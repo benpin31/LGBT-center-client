@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Card from './CardAdmins&Volunteer'
 
 class Admins extends Component {
     render() {
         return (
             <div>
-                hello admins
             </div>
         )
     }
