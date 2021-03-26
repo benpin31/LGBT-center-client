@@ -7,111 +7,153 @@
 }
   
 #red, #orange, #yellow, #green, #blue, #purple {
-width: 100%;
-height: 100%;
-animation: flag-sweep 0s ease-out;
+    width: 100%;
+    height: 100%;
+    animation: flag-sweep 0s ease-out;
 }
 
 #red {
-background-color: var(--red-flag);
-animation-duration: 0.4s;
+    background-color: var(--red-flag);
+    animation-duration: 0.4s;
 }
 
 #orange {
-background-color: var(--orange-flag);
-animation-duration: 0.45s;
+    background-color: var(--orange-flag);
+    animation-duration: 0.45s;
 }
 
 #yellow {
-background-color: var(--yellow-flag);
-animation-duration: 0.5s;
+    background-color: var(--yellow-flag);
+    animation-duration: 0.5s;
 }
 
 #green {
-background-color: var(--green-flag);
-animation-duration: 0.55s;
+    background-color: var(--green-flag);
+    animation-duration: 0.55s;
 }
 
 #blue {
-background-color: var(--blue-flag);
-animation-duration: 0.6s;
+    background-color: var(--blue-flag);
+    animation-duration: 0.6s;
 }
 
 #purple {
-background-color: var(--purple-flag);
-animation-duration: 0.65s;
+    background-color: var(--purple-flag);
+    animation-duration: 0.65s;
 }
 
 @keyframes flag-sweep {
-0% {
-    transform: translateY(100%);
-}
-100% {
-    transform: translateY(0);
-}
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 #flag-container p {
-position: absolute;
-color: white;
-text-transform: uppercase;
-font-size: 60px;
-font-weight: 900;
-top: 50%;
-left: 50%;
-transform: translate(-50%);
-display: none;
+    position: absolute;
+    color: white;
+    text-transform: uppercase;
+    font-size: 60px;
+    font-weight: 900;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    display: none;
 }
 
 
 #signin {
-position: absolute;
-width: 100vw;
-height: 85vh;
-z-index: 1;
-background-color: white;
-border-radius: 0% 0% 50% 50% / 0% 0% 10% 10%;
-display: none;
-animation : signinsweep 0.9s ease-out;
+    position: absolute;
+    width: 100vw;
+    height: 85vh;
+    z-index: 1;
+    background-color: white;
+    border-radius: 0% 0% 50% 50% / 0% 0% 10% 10%;
+    display: none;
+    animation : signinsweep 0.9s ease-out;
 }
 
 @keyframes signinsweep {
-0% {
-    transform: translateY(-100%);
-}
-100% {
-    transform: translateY(0);
-}
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 @keyframes outro-sweep {
-0% {
-    transform: translateY(0);
-}
-100% {
-    transform: translateY(-100%);
-}
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
 }
 
 
 /* FORM SIGN IN  */
 
+.form-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container img {
+    margin-bottom: 100px;
+}
+
 .form-signin {
-background-color: aqua;
-max-width: 415px;
+    max-width: 415px;
 }
 
 .form-signin label, .form-signin input {
-display: block;
+    display: block;
 }
 
 .form-signin label {
-text-transform: uppercase;
-font-weight: 600;
-font-size: 14px;
-line-height: 24px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: rgba(113, 78, 215, 1);
+    margin-bottom: 8px;
 }
 
 .form-signin input {
+    width: 100%;
+    height: 58px; /*needed for the border-box to work*/
+    padding: 18px 20px;
+    background: #FFFFFF;
+    border: 1px solid rgba(113, 78, 215, 0.24);
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
 
+.form-signin input:nth-child(4) {
+    margin-bottom: 40px;
+}
+
+.form-signin input:focus {
+    outline: none;
+    border: 2px solid #714ED7;
+}
+
+.form-signin button {
+    cursor: pointer;
+    width: 100%;
+    background-color: #714ED7;
+    border-radius: 8px;
+    border: none;
+    padding: 12px 170px;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
 }
