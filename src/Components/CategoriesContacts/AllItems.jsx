@@ -5,7 +5,9 @@ import apiHandler from './../../apiHandler/apiHandler' ;
 export class AllItems extends Component {
 
     state = {
-        parameters:null
+        parameters:null,
+        showCreateForm: false,
+        showUpdateForm: null
     }
 
     async componentDidMount() {
@@ -13,16 +15,31 @@ export class AllItems extends Component {
         this.setState({parameters}) ;
     }
 
-
     handleUpdateView = async () => {
         const parameters = await this.props.getParameters() ;
         this.setState({parameters})
     }
 
-    render() {
+    handleOpenCreate = () => {
+        this.setState({showCreateForm: true})
+    }
 
-        const {parametersName, parametersButtonName, updateParameter} = this.props ;
-        const {parameters} = this.state ;
+    handleOpenUpdate = item => {
+        this.setState({showUpdateForm: item})
+    }
+
+    handleCloseCreate = () => {
+        this.setState({showCreateForm: false})
+    }
+
+    handleCloseUpdate = () => {
+        this.setState({showUpdateForm: null})
+    }
+
+    render() {
+        console.log(this.state.showUpdateForm)
+        const {parametersName, parametersButtonName, updateParameter, FormCreateUpdate, formCreateAction} = this.props ;
+        const {parameters, showCreateForm, showUpdateForm} = this.state ;
 
         let activeParameters, inactiveParameters ;
 
@@ -37,7 +54,7 @@ export class AllItems extends Component {
                     <p>
                         {parametersName}
                     </p>
-                    <div>
+                    <div onClick={this.handleOpenCreate}>
                         {parametersButtonName}
                     </div>
                 </div>
@@ -51,7 +68,9 @@ export class AllItems extends Component {
                                         parameter={parameter} 
                                         handleUpdateView={this.handleUpdateView}
                                         updateParameter={updateParameter}
-                                        key={parameter._id}/>
+                                        key={parameter._id}
+                                        handleOpenUpdate={() => this.handleOpenUpdate(parameter)}
+                                    />
  
                                 )
                             }
@@ -60,15 +79,40 @@ export class AllItems extends Component {
                             {
                                 inactiveParameters.map(parameter => 
                                     <CardParameterWidget 
-                                    parameter={parameter} 
-                                    handleUpdateView={this.handleUpdateView}
-                                    updateParameter={updateParameter}
-                                    key={parameter._id}/>
+                                        parameter={parameter} 
+                                        handleUpdateView={this.handleUpdateView}
+                                        updateParameter={updateParameter}
+                                        key={parameter._id}
+                                        handleOpenUpdate={() => this.handleOpenUpdate(parameter)}
+                                    />
  
                                 )
                             }
                         </div>
                     </div>
+                }
+
+                { 
+                    showCreateForm 
+                        && 
+                    <FormCreateUpdate
+                        formAction={formCreateAction}
+                        handleUpdateView={this.handleUpdateView} 
+                        formName={"Ajouter un "+parametersName}
+                        closeForm={this.handleCloseCreate}
+                    />    
+                }
+                    
+                {
+                    showUpdateForm 
+                        && 
+                    <FormCreateUpdate
+                        formAction={value => updateParameter(this.state.showUpdateForm._id, value)}
+                        handleUpdateView={this.handleUpdateView} 
+                        formName={"Ajouter un "+parametersName}
+                        closeForm={this.handleCloseUpdate}
+                        values={this.state.showUpdateForm}
+                    />    
                 }
 
             </div>

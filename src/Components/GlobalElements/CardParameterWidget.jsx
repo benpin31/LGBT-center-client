@@ -15,13 +15,13 @@ export class CardParameterWidget extends Component {
     render() {
         return (
             <div>
-                {this.props.parameter.isActive? "Actif": "Inactif"}
+                {this.props.parameter.isActive? "ACTIF": "ARCHIVÉ"}
                 {this.props.parameter.name}
                 {
                     this.props.parameter.isActive
                         &&
                     <>
-                        <img src={editIcon} alt="edit-icone"/>
+                        <img src={editIcon} alt="edit-icone" onClick={this.props.handleOpenUpdate}/>
                         <img src={archiveIcon} alt="archive-icon" onClick={this.onOffParameter}/>
                     </>
                 }
