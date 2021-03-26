@@ -1,0 +1,117 @@
+#flag-container {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+  
+#red, #orange, #yellow, #green, #blue, #purple {
+width: 100%;
+height: 100%;
+animation: flag-sweep 0s ease-out;
+}
+
+#red {
+background-color: var(--red-flag);
+animation-duration: 0.4s;
+}
+
+#orange {
+background-color: var(--orange-flag);
+animation-duration: 0.45s;
+}
+
+#yellow {
+background-color: var(--yellow-flag);
+animation-duration: 0.5s;
+}
+
+#green {
+background-color: var(--green-flag);
+animation-duration: 0.55s;
+}
+
+#blue {
+background-color: var(--blue-flag);
+animation-duration: 0.6s;
+}
+
+#purple {
+background-color: var(--purple-flag);
+animation-duration: 0.65s;
+}
+
+@keyframes flag-sweep {
+0% {
+    transform: translateY(100%);
+}
+100% {
+    transform: translateY(0);
+}
+}
+
+#flag-container p {
+position: absolute;
+color: white;
+text-transform: uppercase;
+font-size: 60px;
+font-weight: 900;
+top: 50%;
+left: 50%;
+transform: translate(-50%);
+display: none;
+}
+
+
+#signin {
+position: absolute;
+width: 100vw;
+height: 85vh;
+z-index: 1;
+background-color: white;
+border-radius: 0% 0% 50% 50% / 0% 0% 10% 10%;
+display: none;
+animation : signinsweep 0.9s ease-out;
+}
+
+@keyframes signinsweep {
+0% {
+    transform: translateY(-100%);
+}
+100% {
+    transform: translateY(0);
+}
+}
+
+@keyframes outro-sweep {
+0% {
+    transform: translateY(0);
+}
+100% {
+    transform: translateY(-100%);
+}
+}
+
+
+/* FORM SIGN IN  */
+
+.form-signin {
+background-color: aqua;
+max-width: 415px;
+}
+
+.form-signin label, .form-signin input {
+display: block;
+}
+
+.form-signin label {
+text-transform: uppercase;
+font-weight: 600;
+font-size: 14px;
+line-height: 24px;
+}
+
+.form-signin input {
+
+}

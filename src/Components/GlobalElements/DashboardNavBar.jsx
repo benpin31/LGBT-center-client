@@ -1,13 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 
 class DashboardNavBar extends Component {
     render() {
+        console.log(this.props);
         return (
-            <div>
-               hello dashboard navbar 
-            </div>
+            <>
+            {this.props.location.pathname !== '/' &&
+                <div>
+                    hello dashboard navbar 
+                </div>
+            }
+            </>
         )
     }
 }
 
-export default DashboardNavBar
+export default withRouter(DashboardNavBar)

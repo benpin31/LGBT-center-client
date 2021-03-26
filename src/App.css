@@ -1,5 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@400;500;600&display=swap');
+/* font-family: 'Asap', sans-serif;
+font-weight: 400;
+font-weight: 500;
+font-weight: 600; */
+
+:root {
+  --red-flag: rgb(255, 176, 176);
+  --orange-flag: rgb(250, 198, 150);
+  --yellow-flag: rgb(247, 230, 143);
+  --green-flag: rgb(167, 242, 165);
+  --blue-flag: rgb(150, 242, 239);
+  --purple-flag: rgb(181, 200, 255);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Asap', sans-serif;
+  font-weight: 400;
+}
+
+.App {
+  display: flex;
 }
