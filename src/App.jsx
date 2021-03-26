@@ -1,6 +1,6 @@
 import './App.css';
 import {Switch, Route} from 'react-router-dom';
-
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 import Home from './Views/Home';
 import Dashboard from './Views/Dashboard';
