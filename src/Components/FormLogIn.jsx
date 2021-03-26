@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './../Styles/LogIn.css';
+import logo from './../Assets/logo.svg';
 
 class FormLogIn extends Component {
     state = {
@@ -15,26 +16,29 @@ class FormLogIn extends Component {
 
     render() {
         return (
-            <form className="form-signin" onSubmit={this.handleSubmit}>
-                <label htmlFor="username">Nom d'utilisateur</label>
-                <input 
-                    onChange={(event) => this.setState({username : event.target.value})}
-                    value={this.state.username}
-                    type="text" 
-                    id="username" 
-                    name="username"
-                />
+            <div className="form-container">
+                <img src={logo} alt=""/>
+                <form className="form-signin" onSubmit={this.handleSubmit}>
+                    <label htmlFor="username">Nom d'utilisateur</label>
+                    <input 
+                        onChange={(event) => this.setState({username : event.target.value})}
+                        value={this.state.username}
+                        type="text" 
+                        id="username" 
+                        name="username"
+                    />
 
-                <label htmlFor="password">Mot de passe</label>
-                <input 
-                    onChange={(event) => this.setState({password : event.target.value})}
-                    value={this.state.password}
-                    type="text" 
-                    id="password" 
-                    name="password"
-                />
-                <button >Click me</button>
-            </form> 
+                    <label htmlFor="password">Mot de passe</label>
+                    <input 
+                        onChange={(event) => this.setState({password : event.target.value})}
+                        value={this.state.password}
+                        type="text" 
+                        id="password" 
+                        name="password"
+                    />
+                    <button >Connexion</button>
+                </form> 
+            </div>
         )
     }
 }
