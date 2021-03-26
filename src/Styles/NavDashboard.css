@@ -1,0 +1,51 @@
+#DashboardNavBar {
+    /* position: relative; */
+    position: sticky;
+    top: 24px;
+    width: 294px;
+    height: calc(100vh - 48px);
+    margin: 24px 48px 24px 24px;
+    border: 1px solid rgba(113, 78, 215, 0.12);
+    border-radius: 8px;
+    background-color: white;
+}
+
+#DashboardNavBar img.logo {
+    padding-left: 38px;
+    margin: 64px 0;
+}
+
+#DashboardNavBar .link {
+    display: block;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #241B3D;
+    padding: 18px 42px;
+}
+
+#DashboardNavBar .link:hover, .selected {
+    background-color: rgba(113, 78, 215, 0.06);
+    border-right: 2px solid rgba(65, 44, 122, 1);
+}
+
+.logout {
+    display: flex;
+    position: absolute;
+    bottom: 24px;
+    left: 48px;
+    cursor: pointer;
+}
+
+.logout img {
+    margin-right: 10px;
+}
+
+.logout p {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #714ED7;
+}
