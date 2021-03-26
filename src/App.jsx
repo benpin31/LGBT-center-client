@@ -1,6 +1,6 @@
 import './App.css';
 import {Switch, Route} from 'react-router-dom';
-
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 import Home from './Views/Home';
 import Dashboard from './Views/Dashboard';
@@ -10,9 +10,9 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" component={Home}/>
+        <Route exact path="/" protectionLevel="admin" component={Home}/>
         {/* à protéger */}
-        <Route exact path="/dashboard" component={Dashboard}/>
+        <ProtectedRoute exact path="/dashboard" protectionLevel="volunteer" component={Dashboard}/>
         <Route path="*" component={NotFound}/>
       </Switch>
     </div>
