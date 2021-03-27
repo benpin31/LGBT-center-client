@@ -61,14 +61,14 @@ export default {
 
   deleteUser(userId) {
     return service
-    .delete(`/api/delete/${userId}`)
+    .delete(`/api/user/delete/${userId}`)
     .then((res) => res.data)
     .catch(errorHandler);
   },
 
   updateUser(userId, updatedInfo) {
     return service
-    .patch(`/api/edit/${userId}`, updatedInfo)
+    .patch(`/api/user/edit/${userId}`, updatedInfo)
     .then((res) => res.data)
     .catch(errorHandler);
   },

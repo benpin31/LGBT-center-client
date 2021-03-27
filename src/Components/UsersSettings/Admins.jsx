@@ -5,8 +5,16 @@ class Admins extends Component {
   render() {
     return (
       <div>
-        {this.props.users.map((user, i) => {
-          return user.isAdmin && <Card key={i} users={user} />;
+        {this.props.users.map(user => {
+          return (
+            user.isAdmin 
+              && 
+            <Card 
+              key={user._id} 
+                users={user} 
+                handlePopup = {() => this.props.handlePopup(user)}
+                getAllUsers={this.props.getAllUsers}            
+              />)
         })}
       </div>
     );

@@ -9,7 +9,8 @@ import FormUser from "../../Components/UsersSettings/FormCreateUpdateAdmin";
 class SettingsUsers extends Component {
   state = {
     users: null,
-    isShown: false,
+    isShownCreate: false,
+    isShownUpdate: null,
   };
 
   componentDidMount() {
@@ -19,11 +20,23 @@ class SettingsUsers extends Component {
       .catch((error) => console.log(error));
   }
 
-  handlePopup = () => {
-    this.setState({ isShown: !this.state.isShown });
+  getAllUsers = () => {
+    api
+    .getUsers()
+    .then((response) => this.setState({ users: response }))
+    .catch((error) => console.log(error));
+  }
+
+  handlePopupCreate = () => {
+    this.setState({ isShownCreate: !this.state.isShownCreate, isShownUpdate: null });
+  };
+
+  handlePopupUpdate = user => {
+    this.setState({ isShownUpdate: user, isShownCreate: false });
   };
 
   render() {
+    console.log("toto" ,this.state.isShownUpdate)
     if (this.state.users === null) {
       return <div className="loading">Loading...</div>;
     }
@@ -32,20 +45,40 @@ class SettingsUsers extends Component {
       <div>
         <div className="header-dashboard">
           <h1>utilisateur.ices</h1>
-          <button onClick={this.handlePopup}>
+          <button onClick={this.handlePopupCreate}>
             <img src={plusIcon} alt="plus-icon" /> Ajouter un.e nouvel.le
             utilisateur.ice
           </button>
         </div>
-        <Admins users={this.state.users} />
-        <Volunteer users={this.state.users} />
-        {this.state.isShown && (
+        <Admins 
+          users={this.state.users} 
+          handlePopup = {this.handlePopupUpdate}
+          getAllUsers={this.getAllUsers}
+        />
+        <Volunteer 
+          users={this.state.users} 
+          handlePopup = {this.handlePopupUpdate}
+          getAllUsers={this.getAllUsers}
+        />
+        {
+          this.state.isShownCreate 
+            && 
           <FormUser
-            users={this.state.users}
-            isShown={this.state.isShown}
-            handlePopup={this.handlePopup}
+            formAction={api.createUser}
+            handlePopup={this.handlePopupCreate}
+            getAllUsers={this.getAllUsers}
           />
-        )}
+        }
+        {
+          this.state.isShownUpdate 
+            &&
+          <FormUser
+            formAction={value => api.updateUser(this.state.isShownUpdate._id, value)}
+            handlePopup={this.handlePopupUpdate}
+            getAllUsers={this.getAllUsers}
+            value={this.state.isShownUpdate}
+          />
+        }
       </div>
     );
   }

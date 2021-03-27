@@ -3,7 +3,7 @@ import api from "../../apiHandler/apiHandler";
 
 class FormCreateUpdateAdmin extends Component {
   state = {
-    login: "",
+    login: this.props.value ? this.props.value.login : "",
     password: "",
     isAdmin: true,
   };
@@ -15,16 +15,17 @@ class FormCreateUpdateAdmin extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    api
-      .createUser(this.state)
+    this.props.formAction(this.state)
       .then((response) => {
           console.log(response);
-          //REFRESH
+          this.props.getAllUsers() ;
+          this.props.handlePopup() ;
         })
       .catch((error) => console.log(error));
   };
 
   render() {
+    console.log(this.state, this.props.value)
     return (
       <div>
         <div>
@@ -35,6 +36,7 @@ class FormCreateUpdateAdmin extends Component {
           <label htmlFor="login">nom utilisateur.ice</label>
           <input
             onChange={this.handleChange}
+            value={this.state.login}
             id="login"
             type="text"
             name="login"
@@ -42,6 +44,7 @@ class FormCreateUpdateAdmin extends Component {
           <label htmlFor="password">mot de passe</label>
           <input
             onChange={this.handleChange}
+            value={this.props.password}
             id="password"
             type="password"
             name="password"

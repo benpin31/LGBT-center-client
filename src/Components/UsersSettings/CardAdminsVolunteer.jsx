@@ -8,7 +8,10 @@ class CardAdminsVolunteer extends Component {
   handleDelete = (userId) => {
     api
       .deleteUser(userId)
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response)
+        this.props.getAllUsers()
+      })
       .catch((error) => console.log(error));
   };
 
@@ -21,8 +24,8 @@ class CardAdminsVolunteer extends Component {
             <p>{this.props.users.login}</p>
             {!this.props.context.isLoading &&
               this.props.context.user._id === this.props.users._id && (
-                <button>
-                  <img src={editIcon} alt="trash-icon" />
+                <button onClick={this.props.handlePopup}>
+                  <img src={editIcon} alt="edit-icon" />
                 </button>
               )}
             <button onClick={() => this.handleDelete(this.props.users._id)}>
