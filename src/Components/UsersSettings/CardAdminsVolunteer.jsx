@@ -37,8 +37,8 @@ class CardAdminsVolunteer extends Component {
           <>
             <div>Bénévole</div>
             <p>{this.props.users.login}</p>
-            <button>
-              <img src={editIcon} alt="trash-icon" />
+            <button onClick={this.props.handlePopup}>
+              <img src={editIcon} alt="edit-icon" />
             </button>
           </>
         )}

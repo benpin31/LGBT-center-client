@@ -35,8 +35,11 @@ class SettingsUsers extends Component {
     this.setState({ isShownUpdate: user, isShownCreate: false });
   };
 
+  handleHidePopup = () => {
+    this.setState({ isShownUpdate: null, isShownCreate: false });
+  }
+
   render() {
-    console.log("toto" ,this.state.isShownUpdate)
     if (this.state.users === null) {
       return <div className="loading">Loading...</div>;
     }
@@ -65,7 +68,7 @@ class SettingsUsers extends Component {
             && 
           <FormUser
             formAction={api.createUser}
-            handlePopup={this.handlePopupCreate}
+            handlePopup={this.handleHidePopup}
             getAllUsers={this.getAllUsers}
           />
         }
@@ -74,7 +77,7 @@ class SettingsUsers extends Component {
             &&
           <FormUser
             formAction={value => api.updateUser(this.state.isShownUpdate._id, value)}
-            handlePopup={this.handlePopupUpdate}
+            handlePopup={this.handleHidePopup}
             getAllUsers={this.getAllUsers}
             value={this.state.isShownUpdate}
           />

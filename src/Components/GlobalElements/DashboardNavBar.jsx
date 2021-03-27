@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
 import {withRouter, NavLink} from 'react-router-dom';
+import { withUser } from "./../../Components/Auth/withUser";
+import apiHandler from './../../apiHandler/apiHandler'
 
 import './../../Styles/NavDashboard.css';
 import logo from './../../Assets/logo.svg';
 import logout from './../../Assets/exit-icon.svg';
 
 class DashboardNavBar extends Component {
+
+    handleLogout = () => {
+        const {context} = this.props ;
+
+        apiHandler
+          .logout()
+          .then(() => {
+            context.removeUser();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
     render() {
+
+        const { context } =this.props ;
+
         return (
             <>
             {this.props.location.pathname !== '/' &&
@@ -24,32 +43,39 @@ class DashboardNavBar extends Component {
 
                     <NavLink 
                         exact
-                        to="/"
+                        to="/dashboard/rapport"
                         className="link" 
                         activeClassName="selected"
                     >
                         Rapport
                     </NavLink>
 
-                    <NavLink 
-                        exact
-                        to="/"
-                        className="link" 
-                        activeClassName="selected"
-                    >
+                    {
+                        !context.isLoading && context.isLoggedIn && context.user.isAdmin &&
+                        <NavLink 
+                            exact
+                            to="/dashboard/parameters"
+                            className="link" 
+                            activeClassName="selected"
+                        >
                         Paramètres
-                    </NavLink>
+                        </NavLink>
+                    }
 
-                    <NavLink 
-                        exact
-                        to="/"
-                        className="link" 
-                        activeClassName="selected"
-                    >
+                    {
+                        !context.isLoading && context.isLoggedIn && context.user.isAdmin &&
+                        <NavLink 
+                            exact
+                            to="/dashboard/users"
+                            className="link" 
+                            activeClassName="selected"
+                        >
                         Utilisateurs
-                    </NavLink>
+                        </NavLink>
+                    }
 
-                    <div className="logout">
+
+                    <div className="logout" onClick={this.handleLogout}>
                         <img src={logout} alt=""/>
                         <p>Déconnexion</p>
                     </div>
@@ -60,4 +86,4 @@ class DashboardNavBar extends Component {
     }
 }
 
-export default withRouter(DashboardNavBar)
+export default withUser(withRouter(DashboardNavBar))

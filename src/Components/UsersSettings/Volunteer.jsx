@@ -12,6 +12,8 @@ class Volunteer extends Component {
             <Card 
               key={user._id} 
               users={user} 
+              handlePopup = {() => this.props.handlePopup(user)}
+              getAllUsers={this.props.getAllUsers}            
             />)
         })}
       </div>

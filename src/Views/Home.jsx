@@ -1,6 +1,11 @@
 import React from 'react';
+import { withUser } from "./../Components/Auth/withUser";
+import { withRouter } from "react-router";
+
 import FormLogIn from './../Components/FormLogIn';
 import './../Styles/LogIn.css';
+
+import apiHandler from './../apiHandler/apiHandler'
 
 class Home extends React.Component {
     state = {
@@ -28,7 +33,7 @@ class Home extends React.Component {
         }, 700);
     }
 
-    handleLoggedin = () => {
+    handleLoggedin = (user) => {
         this.setState({
             signInStyle: {
                 display : 'block',
@@ -49,6 +54,16 @@ class Home extends React.Component {
         }, 700);
 
         //changer de route après le timeOut
+        apiHandler
+            .signin(user)
+            .then((data) => {
+                this.props.context.setUser(data);
+                setTimeout(() => this.props.history.push("dashboard/new-visit"), 1500)
+            })
+            .catch((error) => {
+                console.log(error);
+                setTimeout(() => this.props.history.push("/dashboard"), 1500) ;
+            });
     }
 
     render() {
@@ -71,4 +86,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home
+export default withRouter(withUser(Home))

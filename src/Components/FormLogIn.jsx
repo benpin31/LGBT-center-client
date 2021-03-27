@@ -8,10 +8,15 @@ class FormLogIn extends Component {
         password : ""
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
-        //if successfully logged in
-        this.props.onLoggedIn();
+        const {username: login, password} = this.state ;        
+
+        try {
+            await this.props.onLoggedIn({login, password});
+        } catch(err) {
+            console.log(err)
+        }
     } 
 
     render() {
