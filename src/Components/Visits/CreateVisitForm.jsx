@@ -23,12 +23,18 @@ export class ChooseCategory extends Component {
     componentDidMount() {
         apiHandler
         .getCategories()
-        .then(res => this.setState({allCategories : res}))
+        .then(res => {
+            const activeCategories = res.filter(cat => cat.isActive);
+            this.setState({allCategories : activeCategories})
+        })
         .catch(err => console.log(err));
 
         apiHandler
         .getContactTypes()
-        .then(res => this.setState({allContactTypes : res}))
+        .then(res => {
+            const activeContacts = res.filter(cont => cont.isActive);
+            this.setState({allContactTypes : activeContacts});
+        })
         .catch(err => console.log(err));
     }
 

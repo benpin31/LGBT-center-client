@@ -33,7 +33,7 @@ class DashboardNavBar extends Component {
 
                     <NavLink 
                         exact
-                        to="/"
+                        to="/dashboard/parametres"
                         className="link" 
                         activeClassName="selected"
                     >
