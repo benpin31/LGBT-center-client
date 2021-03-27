@@ -6,21 +6,25 @@ export default class FormCreateUpdateContact extends Component {
 
     state={
         name: this.props.values ? this.props.values.name: "",
+        //  if update type, this.props.values is given and the initial values of the item are given
     }
 
-    handleChangeName = event => {
+    handleChange = event => {
         this.setState({name: event.target.value})
-    }
-
-    handleChangeIsActiv = event => {
-        this.setState({asActive: event.target.checked})
     }
 
     handleSubmit =  async event => {
         event.preventDefault()
-        await this.props.formAction({...this.state, isActive: true}) 
-        this.props.handleUpdateView()
-        this.props.closeForm()
+        try {
+            await this.props.formAction({...this.state, isActive: true}) 
+            this.props.handleUpdateView() ;
+            this.props.closeForm() ;
+        } catch(err) {
+            console.log(err) ;
+            this.props.closeForm() ;
+
+        }
+
     }
 
     render() {
@@ -39,7 +43,7 @@ export default class FormCreateUpdateContact extends Component {
                         name="name" 
                         id="name"
                         value={name}
-                        onChange={this.handleChangeName}
+                        onChange={this.handleChange}
                     />
                 <button>Submit</button>
                 </form>

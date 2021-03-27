@@ -1,23 +1,38 @@
 import React, { Component } from 'react' ;
-import CardParameterWidget from './../GlobalElements/CardParameterWidget'
-import apiHandler from './../../apiHandler/apiHandler' ;
+import CardItemWidget from './../GlobalElements/CardItemWidget'
 
 export class AllItems extends Component {
 
     state = {
-        parameters:null,
+        items:null,
         showCreateForm: false,
+        //  when click to add an item : become true and show the form popup by guardian
         showUpdateForm: null
+        //  When click to update an item : become become the full object (and so become truthy)
+        //  and the update form apears by guardian. Then one can use the content of the state to fill the form
+        //  with actual values
     }
 
     async componentDidMount() {
-        const parameters = await this.props.getParameters() ;
-        this.setState({parameters}) ;
+        // Get the total list of items when the component is monted
+        try {
+            const items = await this.props.getAllItmes() ;
+            this.setState({items}) ;
+        } catch(err) {
+            console.log(err)
+        }
+
     }
 
     handleUpdateView = async () => {
-        const parameters = await this.props.getParameters() ;
-        this.setState({parameters})
+        // Use to update the list of items when an update has been done
+        try {
+            const items = await this.props.getAllItmes() ;
+            this.setState({items})
+        } catch(err) {
+            console.log(err)
+        }
+
     }
 
     handleOpenCreate = () => {
@@ -37,39 +52,39 @@ export class AllItems extends Component {
     }
 
     render() {
-        console.log(this.state.showUpdateForm)
-        const {parametersName, parametersButtonName, updateParameter, FormCreateUpdate, formCreateAction} = this.props ;
-        const {parameters, showCreateForm, showUpdateForm} = this.state ;
+        const {title, buttonName, updateItem, FormCreateUpdateComponent, formCreateAction} = this.props ;
+        const {items, showCreateForm, showUpdateForm} = this.state ;
 
-        let activeParameters, inactiveParameters ;
+        let activeitems, inactiveitems ;
 
-        if(parameters) {
-            activeParameters = parameters.filter(parameter => parameter.isActive)
-            inactiveParameters = parameters.filter(parameter => !parameter.isActive)
+        if(items) {
+            activeitems = items.filter(item => item.isActive)
+            inactiveitems = items.filter(item => !item.isActive)
         }
 
         return (
             <div>
                 <div>
                     <p>
-                        {parametersName}
+                        {title}
                     </p>
                     <div onClick={this.handleOpenCreate}>
-                        {parametersButtonName}
+                        {buttonName}
                     </div>
                 </div>
                 {
-                    parameters &&
+                    items &&
                     <div>
                         <div>
                             {
-                                activeParameters.map(parameter => 
-                                    <CardParameterWidget 
-                                        parameter={parameter} 
+                                activeitems.map(item => 
+                                    <CardItemWidget 
+                                        item={item} 
+                                        updateItem={updateItem}
+                                        handleOpenUpdate={() => this.handleOpenUpdate(item)}
                                         handleUpdateView={this.handleUpdateView}
-                                        updateParameter={updateParameter}
-                                        key={parameter._id}
-                                        handleOpenUpdate={() => this.handleOpenUpdate(parameter)}
+                                        // To update views after deleting an item for instance
+                                        key={item._id}
                                     />
  
                                 )
@@ -77,13 +92,13 @@ export class AllItems extends Component {
                         </div>
                         <div>
                             {
-                                inactiveParameters.map(parameter => 
-                                    <CardParameterWidget 
-                                        parameter={parameter} 
+                                inactiveitems.map(item => 
+                                    <CardItemWidget 
+                                        item={item} 
+                                        updateItem={updateItem}
+                                        handleOpenUpdate={() => this.handleOpenUpdate(item)}
                                         handleUpdateView={this.handleUpdateView}
-                                        updateParameter={updateParameter}
-                                        key={parameter._id}
-                                        handleOpenUpdate={() => this.handleOpenUpdate(parameter)}
+                                        key={item._id}
                                     />
  
                                 )
@@ -94,24 +109,28 @@ export class AllItems extends Component {
 
                 { 
                     showCreateForm 
+                    // appears only the the state is true
                         && 
-                    <FormCreateUpdate
+                    <FormCreateUpdateComponent
+                        formName={"Ajouter un "+title}
                         formAction={formCreateAction}
                         handleUpdateView={this.handleUpdateView} 
-                        formName={"Ajouter un "+parametersName}
                         closeForm={this.handleCloseCreate}
                     />    
                 }
                     
                 {
                     showUpdateForm 
+                    // appears only the the state is not empty/ here the state is a full item so that one can use
+                    // its informations to fill the form
                         && 
-                    <FormCreateUpdate
-                        formAction={value => updateParameter(this.state.showUpdateForm._id, value)}
+                    <FormCreateUpdateComponent
+                        formName={"Ajouter un "+title}
+                        formAction={value => updateItem(this.state.showUpdateForm._id, value)}
                         handleUpdateView={this.handleUpdateView} 
-                        formName={"Ajouter un "+parametersName}
                         closeForm={this.handleCloseUpdate}
                         values={this.state.showUpdateForm}
+                        // current value of the item
                     />    
                 }
 

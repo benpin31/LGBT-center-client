@@ -10,15 +10,18 @@ export default class FormCreateUpdateCategory extends Component {
         this.setState({[event.target.name]: event.target.value})
     }
 
-    handleChangeIsActiv = event => {
-        this.setState({asActive: event.target.checked})
-    }
-
     handleSubmit =  async event => {
         event.preventDefault()
-        await this.props.formAction({...this.state, isActive: true}) 
-        this.props.handleUpdateView()
-        this.props.closeForm()
+        try {
+            await this.props.formAction({...this.state, isActive: true}) ;
+            this.props.handleUpdateView() ;
+            this.props.closeForm() ;
+        } catch(err) {
+            console.log(err) ;
+            this.props.closeForm() ;
+        }
+
+
     }
 
     render() {
@@ -42,7 +45,7 @@ export default class FormCreateUpdateCategory extends Component {
                         value={name}
                         onChange={this.handleChange}
                     />
-                    <label htmlFor="description">Name</label>
+                    <label htmlFor="description">Description</label>
                     <textarea 
                         name="description" 
                         id="description"
