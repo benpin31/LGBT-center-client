@@ -53,7 +53,7 @@
     justify-content: center;
 }
 
-/* CATEGORIES FORM  */
+/* CATEGORIES-CONTACTS FORMS  */
 
 .cat-cont-container {
     display: flex;
@@ -80,6 +80,7 @@
     border: 1px solid rgba(113, 78, 215, 0.24);
     border-radius: 8px;
     cursor: pointer;
+    animation: opacity 0.3s ease-out;
 }
 
 .cat-cont:hover {
@@ -109,6 +110,7 @@
     border-radius: 8px;
     cursor: pointer;
     margin-bottom: 40px;
+    animation: opacity 0.3s ease-out;
 }
 
 .input-header {
@@ -119,5 +121,28 @@
     position: absolute;
     right: 0;
     top: 0;
+}
+
+#CreateForm button {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(113, 78, 215, 1);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    width: 100%;
+    color: #FFFFFF;
+    cursor: pointer;
+    animation: opacity 0.2s ease-out;
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 

@@ -11,6 +11,7 @@ import Dashboard from './Views/Dashboard';
 import NavDashboard from './Components/GlobalElements/DashboardNavBar';
 import History from './Views/Visits/History';
 import CreateVisit from './Views/Visits/CreateVisit';
+import UpdateVisit from './Views/Visits/UpdateVisit';
 import SettingsCatCont from './Views/Settings/SettingsCatCont'
 
 import NotFound from './Views/NotFound';
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/dashboard/users" component={SettingsUsers} />
           <Route exact path="/dashboard/history" component={History}/>
           <Route exact path="/dashboard/new-visit" component={CreateVisit}/>
+          <Route exact path="/dashboard/update-visit" component={UpdateVisit}/>
           <Route 
             exact 
             path="/dashboard/parametres" 
