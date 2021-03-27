@@ -4,7 +4,7 @@
     top: 24px;
     width: 294px;
     height: calc(100vh - 48px);
-    margin: 24px 48px 24px 24px;
+    margin: 24px 0 24px 24px;
     border: 1px solid rgba(113, 78, 215, 0.12);
     border-radius: 8px;
     background-color: white;
