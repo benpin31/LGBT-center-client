@@ -11,6 +11,7 @@ import Dashboard from './Views/Dashboard';
 import NavDashboard from './Components/GlobalElements/DashboardNavBar';
 import History from './Views/Visits/History';
 import CreateVisit from './Views/Visits/CreateVisit';
+import UpdateVisit from './Views/Visits/UpdateVisit';
 import SettingsCatCont from './Views/Settings/SettingsCatCont'
 
 import NotFound from './Views/NotFound';
@@ -31,6 +32,7 @@ function App() {
           {/* à protéger */}
           <ProtectedRoute protectionLevel="volunteer" Route exact path="/dashboard" component={Dashboard} />
           <ProtectedRoute protectionLevel="volunteer" Route exact path="/dashboard/new-visit" component={CreateVisit}/>
+          <ProtectedRoute protectionLevel="volunteer" exact path="/dashboard/update-visit" component={UpdateVisit}/>
           <ProtectedRoute protectionLevel="volunteer" Route exact path="/dashboard/history" component={History}/>
           <ProtectedRoute protectionLevel="admin" exact path="/dashboard/parameters" component={SettingsCatCont}/>
           <ProtectedRoute protectionLevel="admin" exact path="/dashboard/users" component={SettingsUsers} />

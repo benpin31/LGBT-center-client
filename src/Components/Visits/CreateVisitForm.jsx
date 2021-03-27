@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import apiHandler from '../../apiHandler/apiHandler';
 
 import './../../Styles/CreateVisit.css';
@@ -18,18 +19,31 @@ export class ChooseCategory extends Component {
 
         allCategories: null,
         allContactTypes: null,
+
+        visitToUpdate: null,
+        isUpdateVisit: false
     }
 
     componentDidMount() {
         apiHandler
         .getCategories()
-        .then(res => this.setState({allCategories : res}))
+        .then(res => {
+            const activeCategories = res.filter(cat => cat.isActive);
+            this.setState({allCategories : activeCategories})
+        })
         .catch(err => console.log(err));
 
         apiHandler
         .getContactTypes()
-        .then(res => this.setState({allContactTypes : res}))
+        .then(res => {
+            const activeContacts = res.filter(cont => cont.isActive);
+            this.setState({allContactTypes : activeContacts});
+        })
         .catch(err => console.log(err));
+
+        if(this.props.visitId) {
+            this.setState({visitToUpdate : this.props.visitId, isUpdateVisit: true})
+        }
     }
 
     handleDecrease = () => {
@@ -41,63 +55,95 @@ export class ChooseCategory extends Component {
         this.setState({nbOfPerson : this.state.nbOfPerson + 1});
     }
 
-    handleSelectCat = (categoryId, name) => {
-        this.setState({category : {categoryId, name}});
+    handleSelectItem = (id, name, item) => {
+        this.setState({[item] : {id, name}});
     }
 
-    changeCat = () => {
-        this.setState({category : null});
+    handleChangeItem = (item) => {
+        this.setState({[item] : null, isUpdateVisit:false});
     }
 
-    handleSelectContact = (contactId, name) => {
-        this.setState({contactType : {contactId, name}});
-    }
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const {nbOfPerson, category, contactType, visitToUpdate} = this.state;
 
-    changeContact = () => {
-        this.setState({contactType : null});
+        if(visitToUpdate) {
+
+            apiHandler
+            .updateVisit(visitToUpdate._id, {
+                date: visitToUpdate.date,
+                category: category.id,
+                contactType: contactType.id
+            })
+            .then(() => this.props.history.push('/dashboard/history'))
+            .catch(error => console.log(error))
+
+        } else {
+
+            for(let i = 0; i < nbOfPerson; i++) {
+                apiHandler
+                .createVisit({
+                    category : category.id,
+                    contactType : contactType.id
+                })
+                .then(() => {
+                    if(i === nbOfPerson - 1) {
+                        this.props.history.push('/dashboard/history')
+                    }
+                })
+                .catch(error => console.log(error));
+            }
+
+        }
     }
 
     render() {
-        const {allCategories, category, allContactTypes, contactType, date, nbOfPerson} = this.state
+
+        const {allCategories, category, allContactTypes, contactType, date, nbOfPerson, visitToUpdate, isUpdateVisit} = this.state
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const dateFormat = date.toLocaleDateString('fr-FR', options);
         
         return (
-            <form id="CreateForm">
-                <div id="first-form">
-                    <div id="nb-of-person">
-                        <div className="input-header">
-                            <h2>nombre de personnes</h2>
-                            {nbOfPerson && 
-                                <img src={checkedIcon} alt=""/>
-                            }
+            <form 
+                onSubmit={this.handleSubmit}
+                id="CreateForm"
+            >
+                {!visitToUpdate &&
+                    <div id="first-form">
+                        <div id="nb-of-person">
+                            <div className="input-header">
+                                <h2>nombre de personnes</h2>
+                                {nbOfPerson && 
+                                    <img src={checkedIcon} alt=""/>
+                                }
+                            </div>
+                            <div className="input-content">
+                                <img 
+                                    onClick={this.handleDecrease}
+                                    src={minusIcon} alt=""
+                                />
+                                <p className="validated-input">
+                                    {nbOfPerson} personne{nbOfPerson > 1 ? 's' : ''}
+                                </p>
+                                <img 
+                                onClick={this.handleIncrease} 
+                                src={plusIcon} alt=""
+                                />
+                            </div>
                         </div>
-                        <div className="input-content">
-                            <img 
-                                onClick={this.handleDecrease}
-                                src={minusIcon} alt=""
-                            />
-                            <p className="validated-input">
-                                {nbOfPerson} personne{nbOfPerson > 1 ? 's' : ''}
-                            </p>
-                            <img 
-                            onClick={this.handleIncrease} 
-                            src={plusIcon} alt=""
-                            />
+                        <div id="date">
+                            <div className="input-header">
+                                <h2>date</h2>
+                                {date && 
+                                    <img src={checkedIcon} alt=""/>
+                                }
+                            </div>
+                            <div className="input-content">
+                                <p className="validated-input">{dateFormat}</p>
+                            </div>
                         </div>
                     </div>
-                    <div id="date">
-                        <div className="input-header">
-                            <h2>date</h2>
-                            {date && 
-                                <img src={checkedIcon} alt=""/>
-                            }
-                        </div>
-                        <div className="input-content">
-                            <p className="validated-input">{dateFormat}</p>
-                        </div>
-                    </div>
-                </div>
+                }
 
                 <div className="input-header">
                     <h2>service du centre demandé</h2>
@@ -106,11 +152,12 @@ export class ChooseCategory extends Component {
                     }
                 </div>
                 <div className="cat-cont-container">
-                    {!category &&
+                    {!isUpdateVisit && 
+                    !category &&
                     allCategories &&
                         allCategories.map(category => 
                             <div 
-                                onClick={() => this.handleSelectCat(category._id, category.name)}
+                                onClick={() => this.handleSelectItem(category._id, category.name, "category")}
                                 key={category._id}
                                 className="cat-cont"
                             >
@@ -122,15 +169,24 @@ export class ChooseCategory extends Component {
                 </div>
 
                 {category &&
-                    <div className="selected-cat-cont">
+                    <div 
+                        onClick={() => this.handleChangeItem('category')}
+                        className="selected-cat-cont"
+                    >
                         <p className="validated-input">{category.name}</p>
-                        <img 
-                            onClick={this.changeCat}
-                            src={editIcon}
-                            alt=""
-                        />
+                        <img src={editIcon} alt=""/>
                     </div>
                 }
+
+                {isUpdateVisit &&
+                    <div 
+                        onClick={() => this.handleChangeItem('category')}
+                        className="selected-cat-cont"
+                    >
+                        <p className="validated-input">{visitToUpdate.category.name}</p>
+                        <img src={editIcon} alt=""/>
+                    </div>
+                }           
 
                 <div className="input-header">
                     <h2>mode de contact utilisé</h2>
@@ -151,7 +207,7 @@ export class ChooseCategory extends Component {
                     allContactTypes &&
                         allContactTypes.map(contact => 
                             <div 
-                                onClick={() => this.handleSelectContact(contact._id, contact.name)}
+                                onClick={() => this.handleSelectItem(contact._id, contact.name, "contactType")}
                                 key={contact._id}
                                 className="cat-cont"
                             >
@@ -162,18 +218,31 @@ export class ChooseCategory extends Component {
                 </div>
 
                 {category && contactType &&
-                    <div className="selected-cat-cont">
-                        <p>{contactType.name}</p>
-                        <img 
-                            onClick={this.changeContact}
-                            src={editIcon}
-                            alt=""
-                        />
+                    <div 
+                        onClick={() => this.handleChangeItem('contactType')}
+                        className="selected-cat-cont"
+                    >
+                        <p className="validated-input">{contactType.name}</p>
+                        <img src={editIcon} alt=""/>
                     </div>
                 }   
+
+                {isUpdateVisit &&
+                    <div 
+                        onClick={() => this.handleChangeItem('contactType')}
+                        className="selected-cat-cont"
+                    >
+                        <p className="validated-input">{visitToUpdate.contactType.name}</p>
+                        <img src={editIcon} alt=""/>
+                    </div>
+                }   
+
+                {category && contactType &&
+                    <button>Enregistrer</button>
+                }
             </form>
         )
     }
 }
 
-export default ChooseCategory
+export default withRouter(ChooseCategory);
