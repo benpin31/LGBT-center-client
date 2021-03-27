@@ -1,0 +1,123 @@
+#CreateForm {
+    margin: 50px 48px;
+}
+
+#CreateForm h2 {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: rgba(66, 53, 102, 0.5);
+    margin-bottom: 16px;
+}
+
+/* FIRST ROW FORM  */
+#first-form {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+#nb-of-person {
+    width: 100%;
+    margin-right: 32px;
+}
+
+#nb-of-person .input-content, #date .input-content{
+    display: flex;
+    padding: 20px;
+    border: 2px solid #714ED7;
+    border-radius: 8px;
+    background-color: rgba(113, 78, 215, 0.06);
+}
+
+#nb-of-person div {
+    justify-content: space-between;
+}
+
+#nb-of-person div img {
+    cursor: pointer;
+}
+
+.validated-input {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #5B3FAD;
+}
+
+#date {
+    width: 100%;
+}
+
+#date div {
+    justify-content: center;
+}
+
+/* CATEGORIES FORM  */
+
+.cat-cont-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cat-cont-container .cat-cont {
+    width: 49.5%;
+}
+
+.cat-cont:nth-child(2n) {
+    margin-left: 1%;
+}
+
+.cat-cont:last-child {
+    margin-bottom: 40px;
+}
+
+.cat-cont {
+    padding: 19px 24px;
+    height: 60px;
+    margin-bottom: 8px;
+    background: #FFFFFF;
+    border: 1px solid rgba(113, 78, 215, 0.24);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.cat-cont:hover {
+    border: 2px solid #714ED7;
+    background-color: rgba(113, 78, 215, 0.06);
+}
+
+.cat-cont p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #241B3D;
+}
+
+.cat-cont:hover p {
+    color: #5B3FAD;
+}
+
+.selected-cat-cont {
+    display: flex;
+    justify-content: space-between;
+    padding: 19px 24px;
+    height: 60px;
+    margin-bottom: 8px;
+    border: 2px solid #714ED7;
+    background-color: rgba(113, 78, 215, 0.06);
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 40px;
+}
+
+.input-header {
+    position: relative;
+}
+
+.input-header img {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ChooseCategoryForm from './../../Components/Visits/ChooseCategory';
-// import ContactTypeForm from './../../Components/Visits/ChooseContactType';
-// import ValidationForm from './../../Components/Visits/ValidationForm';
+import CreateVisitForm from '../../Components/Visits/CreateVisitForm';
+
 
 class CreateVisit extends Component {
     state = {
@@ -11,20 +10,12 @@ class CreateVisit extends Component {
     }
 
     render() {
-        const {categoryCurrent, contactCurrent, validationCurrent} = this.state;
+        const {categoryCurrent} = this.state;
         return (
             <>
                 {categoryCurrent &&
-                    <ChooseCategoryForm />
+                    <CreateVisitForm />
                 }
-                {/*                 
-                {contactCurrent &&
-                    <ContactTypeForm />
-                }
-                
-                {validationCurrent &&
-                    <ValidationForm />
-                } */}
             </>
         )
     }

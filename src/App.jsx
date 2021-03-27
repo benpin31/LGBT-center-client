@@ -1,6 +1,6 @@
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import ProtectedRoute from "./Components/ProtectedRoute";
+// import ProtectedRoute from "./Components/ProtectedRoute";
 
 import SettingsUsers from "./Views/Settings/SettingsUsers";
 import HeaderFlag from './Components/GlobalElements/HeaderFlag';
@@ -39,7 +39,6 @@ function App() {
             component={SettingsCatCont}>
           </Route>
           <Route path="*" component={NotFound} />
-
         </Switch>
       </div>
 
