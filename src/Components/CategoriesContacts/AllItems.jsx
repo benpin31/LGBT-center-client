@@ -36,11 +36,11 @@ export class AllItems extends Component {
     }
 
     handleOpenCreate = () => {
-        this.setState({showCreateForm: true})
+        this.setState({showUpdateForm: null, showCreateForm: true})
     }
 
     handleOpenUpdate = item => {
-        this.setState({showUpdateForm: item})
+        this.setState({showCreateForm: false, showUpdateForm: item})
     }
 
     handleCloseCreate = () => {
