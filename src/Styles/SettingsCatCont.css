@@ -1,0 +1,45 @@
+#settings-cat-cont {
+  margin: 50px 48px;
+}
+
+#header-cat-cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+#header-cat-cont > p {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 23px;
+  color: #241b3d;
+  margin-top: 10px;
+}
+
+#header-cat-cont div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  background-color: rgba(113, 78, 215, 0.2);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  width: 45%;
+  height: 50px;
+}
+
+#header-cat-cont div:focus {
+  outline: none;
+}
+
+#header-cat-cont div p {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: #ffffff;
+  margin-left: 10px;
+  color: rgba(113, 78, 215, 1);
+}
