@@ -1,6 +1,6 @@
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-// import ProtectedRoute from "./Components/ProtectedRoute";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 import SettingsUsers from "./Views/Settings/SettingsUsers";
 import HeaderFlag from './Components/GlobalElements/HeaderFlag';
@@ -29,16 +29,12 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           {/* à protéger */}
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/dashboard/users" component={SettingsUsers} />
-          <Route exact path="/dashboard/history" component={History}/>
-          <Route exact path="/dashboard/new-visit" component={CreateVisit}/>
-          <Route 
-            exact 
-            path="/dashboard/parametres" 
-            component={SettingsCatCont}>
-          </Route>
-          <Route path="*" component={NotFound} />
+          <ProtectedRoute protectionLevel="volunteer" Route exact path="/dashboard" component={Dashboard} />
+          <ProtectedRoute protectionLevel="volunteer" Route exact path="/dashboard/new-visit" component={CreateVisit}/>
+          <ProtectedRoute protectionLevel="volunteer" Route exact path="/dashboard/history" component={History}/>
+          <ProtectedRoute protectionLevel="admin" exact path="/dashboard/parameters" component={SettingsCatCont}/>
+          <ProtectedRoute protectionLevel="admin" exact path="/dashboard/users" component={SettingsUsers} />
+          <ProtectedRoute protectionLevel="volunteer" path="*" component={NotFound} />
         </Switch>
       </div>
 

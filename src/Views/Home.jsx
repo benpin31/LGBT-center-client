@@ -34,35 +34,35 @@ class Home extends React.Component {
     }
 
     handleLoggedin = (user) => {
-        this.setState({
-            signInStyle: {
-                display : 'block',
-                transform : 'translateY(-100%)',
-                animation : 'outro-sweep 1s ease-out'
-            }
-        })
-
-        setTimeout(() => {
-            this.setState({
-                flagStyle : {
-                    display : 'block',
-                    transform : 'translateY(calc(-100% + 6px))',
-                    animation : 'outro-sweep 0.5s ease-out'
-                }
-            })
-
-        }, 700);
-
         //changer de route après le timeOut
         apiHandler
             .signin(user)
             .then((data) => {
                 this.props.context.setUser(data);
-                setTimeout(() => this.props.history.push("dashboard/new-visit"), 1500)
+
+                this.setState({
+                    signInStyle: {
+                        display : 'block',
+                        transform : 'translateY(-100%)',
+                        animation : 'outro-sweep 1s ease-out'
+                    }
+                })
+        
+                setTimeout(() => {
+                    this.setState({
+                        flagStyle : {
+                            display : 'block',
+                            transform : 'translateY(calc(-100% + 6px))',
+                            animation : 'outro-sweep 0.5s ease-out'
+                        }
+                    })
+        
+                }, 700);
+        
+                setTimeout(() => this.props.history.push("dashboard/new-visit"), 1500) ;
             })
             .catch((error) => {
                 console.log(error);
-                setTimeout(() => this.props.history.push("/dashboard"), 1500) ;
             });
     }
 
