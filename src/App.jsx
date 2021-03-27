@@ -9,6 +9,7 @@ import Home from './Views/Home';
 import Dashboard from './Views/Dashboard';
 import NavDashboard from './Components/GlobalElements/DashboardNavBar';
 import History from './Views/Visits/History';
+import CreateVisit from './Views/Visits/CreateVisit';
 
 import NotFound from './Views/NotFound';
 
@@ -28,6 +29,7 @@ function App() {
           {/* à protéger */}
           <Route exact path="/dashboard" component={Dashboard}/>
           <Route exact path="/dashboard/history" component={History}/>
+          <Route exact path="/dashboard/new-visit" component={CreateVisit}/>
           <Route path="*" component={NotFound}/>
         </Switch>
       </div>
