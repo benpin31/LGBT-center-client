@@ -31,6 +31,8 @@ class FormCreateUpdateAdmin extends Component {
       let  isLoginLengthValidated = true, isLoginFree = true, isPasswordValidated = true ;
 
       if(users.find(user => user.login === login && user.login !== this.props.value?.login)) {
+        //  search if the login is already used. In the case it is an update (in that case, this.props.value
+        //  is not null), the user name is of course a valid one 
         isLoginFree = false ;
       }
 
@@ -95,7 +97,7 @@ class FormCreateUpdateAdmin extends Component {
             name="password"
             placeholder="•••••••••"
           />
-          {!isPasswordValidated && <div><p>Le mot de passe login doit contenir au moins 3 caractères.</p></div> }
+          {!isPasswordValidated && <div><p>Le mot de passe doit contenir au moins 3 caractères.</p></div> }
           <button>Créer</button>
         </form>
       </div>
