@@ -40,6 +40,13 @@
     margin-left: 10px;
 }
 
+.users-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
 @media (max-width: 1024px) {
     #settings-users{
         margin: 100px 48px;

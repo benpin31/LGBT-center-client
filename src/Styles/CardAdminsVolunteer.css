@@ -1,0 +1,59 @@
+.CardContainerAdminsVolunteer {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 47%;
+    padding: 24px 32px;
+    margin-bottom: 8px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    background-color: white;
+}
+
+.CardContainerAdminsVolunteer:nth-child(2n) {
+    margin-left: 6%;
+}
+
+.CardContainerAdminsVolunteer p {
+    color: rgba(36, 27, 61, 1);
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: 16px;
+}
+
+.card-info-admins-volunteer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.card-info-admins-volunteer div {
+    padding: 6px 12px;
+    margin-right: 8px;
+    color: rgba(91, 63, 173, 1);
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    border: 2px solid rgba(113, 78, 215, 0.06);
+    border-radius: 500px;
+}
+
+.CardContainerAdminsVolunteer aside img {
+    width: 20px;
+    height: 20px;
+    margin: 8px;
+    cursor: pointer;
+}
+
+.CardContainerAdminsVolunteer aside {
+    position: absolute;
+    display: flex;
+    top: 50%;
+    right: 22px;
+    transform: translateY(-50%);  
+    background: #FFFFFF;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.14);
+    border-radius: 4px;
+}
