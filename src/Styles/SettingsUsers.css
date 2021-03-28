@@ -12,7 +12,7 @@
 #settings-users #header-users > h1 {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 30px;
+    font-size: 20px;
     line-height: 23px;
     color: #241B3D;
     margin-top: 15px;
@@ -38,4 +38,11 @@
     line-height: 22px;
     color: #FFFFFF;
     margin-left: 10px;
+}
+
+.users-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
 }

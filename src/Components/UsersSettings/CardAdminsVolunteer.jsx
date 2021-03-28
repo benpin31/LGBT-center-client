@@ -3,8 +3,13 @@ import binIcon from "../../Assets/trash-icon.svg";
 import editIcon from "../../Assets/edit-icon.svg";
 import { withUser } from "../Auth/withUser";
 import api from "../../apiHandler/apiHandler";
+import '../../Styles/CardAdminsVolunteer.css';
 
 class CardAdminsVolunteer extends Component {
+  state = {
+    isHovering: false
+  }
+
   handleDelete = (userId) => {
     api
       .deleteUser(userId)
@@ -14,15 +19,28 @@ class CardAdminsVolunteer extends Component {
       .catch((error) => console.log(error));
   };
 
+  handleMouseEnterCard = () => {
+    this.setState({isHovering: true})
+  }
+
+  handleMouseLeaveCard = () => {
+    this.setState({isHovering: false})
+  }
+
   render() {
     return (
-      <div className="CardContainer">
+      <div 
+      onMouseEnter={this.handleMouseEnterCard}
+      onMouseLeave={this.handleMouseLeaveCard}
+      className="CardContainerAdminsVolunteer"
+      >
         {this.props.users.isAdmin && (
-          <>
-            <div className="card-info">
+          <div>
+            <div className="card-info-admins-volunteer">
               <div>Admin</div>
               <p>{this.props.users.login}</p>
             </div>
+            {this.state.isHovering &&
             <aside>
               {!this.props.context.isLoading &&
                 this.props.context.user._id === this.props.users._id && (
@@ -38,19 +56,20 @@ class CardAdminsVolunteer extends Component {
                 src={binIcon}
                 alt="trash-icon"
               />
-            </aside>
-          </>
+            </aside>}
+          </div>
         )}
         {!this.props.users.isAdmin && (
-          <>
-            <div className="card-info">
+          <div>
+            <div className="card-info-admins-volunteer">
               <div>Bénévole</div>
               <p>{this.props.users.login}</p>
             </div>
+            {this.state.isHovering &&
             <aside onClick={this.props.handlePopup}>
               <img src={editIcon} alt="edit-icon" />
-            </aside>
-          </>
+            </aside>}
+          </div>
         )}
       </div>
     );

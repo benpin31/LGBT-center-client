@@ -4,7 +4,7 @@ import Card from "./CardAdminsVolunteer";
 class Volunteer extends Component {
   render() {
     return (
-      <div>
+      <>
         {this.props.users.map(user => {
           return (
             !user.isAdmin 
@@ -16,7 +16,7 @@ class Volunteer extends Component {
               getAllUsers={this.props.getAllUsers}            
             />)
         })}
-      </div>
+      </>
     );
   }
 }
