@@ -109,8 +109,6 @@ export class ChooseCategory extends Component {
                 id="CreateForm"
             >
 
-                <h1>ajouter une nouvelle visite</h1>
-
                 {!visitToUpdate &&
                     <div id="first-form">
                         <div id="nb-of-person">

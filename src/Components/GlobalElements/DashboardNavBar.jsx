@@ -20,7 +20,7 @@ class DashboardNavBar extends Component {
           .catch((error) => {
             console.log(error);
           });
-      }
+    }
 
     render() {
 
@@ -70,7 +70,7 @@ class DashboardNavBar extends Component {
                             className="link" 
                             activeClassName="selected"
                         >
-                        Utilisateurs
+                        Utilisateur·ices
                         </NavLink>
                     }
 

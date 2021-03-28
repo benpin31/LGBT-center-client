@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-
-import "./../../Styles/CatCont.css"
+import React, { Component } from 'react';
+import './../../Styles/FormCreateCatCont.css';
 
 export default class FormCreateUpdateContact extends Component {
 
@@ -42,22 +41,24 @@ export default class FormCreateUpdateContact extends Component {
         const { formName,closeForm } = this.props
         const {name} = this.state
         return (
-            <div className="FormCreateUpdateContact">
-                <div>
-                    <p>{formName}</p>
-                    <div onClick={closeForm}>Annuler</div>
+            <div className="shadow-pop-up">
+                <div className="FormCreateUpdateContact">
+                    <div>
+                        <p>{formName}</p>
+                        <div className="close-pop-up" onClick={closeForm}>Annuler</div>
+                    </div>
+                    <form action="" onSubmit={this.handleSubmit}>
+                        <label htmlFor="name">Name</label>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            id="name"
+                            value={name}
+                            onChange={this.handleChange}
+                        />
+                    <button>Submit</button>
+                    </form>
                 </div>
-                <form action="" onSubmit={this.handleSubmit}>
-                    <label htmlFor="name">Name</label>
-                    <input 
-                        type="text" 
-                        name="name" 
-                        id="name"
-                        value={name}
-                        onChange={this.handleChange}
-                    />
-                <button>Submit</button>
-                </form>
             </div>
         )
     }
