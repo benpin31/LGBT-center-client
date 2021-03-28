@@ -15,7 +15,6 @@
   line-height: 23px;
   text-transform: uppercase;
   color: #241B3D;
-  margin-top: 10px;
 }
 
 #header-cat-cont div {
@@ -45,5 +44,11 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 16px;
+}
+
+@media (max-width: 1024px) {
+  #item-collection-container {
+    margin: 100px 48px;
+  }
 }
 

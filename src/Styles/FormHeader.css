@@ -31,3 +31,9 @@
     line-height: 22px;
     color: #5B3FAD;
 }
+
+@media (max-width: 1024px) {
+    .FormHeader {
+        margin: 100px 48px 28px 48px;
+    }
+}

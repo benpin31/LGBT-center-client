@@ -42,3 +42,9 @@
 .link {
     text-decoration: none;
 }
+
+@media (max-width: 1024px) {
+    #History {
+        margin: 100px 48px;
+    }
+}

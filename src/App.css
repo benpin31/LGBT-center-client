@@ -21,12 +21,6 @@ font-weight: 600; */
   font-weight: 400;
 }
 
-.App {
-  display: flex;
-  background-color: rgba(247, 248, 250, 1);
-
-}
-
 #header-flag {
   position: fixed;
   z-index: 5;
@@ -35,8 +29,19 @@ font-weight: 600; */
   height: 6px;
 }
 
+.App {
+  display: flex;
+  background-color: rgba(247, 248, 250, 1);
+
+}
+
 #right-side {
   width: 100%;
-  /*
-  margin: 50px 48px; */
+}
+
+@media (max-width: 1024px) {
+  .App {
+    flex-direction: column;
+    min-height: 100vh;
+  }
 }

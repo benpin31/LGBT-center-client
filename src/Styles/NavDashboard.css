@@ -48,3 +48,49 @@
     text-transform: uppercase;
     color: #714ED7;
 }
+
+@media (max-width: 1024px) {
+    #DashboardNavBar {
+        display: flex;
+        position: fixed;
+        align-items: center;
+        top: 0;
+        z-index: 3;
+        height: 60px;
+        margin: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    #DashboardNavBar img.logo {
+        width: 150px;
+        padding: 0;
+        margin: 0;
+        margin-right: 28px;
+    }
+
+    .logout {
+        position: relative;
+        top: 0px;
+        left: 20px;
+        cursor: pointer;
+        max-width: 150px;
+    }
+
+    .logout p {
+        display: none;
+    }
+
+    #DashboardNavBar .link {
+        display: block;
+        font-size: 15px;
+        line-height: 0;
+        padding: 28.5px 15px;
+    }
+
+    #DashboardNavBar .link:hover, .selected {
+        background-color: rgba(113, 78, 215, 0.06);
+        border-right: 0;
+        border-bottom: 2px solid rgba(65, 44, 122, 1);
+    }
+}
