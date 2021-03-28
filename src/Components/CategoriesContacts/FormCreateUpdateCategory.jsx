@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
-import './../../Styles/FormCreateCatCont.css';
+import React, { Component } from "react";
+import "./../../Styles/FormCreateCatCont.css";
 
 export default class FormCreateUpdateCategory extends Component {
     state={
         name: this.props.values ? this.props.values.name: "",
         description: this.props.values ? this.props.values.description: "",
+
+        isNameValidated: true,
+        isdescriptionValidated : true
     }
 
     componentDidUpdate(prevProps) {
@@ -17,13 +20,17 @@ export default class FormCreateUpdateCategory extends Component {
         }
     }
 
-    handleChange = event => {
-        this.setState({[event.target.name]: event.target.value})
-    }
-
     handleSubmit =  async event => {
-        const {formAction, handleUpdateView, closeForm} = this.props ;
         event.preventDefault()
+
+        const {formAction, handleUpdateView, closeForm} = this.props ;
+        const {name, description} = this.state ;
+
+        if (name.length < 3 || description.length < 3) {
+            this.setState({isNameValidated: name.length >= 3, isdescriptionValidated: description.length >= 3}) ;
+            return ;
+        }
+
         try {
             await formAction({...this.state, isActive: true}) ;
             handleUpdateView() ;
@@ -32,41 +39,48 @@ export default class FormCreateUpdateCategory extends Component {
             console.log(err) ;
             closeForm() ;
         }
-
-
     }
 
-    render() {
-        const { formName,closeForm } = this.props
-        const {name, description} = this.state
+    handleChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+    };
 
-        return (
-            <div className="shadow-pop-up">
-                <div className="FormCreateUpdateContact">
-                    <div>
-                        <p>{formName}</p>
-                        <div className="close-pop-up" onClick={closeForm}>Annuler</div>
-                    </div>
-                    <form action="" onSubmit={this.handleSubmit}>
-                        <label htmlFor="name">Name</label>
-                        <input 
-                            type="text" 
-                            name="name" 
-                            id="name"
-                            value={name}
-                            onChange={this.handleChange}
-                        />
-                        <label htmlFor="description">Description</label>
-                        <textarea 
-                            name="description" 
-                            id="description"
-                            value={description}
-                            onChange={this.handleChange}
-                        />
-                    <button>Submit</button>
-                    </form>
+
+  render() {
+    const { formName, closeForm } = this.props;
+    const {name, description, isNameValidated, isdescriptionValidated} = this.state ;
+
+    return (
+      <div className="shadow-pop-up">
+        <div className="FormCreateUpdateContact">
+            <div>
+                <p>{formName}</p>
+                <div className="close-pop-up" onClick={closeForm}>
+                Annuler
                 </div>
             </div>
-        )
-    }
+          <form action="" onSubmit={this.handleSubmit}>
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={this.handleChange}
+            />
+            {!isNameValidated && <div><p>Le nom doit contenir au moins 3 caractères</p></div> }
+            <label htmlFor="description">Description</label>
+            <textarea
+              name="description"
+              id="description"
+              value={description}
+              onChange={this.handleChange}
+            />
+            {!isdescriptionValidated && <div><p>La description doit contenir au moins 3 caractères</p></div> }
+            <button>Submit</button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
