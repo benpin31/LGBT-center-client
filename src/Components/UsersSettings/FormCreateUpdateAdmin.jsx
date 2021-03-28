@@ -5,7 +5,7 @@ class FormCreateUpdateAdmin extends Component {
   state = {
     login: this.props.value ? this.props.value.login : "",
     password: "",
-    isAdmin: true,
+    isAdmin: this.props.value ? this.props.value.isAdmin : true,
 
     //  input validation
     isLoginLengthValidated: true,
