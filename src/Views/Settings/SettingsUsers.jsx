@@ -78,6 +78,7 @@ class SettingsUsers extends Component {
             handlePopup={this.handleHidePopup}
             getAllUsers={this.getAllUsers}
             users={this.state.users}
+            action="ajouter"
           />
         )}
         {this.state.isShownUpdate && (
@@ -89,6 +90,7 @@ class SettingsUsers extends Component {
             getAllUsers={this.getAllUsers}
             value={this.state.isShownUpdate}
             users={this.state.users}
+            action="modifier"
           />
         )}
       </div>
