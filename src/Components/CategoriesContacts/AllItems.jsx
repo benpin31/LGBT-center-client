@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import CardItemWidget from "./../GlobalElements/CardItemWidget";
+import CardCatCont from "./CardCatCont";
+
 import "../../Styles/SettingsCatCont.css";
-import "../../Styles/AllItems.css";
-import plusIcon from "../../Assets/plus-icon.svg";
+import plusIcon from "../../Assets/purple-plus-icon.svg";
 
 export class AllItems extends Component {
   state = {
@@ -60,6 +60,8 @@ export class AllItems extends Component {
       formCreateAction,
     } = this.props;
     const { items, showCreateForm, showUpdateForm } = this.state;
+    
+    const titleFormat = title === "Type de contact" ? "un type de contact" : "une catégorie"
 
     let activeitems, inactiveitems;
 
@@ -69,7 +71,7 @@ export class AllItems extends Component {
     }
 
     return (
-      <div>
+      <div id="item-collection-container"> 
         <div id="header-cat-cont">
           <p>{title}</p>
           <div onClick={this.handleOpenCreate}>
@@ -78,10 +80,10 @@ export class AllItems extends Component {
           </div>
         </div>
         {items && (
-          <div>
+          <div id="items-container">
             <div className="dashboard-cat-cont">
               {activeitems.map((item) => (
-                <CardItemWidget
+                <CardCatCont
                   item={item}
                   updateItem={updateItem}
                   handleOpenUpdate={() => this.handleOpenUpdate(item)}
@@ -93,14 +95,15 @@ export class AllItems extends Component {
             </div>
             <div className="dashboard-cat-cont">
               {inactiveitems.map((item) => (
-                <CardItemWidget
+                <CardCatCont
                   item={item}
                   updateItem={updateItem}
                   handleOpenUpdate={() => this.handleOpenUpdate(item)}
                   handleUpdateView={this.handleUpdateView}
                   key={item._id}
                 />
-              ))}
+              ))
+            }
             </div>
           </div>
         )}
@@ -108,7 +111,7 @@ export class AllItems extends Component {
         {showCreateForm && (
           // appears only the the state is true
           <FormCreateUpdateComponent
-            formName={"Ajouter un " + title}
+            formName={"Ajouter " + titleFormat}
             formAction={formCreateAction}
             handleUpdateView={this.handleUpdateView}
             closeForm={this.handleCloseCreate}
@@ -119,7 +122,7 @@ export class AllItems extends Component {
           // appears only the the state is not empty/ here the state is a full item so that one can use
           // its informations to fill the form
           <FormCreateUpdateComponent
-            formName={"Ajouter un " + title}
+            formName={"Modifier " + titleFormat}
             formAction={(value) =>
               updateItem(this.state.showUpdateForm._id, value)
             }

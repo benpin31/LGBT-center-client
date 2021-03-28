@@ -47,10 +47,10 @@ class SettingsUsers extends Component {
     return (
       <div id="settings-users">
         <div id="header-users">
-          <h1>utilisateur.ices</h1>
+          <h1>utilisateur·ices</h1>
           <button onClick={this.handlePopupCreate}>
             <img src={plusIcon} alt="plus-icon" /> 
-            <p>Ajouter un.e nouvel.le utilisateur.ice</p>
+            <p>Ajouter un·e nouvel·le utilisateur·ice</p>
           </button>
         </div>
         <Admins 

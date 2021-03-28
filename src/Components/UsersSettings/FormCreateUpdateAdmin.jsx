@@ -1,5 +1,6 @@
-import userEvent from "@testing-library/user-event";
 import React, { Component } from "react";
+import api from "../../apiHandler/apiHandler";
+import '../../Styles/CreateUsers.css'
 
 class FormCreateUpdateAdmin extends Component {
   state = {
@@ -72,34 +73,35 @@ class FormCreateUpdateAdmin extends Component {
     const {isLoginLengthValidated, isLoginFree, isPasswordValidated} = this.state ;
 
     return (
-      <div>
-        <div>
-          <h1>ajouter un.e utilisateur.ice</h1>
-          <button onClick={this.props.handlePopup}>Annuler</button>
-        </div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="login">nom utilisateur.ice</label>
-          <input
-            onChange={this.handleChange}
-            value={this.state.login}
-            id="login"
-            type="text"
-            name="login"
-          />
-          {!isLoginLengthValidated && <div><p>Le login doit contenir au moins 3 caractères.</p></div> }
+      <div id="BackFormUser">
+        <div id="FormUser">
+          <div id="header-form-user">
+            <h1>ajouter un.e utilisateur.ice</h1>
+            <button onClick={this.props.handlePopup}>Annuler</button>
+          </div>
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="login">nom utilisateur.ice</label>
+            <input
+              onChange={this.handleChange}
+              value={this.state.login}
+              id="login"
+              type="text"
+              name="login"
+            />
+            {!isLoginLengthValidated && <div><p>Le login doit contenir au moins 3 caractères.</p></div> }
           {!isLoginFree && <div><p>Ce nom d’utilisateur est déjà pris.</p></div> }
-          <label htmlFor="password">mot de passe</label>
-          <input
-            onChange={this.handleChange}
-            value={this.props.password}
-            id="password"
-            type="password"
-            name="password"
-            placeholder="•••••••••"
-          />
-          {!isPasswordValidated && <div><p>Le mot de passe doit contenir au moins 3 caractères.</p></div> }
-          <button>Créer</button>
-        </form>
+            <label htmlFor="password">mot de passe</label>
+            <input
+              onChange={this.handleChange}
+              value={this.props.password}
+              id="password"
+              type="password"
+              name="password"
+            />
+            {!isPasswordValidated && <div><p>Le mot de passe doit contenir au moins 3 caractères.</p></div> }
+            <button>Créer</button>
+          </form>
+        </div>
       </div>
     );
   }

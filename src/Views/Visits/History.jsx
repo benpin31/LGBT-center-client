@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import apiHandler from './../../apiHandler/apiHandler';
-import CardInfo from './../../Components/JulieCardInfo';
+import CardInfo from '../../Components/Visits/VisitCardInfo';
 import {Link} from 'react-router-dom';
 
 import './../../Styles/History.css';

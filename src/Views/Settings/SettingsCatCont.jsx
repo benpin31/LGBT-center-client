@@ -4,7 +4,6 @@ import apiHandler from "./../../apiHandler/apiHandler";
 import AllItems from "./../../Components/CategoriesContacts/AllItems";
 import FormCreateUpdateCategory from "./../../Components/CategoriesContacts/FormCreateUpdateCategory";
 import FormCreateUpdateContact from "./../../Components/CategoriesContacts/FormCreateUpdateContact";
-import "../../Styles/SettingsCatCont.css";
 
 // Render a the catgory and contact management
 // The wiews contain two parts :
@@ -14,7 +13,7 @@ import "../../Styles/SettingsCatCont.css";
 
 function SettingsCatCont() {
   return (
-    <div id="settings-cat-cont">
+    <>
       {/* Category lists */}
       <AllItems
         title={"Catégories"}
@@ -40,7 +39,7 @@ function SettingsCatCont() {
         updateItem={apiHandler.updateContactType}
         formCreateAction={apiHandler.createContactType}
       />
-    </div>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CreateVisitForm from '../../Components/Visits/CreateVisitForm';
+import FormHeader from '../../Components/GlobalElements/FormHeader';
 
 
 class CreateVisit extends Component {
@@ -8,6 +9,7 @@ class CreateVisit extends Component {
         
         return (
             <>
+                <FormHeader title="ajouter une nouvelle visite"/>
                 <CreateVisitForm />
             </>
         )
