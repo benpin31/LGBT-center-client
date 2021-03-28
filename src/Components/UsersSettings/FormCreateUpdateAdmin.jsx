@@ -84,7 +84,7 @@ class FormCreateUpdateAdmin extends Component {
       <div className="shadow-pop-up">
         <div className="FormCreateUpdateContact">
           <div>
-            <h1>ajouter un.e utilisateur.ice</h1>
+            <h1>{this.props.action} un·e utilisateur·ice</h1>
             <div className="close-pop-up" onClick={this.props.handlePopup}>Annuler</div>
           </div>
           <form onSubmit={this.handleSubmit}>
