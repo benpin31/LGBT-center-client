@@ -15,25 +15,28 @@ class Home extends React.Component {
     };
 
     componentDidUpdate(prevProps) {
-        if (this.props.context.isLoggedIn) {
-            this.props.history.push("/dashboard/new-visit")
-        } else  if (prevProps.context.isLoading !== this.props.context.isLoading) {
-            setTimeout(() => {
-                this.setState({
-                    signInStyle: {
-                        display : 'block',
-                        animation : 'signinsweep 0.9s ease-out'
-                    }
-                })
-            }, 900);
-    
-            setTimeout(() => {
-                this.setState({
-                    helloStyle : {
-                        display : 'block',
-                    }
-                })
-            }, 700);
+
+        if (prevProps.context.isLoading !== this.props.context.isLoading) {
+            if (this.props.context.isLoggedIn) {
+                this.props.history.push("/dashboard/new-visit")
+            } else  {
+                setTimeout(() => {
+                    this.setState({
+                        signInStyle: {
+                            display : 'block',
+                            animation : 'signinsweep 0.9s ease-out'
+                        }
+                    })
+                }, 900);
+        
+                setTimeout(() => {
+                    this.setState({
+                        helloStyle : {
+                            display : 'block',
+                        }
+                    })
+                }, 700);
+            }
         }
     }
 

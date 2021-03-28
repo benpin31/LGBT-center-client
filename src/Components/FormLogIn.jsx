@@ -37,7 +37,7 @@ class FormLogIn extends Component {
                     <input 
                         onChange={(event) => this.setState({password : event.target.value})}
                         value={this.state.password}
-                        type="text" 
+                        type="password" 
                         id="password" 
                         name="password"
                     />
