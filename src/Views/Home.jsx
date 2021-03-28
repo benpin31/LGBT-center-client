@@ -12,25 +12,55 @@ class Home extends React.Component {
         signInStyle : null,
         flagStyle : null,
         helloStyle : null,
+
+        isValidSignin: true
     };
 
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                signInStyle: {
-                    display : 'block',
-                    animation : 'signinsweep 0.9s ease-out'
-                }
-            })
-        }, 900);
+    componentDidUpdate(prevProps) {
 
-        setTimeout(() => {
-            this.setState({
-                helloStyle : {
-                    display : 'block',
-                }
-            })
-        }, 700);
+        if (prevProps.context.isLoading !== this.props.context.isLoading) {
+            if (this.props.context.isLoggedIn) {
+                this.props.history.push("/dashboard/new-visit")
+            } else  {
+                setTimeout(() => {
+                    this.setState({
+                        signInStyle: {
+                            display : 'block',
+                            animation : 'signinsweep 0.9s ease-out'
+                        }
+                    })
+                }, 900);
+        
+                setTimeout(() => {
+                    this.setState({
+                        helloStyle : {
+                            display : 'block',
+                        }
+                    })
+                }, 700);
+            }
+        }
+    }
+
+    componentDidMount() {
+        if(!this.props.context.isLoggedIn & !this.props.context.isLoading) {
+            setTimeout(() => {
+                this.setState({
+                    signInStyle: {
+                        display : 'block',
+                        animation : 'signinsweep 0.9s ease-out'
+                    }
+                })
+            }, 900);
+    
+            setTimeout(() => {
+                this.setState({
+                    helloStyle : {
+                        display : 'block',
+                    }
+                })
+            }, 700);
+        }
     }
 
     handleLoggedin = (user) => {
@@ -59,20 +89,23 @@ class Home extends React.Component {
         
                 }, 700);
         
-                setTimeout(() => this.props.history.push("dashboard/new-visit"), 1500) ;
+                setTimeout(() => this.props.history.push("/dashboard/new-visit"), 1500) ;
             })
             .catch((error) => {
+                this.setState({isValidSignin: false})
                 console.log(error);
             });
     }
 
     render() {
+
         const flags = ["red", "orange", "yellow", "green", "blue", "purple"];
+        const {isValidSignin} = this.state ;
 
         return (
             <div>
                 <div id="signin" style={this.state.signInStyle}>
-                    <FormLogIn onLoggedIn={this.handleLoggedin}/>
+                    <FormLogIn onLoggedIn={this.handleLoggedin} isValidSignin={isValidSignin}/>
                 </div>
 
                 <div id="flag-container">

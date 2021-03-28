@@ -20,6 +20,9 @@ class FormLogIn extends Component {
     } 
 
     render() {
+
+        const { isValidSignin } = this.props ;
+
         return (
             <div className="form-container">
                 <img src={logo} alt=""/>
@@ -37,10 +40,14 @@ class FormLogIn extends Component {
                     <input 
                         onChange={(event) => this.setState({password : event.target.value})}
                         value={this.state.password}
-                        type="text" 
+                        type="password" 
                         id="password" 
                         name="password"
                     />
+                    {   !isValidSignin 
+                            && 
+                        <div><p>Invalid credentials</p></div>
+                    }
                     <button >Connexion</button>
                 </form> 
             </div>

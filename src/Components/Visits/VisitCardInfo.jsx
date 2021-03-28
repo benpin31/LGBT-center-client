@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './../Styles/CardInfo.css';
-import editIcon from './../Assets/edit-icon.svg';
-import deleteIcon from './../Assets/trash-icon.svg';
+import './../../Styles/VisitCardInfo.css';
+import editIcon from './../../Assets/edit-icon.svg';
+import deleteIcon from './../../Assets/trash-icon.svg';
 
 class JulieCardInfo extends Component {
     render() {

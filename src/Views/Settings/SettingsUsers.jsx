@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router";
 import Admins from "../../Components/UsersSettings/Admins";
 import Volunteer from "../../Components/UsersSettings/Volunteer";
 import plusIcon from "../../Assets/plus-icon.svg";
@@ -48,10 +47,10 @@ class SettingsUsers extends Component {
     return (
       <div id="settings-users">
         <div id="header-users">
-          <h1>utilisateur.ices</h1>
+          <h1>utilisateur·ices</h1>
           <button onClick={this.handlePopupCreate}>
             <img src={plusIcon} alt="plus-icon" /> 
-            <p>Ajouter un.e nouvel.le utilisateur.ice</p>
+            <p>Ajouter un·e nouvel·le utilisateur·ice</p>
           </button>
         </div>
         <Admins 
@@ -71,6 +70,7 @@ class SettingsUsers extends Component {
             formAction={api.createUser}
             handlePopup={this.handleHidePopup}
             getAllUsers={this.getAllUsers}
+            users={this.state.users}
           />
         }
         {
@@ -81,6 +81,7 @@ class SettingsUsers extends Component {
             handlePopup={this.handleHidePopup}
             getAllUsers={this.getAllUsers}
             value={this.state.isShownUpdate}
+            users={this.state.users}
           />
         }
       </div>

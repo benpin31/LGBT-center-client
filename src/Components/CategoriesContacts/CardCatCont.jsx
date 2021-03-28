@@ -3,10 +3,17 @@ import archiveIcon from "./../../Assets/archive-icon.svg";
 import editIcon from "./../../Assets/edit-icon.svg";
 import onOffIcone from "./../../Assets/on-off-icon.svg";
 
+import './../../Styles/CatContCard.css';
+
 export class CardItemWidget extends Component {
+  state = {
+    isHovering: false
+  }
+
   onOffItem = async () => {
     const { _id, isActive, name, description } = this.props.item;
     const { handleUpdateView } = this.props;
+    console.log(_id);
     try {
       await this.props.updateItem(_id, {
         name,
@@ -20,17 +27,38 @@ export class CardItemWidget extends Component {
     }
   };
 
+  handleMouseEnterCard = () => {
+    this.setState({isHovering: true})
+  }
+
+  handleMouseLeaveCard = () => {
+    this.setState({isHovering: false})
+  }
+
   render() {
+    const {item, handleOpenUpdate} = this.props;
+
     return (
-      <div className="CardContainerItem">
-        <div>{this.props.item.isActive ? "ACTIF" : "ARCHIVÉ"}</div>
-        <p>{this.props.item.name}</p>
-        {this.props.item.isActive && (
+      <div 
+        onMouseEnter={this.handleMouseEnterCard}
+        onMouseLeave={this.handleMouseLeaveCard}
+        className="CardContainerItem"
+      >
+        <div className="left-container">
+          <div className="status-container">
+            <p>
+              {item.isActive ? "actif" : "archivé"}
+            </p>
+          </div>
+          <p>{item.name}</p>
+        </div>
+        {this.state.isHovering &&
+        item.isActive && (
           <aside>
             <img
               src={editIcon}
               alt="edit-icone"
-              onClick={this.props.handleOpenUpdate}
+              onClick={handleOpenUpdate}
             />
             <img
               src={archiveIcon}
@@ -39,7 +67,8 @@ export class CardItemWidget extends Component {
             />
           </aside>
         )}
-        {!this.props.item.isActive && (
+        {this.state.isHovering &&
+        !item.isActive && (
           <aside>
             <img src={onOffIcone} alt="archive-icon" onClick={this.onOffItem} />
           </aside>
