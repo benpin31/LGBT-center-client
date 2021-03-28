@@ -108,6 +108,9 @@ export class ChooseCategory extends Component {
                 onSubmit={this.handleSubmit}
                 id="CreateForm"
             >
+
+                <h1>ajouter une nouvelle visite</h1>
+
                 {!visitToUpdate &&
                     <div id="first-form">
                         <div id="nb-of-person">
@@ -246,3 +249,5 @@ export class ChooseCategory extends Component {
 }
 
 export default withRouter(ChooseCategory);
+
+
