@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router";
 import Admins from "../../Components/UsersSettings/Admins";
 import Volunteer from "../../Components/UsersSettings/Volunteer";
 import plusIcon from "../../Assets/plus-icon.svg";

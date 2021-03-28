@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import api from "../../apiHandler/apiHandler";
 
 class FormCreateUpdateAdmin extends Component {
   state = {

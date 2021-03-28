@@ -14,23 +14,48 @@ class Home extends React.Component {
         helloStyle : null,
     };
 
-    componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                signInStyle: {
-                    display : 'block',
-                    animation : 'signinsweep 0.9s ease-out'
-                }
-            })
-        }, 900);
+    componentDidUpdate(prevProps) {
+        if (this.props.context.isLoggedIn) {
+            this.props.history.push("/dashboard/new-visit")
+        } else  if (prevProps.context.isLoading !== this.props.context.isLoading) {
+            setTimeout(() => {
+                this.setState({
+                    signInStyle: {
+                        display : 'block',
+                        animation : 'signinsweep 0.9s ease-out'
+                    }
+                })
+            }, 900);
+    
+            setTimeout(() => {
+                this.setState({
+                    helloStyle : {
+                        display : 'block',
+                    }
+                })
+            }, 700);
+        }
+    }
 
-        setTimeout(() => {
-            this.setState({
-                helloStyle : {
-                    display : 'block',
-                }
-            })
-        }, 700);
+    componentDidMount() {
+        if(!this.props.context.isLoggedIn & !this.props.context.isLoading) {
+            setTimeout(() => {
+                this.setState({
+                    signInStyle: {
+                        display : 'block',
+                        animation : 'signinsweep 0.9s ease-out'
+                    }
+                })
+            }, 900);
+    
+            setTimeout(() => {
+                this.setState({
+                    helloStyle : {
+                        display : 'block',
+                    }
+                })
+            }, 700);
+        }
     }
 
     handleLoggedin = (user) => {
@@ -59,7 +84,7 @@ class Home extends React.Component {
         
                 }, 700);
         
-                setTimeout(() => this.props.history.push("dashboard/new-visit"), 1500) ;
+                setTimeout(() => this.props.history.push("/dashboard/new-visit"), 1500) ;
             })
             .catch((error) => {
                 console.log(error);
