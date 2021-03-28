@@ -12,10 +12,9 @@
 #settings-users #header-users > h1 {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 30px;
+    font-size: 20px;
     line-height: 23px;
     color: #241B3D;
-    margin-top: 15px;
 }
 
 #settings-users #header-users button {

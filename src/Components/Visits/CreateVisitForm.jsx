@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import apiHandler from '../../apiHandler/apiHandler';
+import CategoryCard from './CategoryCard';
 
 import './../../Styles/CreateVisit.css';
 import plusIcon from './../../Assets/purple-plus-icon.svg';
@@ -21,7 +22,7 @@ export class ChooseCategory extends Component {
         allContactTypes: null,
 
         visitToUpdate: null,
-        isUpdateVisit: false
+        isUpdateVisit: false,
     }
 
     componentDidMount() {
@@ -98,10 +99,9 @@ export class ChooseCategory extends Component {
     }
 
     render() {
-
         const {allCategories, category, allContactTypes, contactType, date, nbOfPerson, visitToUpdate, isUpdateVisit} = this.state
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const dateFormat = date.toLocaleDateString('fr-FR', options);
+
+        const dateFormat = date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
         
         return (
             <form 
@@ -157,14 +157,7 @@ export class ChooseCategory extends Component {
                     !category &&
                     allCategories &&
                         allCategories.map(category => 
-                            <div 
-                                onClick={() => this.handleSelectItem(category._id, category.name, "category")}
-                                key={category._id}
-                                className="cat-cont"
-                            >
-                                <p>{category.name}</p>
-                                
-                            </div>
+                            <CategoryCard key={category._id} category={category} handleSelectItem={this.handleSelectItem}/>
                         )
                     }
                 </div>

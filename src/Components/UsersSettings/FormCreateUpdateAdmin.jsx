@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import api from "../../apiHandler/apiHandler";
 import "../../Styles/FormCreateCatCont.css";
 
 class FormCreateUpdateAdmin extends Component {

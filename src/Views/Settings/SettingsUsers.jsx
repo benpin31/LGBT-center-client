@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+
 import Admins from "../../Components/UsersSettings/Admins";
 import Volunteer from "../../Components/UsersSettings/Volunteer";
-import plusIcon from "../../Assets/plus-icon.svg";
 import api from "../../apiHandler/apiHandler";
 import FormUser from "../../Components/UsersSettings/FormCreateUpdateAdmin";
+
 import "../../Styles/SettingsUsers.css";
+import plusIcon from "../../Assets/plus-icon.svg";
 
 class SettingsUsers extends Component {
   state = {
@@ -53,7 +55,7 @@ class SettingsUsers extends Component {
           <h1>utilisateur·ices</h1>
           <button onClick={this.handlePopupCreate}>
             <img src={plusIcon} alt="plus-icon" />
-            <p>Ajouter un·e nouvel·le utilisateur·ice</p>
+            <p>Ajouter un·e utilisateur·ice</p>
           </button>
         </div>
         <div className="users-container">

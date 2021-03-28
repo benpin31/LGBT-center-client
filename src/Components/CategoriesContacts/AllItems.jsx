@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CardCatCont from "./CardCatCont";
 
 import "../../Styles/SettingsCatCont.css";
-import plusIcon from "../../Assets/purple-plus-icon.svg";
+import plusIcon from "../../Assets/plus-icon.svg";
 
 export class AllItems extends Component {
   state = {
