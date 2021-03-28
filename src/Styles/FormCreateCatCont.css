@@ -34,7 +34,7 @@
     cursor: pointer;
 }
 
-.FormCreateUpdateContact p {
+.FormCreateUpdateContact h1 {
     font-weight: 600;
     font-size: 20px;
     line-height: 23px;

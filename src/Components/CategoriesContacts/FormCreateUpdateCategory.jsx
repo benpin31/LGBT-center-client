@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './../../Styles/FormCreateCatCont.css';
+import React, { Component } from "react";
+import "./../../Styles/FormCreateCatCont.css";
 
 export default class FormCreateUpdateCategory extends Component {
     state={
@@ -18,10 +18,6 @@ export default class FormCreateUpdateCategory extends Component {
                 this.setState({name: this.props.values.name}) ;
             }
         }
-    }
-
-    handleChange = event => {
-        this.setState({[event.target.name]: event.target.value})
     }
 
     handleSubmit =  async event => {
@@ -43,43 +39,48 @@ export default class FormCreateUpdateCategory extends Component {
             console.log(err) ;
             closeForm() ;
         }
-
-
     }
 
-    render() {
-        const { formName,closeForm } = this.props ;
-        const {name, description, isNameValidated, isdescriptionValidated} = this.state ;
+    handleChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+    };
 
-        return (
-            <div className="shadow-pop-up">
-                <div className="FormCreateUpdateContact">
-                    <div>
-                        <h1>{formName}</h1>
-                        <div className="close-pop-up" onClick={closeForm}>Annuler</div>
-                    </div>
-                    <form action="" onSubmit={this.handleSubmit}>
-                        <label htmlFor="name">Name</label>
-                        <input 
-                            type="text" 
-                            name="name" 
-                            id="name"
-                            value={name}
-                            onChange={this.handleChange}
-                        />
-                        {!isNameValidated && <div><p>Le nom doit contenir au moins 3 caractères</p></div> }
-                        <label htmlFor="description">Description</label>
-                        <textarea 
-                            name="description" 
-                            id="description"
-                            value={description}
-                            onChange={this.handleChange}
-                        />
-                        {!isdescriptionValidated && <div><p>La description doit contenir au moins 3 caractères</p></div> }
-                    <button>Submit</button>
-                    </form>
+
+  render() {
+    const { formName, closeForm } = this.props;
+    const {name, description, isNameValidated, isdescriptionValidated} = this.state ;
+
+    return (
+      <div className="shadow-pop-up">
+        <div className="FormCreateUpdateContact">
+            <div>
+                <p>{formName}</p>
+                <div className="close-pop-up" onClick={closeForm}>
+                Annuler
                 </div>
             </div>
-        )
-    }
+          <form action="" onSubmit={this.handleSubmit}>
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={this.handleChange}
+            />
+            {!isNameValidated && <div><p>Le nom doit contenir au moins 3 caractères</p></div> }
+            <label htmlFor="description">Description</label>
+            <textarea
+              name="description"
+              id="description"
+              value={description}
+              onChange={this.handleChange}
+            />
+            {!isdescriptionValidated && <div><p>La description doit contenir au moins 3 caractères</p></div> }
+            <button>Submit</button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
