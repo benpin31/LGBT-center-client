@@ -12,6 +12,8 @@ class Home extends React.Component {
         signInStyle : null,
         flagStyle : null,
         helloStyle : null,
+
+        isValidSignin: true
     };
 
     componentDidUpdate(prevProps) {
@@ -90,17 +92,20 @@ class Home extends React.Component {
                 setTimeout(() => this.props.history.push("/dashboard/new-visit"), 1500) ;
             })
             .catch((error) => {
+                this.setState({isValidSignin: false})
                 console.log(error);
             });
     }
 
     render() {
+
         const flags = ["red", "orange", "yellow", "green", "blue", "purple"];
+        const {isValidSignin} = this.state ;
 
         return (
             <div>
                 <div id="signin" style={this.state.signInStyle}>
-                    <FormLogIn onLoggedIn={this.handleLoggedin}/>
+                    <FormLogIn onLoggedIn={this.handleLoggedin} isValidSignin={isValidSignin}/>
                 </div>
 
                 <div id="flag-container">

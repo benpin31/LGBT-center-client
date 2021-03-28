@@ -16,7 +16,6 @@ class FormCreateUpdateAdmin extends Component {
     event.preventDefault();
     this.props.formAction(this.state)
       .then((response) => {
-          console.log(response);
           this.props.getAllUsers() ;
           this.props.handlePopup() ;
         })
@@ -24,7 +23,6 @@ class FormCreateUpdateAdmin extends Component {
   };
 
   render() {
-    console.log(this.state, this.props.value)
     return (
       <div>
         <div>

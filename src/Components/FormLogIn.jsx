@@ -20,6 +20,10 @@ class FormLogIn extends Component {
     } 
 
     render() {
+
+        const { isValidSignin } = this.props ;
+        console.log(isValidSignin) ;
+
         return (
             <div className="form-container">
                 <img src={logo} alt=""/>
@@ -41,6 +45,10 @@ class FormLogIn extends Component {
                         id="password" 
                         name="password"
                     />
+                    {   !isValidSignin 
+                            && 
+                        <div><p>Invalid credentials</p></div>
+                    }
                     <button >Connexion</button>
                 </form> 
             </div>
