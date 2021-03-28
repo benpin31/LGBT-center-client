@@ -5,6 +5,9 @@ export default class FormCreateUpdateCategory extends Component {
     state={
         name: this.props.values ? this.props.values.name: "",
         description: this.props.values ? this.props.values.description: "",
+
+        isNameValidated: true,
+        isdescriptionValidated : true
     }
 
     componentDidUpdate(prevProps) {
@@ -22,8 +25,16 @@ export default class FormCreateUpdateCategory extends Component {
     }
 
     handleSubmit =  async event => {
-        const {formAction, handleUpdateView, closeForm} = this.props ;
         event.preventDefault()
+
+        const {formAction, handleUpdateView, closeForm} = this.props ;
+        const {name, description} = this.state ;
+
+        if (name.length < 3 || description.length < 3) {
+            this.setState({isNameValidated: name.length >= 3, isdescriptionValidated: description.length >= 3}) ;
+            return ;
+        }
+
         try {
             await formAction({...this.state, isActive: true}) ;
             handleUpdateView() ;
@@ -37,14 +48,14 @@ export default class FormCreateUpdateCategory extends Component {
     }
 
     render() {
-        const { formName,closeForm } = this.props
-        const {name, description} = this.state
+        const { formName,closeForm } = this.props ;
+        const {name, description, isNameValidated, isdescriptionValidated} = this.state ;
 
         return (
             <div className="shadow-pop-up">
                 <div className="FormCreateUpdateContact">
                     <div>
-                        <p>{formName}</p>
+                        <h1>{formName}</h1>
                         <div className="close-pop-up" onClick={closeForm}>Annuler</div>
                     </div>
                     <form action="" onSubmit={this.handleSubmit}>
@@ -56,6 +67,7 @@ export default class FormCreateUpdateCategory extends Component {
                             value={name}
                             onChange={this.handleChange}
                         />
+                        {!isNameValidated && <div><p>Le nom doit contenir au moins 3 caractères</p></div> }
                         <label htmlFor="description">Description</label>
                         <textarea 
                             name="description" 
@@ -63,6 +75,7 @@ export default class FormCreateUpdateCategory extends Component {
                             value={description}
                             onChange={this.handleChange}
                         />
+                        {!isdescriptionValidated && <div><p>La description doit contenir au moins 3 caractères</p></div> }
                     <button>Submit</button>
                     </form>
                 </div>

@@ -6,13 +6,16 @@ export default class FormCreateUpdateContact extends Component {
     state={
         name: this.props.values ? this.props.values.name: "",
         //  if update type, this.props.values is given and the initial values of the item are given
+        isNameValidated: true 
     }
 
     componentDidUpdate(prevProps) {
-        //  when the user want to change the upfateform without closing the previous one
+        //  when the user want to change the updateform without closing the previous one
         if (prevProps.values) {
-            const {name: prevName} = prevProps.values
+            // the fact that the props contains values property indicates the form is used for update
+            const {name: prevName} = prevProps.values ;
             if (this.props.values.name !== prevName) {
+                // update only if change or name
                 this.setState({name: this.props.values.name}) ;
             }
         }
@@ -23,10 +26,18 @@ export default class FormCreateUpdateContact extends Component {
     }
 
     handleSubmit =  async event => {
-        const {formAction, handleUpdateView, closeForm} = this.props ;
         event.preventDefault()
+
+        const {formAction, handleUpdateView, closeForm} = this.props ;
+        const {name} = this.state ;
+
+        if (name.length < 3) {
+            this.setState({isNameValidated: false}) ;
+            return ;
+        }
+
         try {
-            await formAction({...this.state, isActive: true}) 
+            await formAction({name, isActive: true}) 
             handleUpdateView() ;
             closeForm() ;
         } catch(err) {
@@ -38,13 +49,13 @@ export default class FormCreateUpdateContact extends Component {
     }
 
     render() {
-        const { formName,closeForm } = this.props
-        const {name} = this.state
+        const { formName,closeForm } = this.props ;
+        const { name, isNameValidated}  = this.state ;
         return (
             <div className="shadow-pop-up">
                 <div className="FormCreateUpdateContact">
                     <div>
-                        <p>{formName}</p>
+                        <h1>{formName}</h1>
                         <div className="close-pop-up" onClick={closeForm}>Annuler</div>
                     </div>
                     <form action="" onSubmit={this.handleSubmit}>
@@ -56,6 +67,7 @@ export default class FormCreateUpdateContact extends Component {
                             value={name}
                             onChange={this.handleChange}
                         />
+                    {!isNameValidated && <div><p>Le nom doit contenir au moins 3 caractères</p></div> }
                     <button>Submit</button>
                     </form>
                 </div>
