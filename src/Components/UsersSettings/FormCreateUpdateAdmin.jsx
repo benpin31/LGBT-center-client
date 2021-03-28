@@ -1,4 +1,3 @@
-import userEvent from "@testing-library/user-event";
 import React, { Component } from "react";
 import api from "../../apiHandler/apiHandler";
 import "../../Styles/FormCreateCatCont.css";
