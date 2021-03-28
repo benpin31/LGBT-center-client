@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../../apiHandler/apiHandler";
+import '../../Styles/CreateUsers.css'
 
 class FormCreateUpdateAdmin extends Component {
   state = {
@@ -15,42 +16,45 @@ class FormCreateUpdateAdmin extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.formAction(this.state)
+    this.props
+      .formAction(this.state)
       .then((response) => {
-          console.log(response);
-          this.props.getAllUsers() ;
-          this.props.handlePopup() ;
-        })
+        console.log(response);
+        this.props.getAllUsers();
+        this.props.handlePopup();
+      })
       .catch((error) => console.log(error));
   };
 
   render() {
-    console.log(this.state, this.props.value)
+    console.log(this.state, this.props.value);
     return (
-      <div>
-        <div>
-          <h1>ajouter un.e utilisateur.ice</h1>
-          <button onClick={this.props.handlePopup}>Annuler</button>
+      <div id="BackFormUser">
+        <div id="FormUser">
+          <div id="header-form-user">
+            <h1>ajouter un.e utilisateur.ice</h1>
+            <button onClick={this.props.handlePopup}>Annuler</button>
+          </div>
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="login">nom utilisateur.ice</label>
+            <input
+              onChange={this.handleChange}
+              value={this.state.login}
+              id="login"
+              type="text"
+              name="login"
+            />
+            <label htmlFor="password">mot de passe</label>
+            <input
+              onChange={this.handleChange}
+              value={this.props.password}
+              id="password"
+              type="password"
+              name="password"
+            />
+            <button>Créer</button>
+          </form>
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="login">nom utilisateur.ice</label>
-          <input
-            onChange={this.handleChange}
-            value={this.state.login}
-            id="login"
-            type="text"
-            name="login"
-          />
-          <label htmlFor="password">mot de passe</label>
-          <input
-            onChange={this.handleChange}
-            value={this.props.password}
-            id="password"
-            type="password"
-            name="password"
-          />
-          <button>Créer</button>
-        </form>
       </div>
     );
   }
