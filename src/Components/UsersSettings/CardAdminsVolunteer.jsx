@@ -3,12 +3,12 @@ import binIcon from "../../Assets/trash-icon.svg";
 import editIcon from "../../Assets/edit-icon.svg";
 import { withUser } from "../Auth/withUser";
 import api from "../../apiHandler/apiHandler";
-import '../../Styles/CardAdminsVolunteer.css';
+import "../../Styles/CardAdminsVolunteer.css";
 
 class CardAdminsVolunteer extends Component {
   state = {
-    isHovering: false
-  }
+    isHovering: false,
+  };
 
   handleDelete = (userId) => {
     api
@@ -20,19 +20,19 @@ class CardAdminsVolunteer extends Component {
   };
 
   handleMouseEnterCard = () => {
-    this.setState({isHovering: true})
-  }
+    this.setState({ isHovering: true });
+  };
 
   handleMouseLeaveCard = () => {
-    this.setState({isHovering: false})
-  }
+    this.setState({ isHovering: false });
+  };
 
   render() {
     return (
-      <div 
-      onMouseEnter={this.handleMouseEnterCard}
-      onMouseLeave={this.handleMouseLeaveCard}
-      className="CardContainerAdminsVolunteer"
+      <div
+        onMouseEnter={this.handleMouseEnterCard}
+        onMouseLeave={this.handleMouseLeaveCard}
+        className="CardContainerAdminsVolunteer"
       >
         {this.props.users.isAdmin && (
           <div>
@@ -40,23 +40,26 @@ class CardAdminsVolunteer extends Component {
               <div>Admin</div>
               <p>{this.props.users.login}</p>
             </div>
-            {this.state.isHovering &&
-            <aside>
-              {!this.props.context.isLoading &&
-                this.props.context.user._id === this.props.users._id && (
-                  <img
-                    onClick={this.props.handlePopup}
-                    src={editIcon}
-                    alt="edit-icon"
-                  />
-                )}
-
-              <img
-                onClick={() => this.handleDelete(this.props.users._id)}
-                src={binIcon}
-                alt="trash-icon"
-              />
-            </aside>}
+            {this.state.isHovering && (
+              <aside>
+                {!this.props.context.isLoading &&
+                  this.props.context.user._id === this.props.users._id && (
+                    <img
+                      onClick={this.props.handlePopup}
+                      src={editIcon}
+                      alt="edit-icon"
+                    />
+                  )}
+                {!this.props.context.isLoading &&
+                  this.props.context.user._id !== this.props.users._id && (
+                    <img
+                      onClick={() => this.handleDelete(this.props.users._id)}
+                      src={binIcon}
+                      alt="trash-icon"
+                    />
+                  )}
+              </aside>
+            )}
           </div>
         )}
         {!this.props.users.isAdmin && (
@@ -65,10 +68,11 @@ class CardAdminsVolunteer extends Component {
               <div>Bénévole</div>
               <p>{this.props.users.login}</p>
             </div>
-            {this.state.isHovering &&
-            <aside onClick={this.props.handlePopup}>
-              <img src={editIcon} alt="edit-icon" />
-            </aside>}
+            {this.state.isHovering && (
+              <aside onClick={this.props.handlePopup}>
+                <img src={editIcon} alt="edit-icon" />
+              </aside>
+            )}
           </div>
         )}
       </div>
