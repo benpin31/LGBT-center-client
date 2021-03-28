@@ -9,7 +9,6 @@ class CardAdminsVolunteer extends Component {
     api
       .deleteUser(userId)
       .then((response) => {
-        console.log(response);
         this.props.getAllUsers();
       })
       .catch((error) => console.log(error));
