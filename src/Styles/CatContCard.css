@@ -41,7 +41,6 @@
 }
 
 .CardContainerItem aside {
-    /* width: 20px; */
     position: absolute;
     display: flex;
     top: 50%;

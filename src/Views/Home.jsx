@@ -75,6 +75,9 @@ class Home extends React.Component {
                         display : 'block',
                         transform : 'translateY(-100%)',
                         animation : 'outro-sweep 1s ease-out'
+                    },
+                    helloStyle : {
+                        display : 'none',
                     }
                 })
         
@@ -109,7 +112,7 @@ class Home extends React.Component {
                 </div>
 
                 <div id="flag-container">
-                    <p style={this.state.helloStyle}>hello</p>
+                    <p style={this.state.helloStyle}>bonjour</p>
                     {flags.map(flag => 
                         <div key={flag} id={flag} style={this.state.flagStyle}></div>
                     )} 

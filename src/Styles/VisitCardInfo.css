@@ -1,4 +1,5 @@
 .CardContainer {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,6 +36,20 @@
 }
 
 .CardContainer aside img {
-    margin-left: 24px;
+    width: 20px;
+    height: 20px;
+    margin: 8px;
     cursor: pointer;
+    background-color: tomato;
+}
+
+.CardContainer aside {
+    position: absolute;
+    display: flex;
+    top: 50%;
+    right: 22px;
+    transform: translateY(-50%);  
+    background: #FFFFFF;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.14);
+    border-radius: 4px;
 }
