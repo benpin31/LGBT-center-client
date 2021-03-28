@@ -22,7 +22,6 @@ class FormLogIn extends Component {
     render() {
 
         const { isValidSignin } = this.props ;
-        console.log(isValidSignin) ;
 
         return (
             <div className="form-container">

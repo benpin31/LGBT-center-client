@@ -70,6 +70,7 @@ class SettingsUsers extends Component {
             formAction={api.createUser}
             handlePopup={this.handleHidePopup}
             getAllUsers={this.getAllUsers}
+            users={this.state.users}
           />
         }
         {
@@ -80,6 +81,7 @@ class SettingsUsers extends Component {
             handlePopup={this.handleHidePopup}
             getAllUsers={this.getAllUsers}
             value={this.state.isShownUpdate}
+            users={this.state.users}
           />
         }
       </div>
