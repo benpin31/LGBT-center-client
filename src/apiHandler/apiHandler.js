@@ -145,4 +145,18 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
     },
+
+    //test
+    repartitionByCategory(data) {
+      return service
+      .post("api/insight/get-category-repartition", data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+    },
+    //axios.post("http://localhost:4000/api/visits/getCategoryRepartition", this.state.date)
+
+
 };
+
+
+
