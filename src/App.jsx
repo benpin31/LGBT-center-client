@@ -7,12 +7,12 @@ import HeaderFlag from './Components/GlobalElements/HeaderFlag';
 
 import Home from './Views/Home';
 
-import Dashboard from './Views/Dashboard';
 import NavDashboard from './Components/GlobalElements/DashboardNavBar';
 import History from './Views/Visits/History';
 import CreateVisit from './Views/Visits/CreateVisit';
 import UpdateVisit from './Views/Visits/UpdateVisit';
-import SettingsCatCont from './Views/Settings/SettingsCatCont'
+import SettingsCatCont from './Views/Settings/SettingsCatCont';
+import CategoriesDistribution from './Views/Insights/CategoriesDistribution' ;
 
 import NotFound from './Views/NotFound';
 
@@ -30,10 +30,10 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           {/* à protéger */}
-          <ProtectedRoute protectionLevel="volunteer" Route exact path="/dashboard" component={Dashboard} />
-          <ProtectedRoute protectionLevel="volunteer" Route exact path="/dashboard/new-visit" component={CreateVisit}/>
+          <ProtectedRoute protectionLevel="volunteer" exact path="/dashboard/rapport" component={CategoriesDistribution}/>
+          <ProtectedRoute protectionLevel="volunteer" exact path="/dashboard/new-visit" component={CreateVisit}/>
           <ProtectedRoute protectionLevel="volunteer" exact path="/dashboard/update-visit" component={UpdateVisit}/>
-          <ProtectedRoute protectionLevel="volunteer" Route exact path="/dashboard/history" component={History}/>
+          <ProtectedRoute protectionLevel="volunteer" exact path="/dashboard/history" component={History}/>
           <ProtectedRoute protectionLevel="admin" exact path="/dashboard/parameters" component={SettingsCatCont}/>
           <ProtectedRoute protectionLevel="admin" exact path="/dashboard/users" component={SettingsUsers} />
           <ProtectedRoute protectionLevel="volunteer" path="*" component={NotFound} />
