@@ -113,6 +113,7 @@ class FormCreateUpdateAdmin extends Component {
               id="password"
               type="password"
               name="password"
+              placeholder={this.props.action === "ajouter" ? '' : '●●●●●●'}
             />
             {!isPasswordValidated && (
               <div>
