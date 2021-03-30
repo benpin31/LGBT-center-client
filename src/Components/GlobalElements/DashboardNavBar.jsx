@@ -34,7 +34,7 @@ class DashboardNavBar extends Component {
 
                     <NavLink 
                         exact
-                        to="/dashboard/history"
+                        to="/history"
                         className="link" 
                         activeClassName="selected"
                     >
@@ -43,7 +43,7 @@ class DashboardNavBar extends Component {
 
                     <NavLink 
                         exact
-                        to="/dashboard/rapport"
+                        to="/categories-repartition"
                         className="link" 
                         activeClassName="selected"
                     >
@@ -54,7 +54,7 @@ class DashboardNavBar extends Component {
                         !context.isLoading && context.isLoggedIn && context.user.isAdmin &&
                         <NavLink 
                             exact
-                            to="/dashboard/parameters"
+                            to="/parameters"
                             className="link" 
                             activeClassName="selected"
                         >
@@ -66,7 +66,7 @@ class DashboardNavBar extends Component {
                         !context.isLoading && context.isLoggedIn && context.user.isAdmin &&
                         <NavLink 
                             exact
-                            to="/dashboard/users"
+                            to="/users"
                             className="link" 
                             activeClassName="selected"
                         >

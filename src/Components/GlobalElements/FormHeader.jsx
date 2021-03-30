@@ -5,7 +5,7 @@ import './../../Styles/FormHeader.css';
 
 class FormHeader extends Component {
     handleCancel = () => {
-        this.props.history.push('/dashboard/history');
+        this.props.history.push('/history');
     } 
 
     render() {

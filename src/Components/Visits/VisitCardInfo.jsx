@@ -39,7 +39,7 @@ class JulieCardInfo extends Component {
                 {isHovering &&
                     <aside>
                         <Link to={{
-                            pathname:"/dashboard/update-visit",
+                            pathname:"/update-visit",
                             state: {
                                 visitId: visit
                             }

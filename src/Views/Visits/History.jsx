@@ -40,7 +40,7 @@ class History extends Component {
                     <p>dernières visites</p>
                     <Link
                         exact="true"
-                        to='/dashboard/new-visit'
+                        to='/new-visit'
                         className="link"
                     >
                         <button>

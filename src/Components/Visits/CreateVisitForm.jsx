@@ -76,7 +76,7 @@ export class ChooseCategory extends Component {
                 category: category.id,
                 contactType: contactType.id
             })
-            .then(() => this.props.history.push('/dashboard/history'))
+            .then(() => this.props.history.push('/history'))
             .catch(error => console.log(error))
 
         } else {
@@ -89,7 +89,7 @@ export class ChooseCategory extends Component {
                 })
                 .then(() => {
                     if(i === nbOfPerson - 1) {
-                        this.props.history.push('/dashboard/history')
+                        this.props.history.push('/history')
                     }
                 })
                 .catch(error => console.log(error));
