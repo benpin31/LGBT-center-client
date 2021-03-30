@@ -4,7 +4,7 @@
 
 .background-container {
     background-color: white;
-    max-height: 500px;
+    max-height: 78vh;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
 }
