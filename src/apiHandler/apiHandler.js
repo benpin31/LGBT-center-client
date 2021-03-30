@@ -161,6 +161,12 @@ export default {
       .catch(errorHandler);
     },
 
+    repartitionByWeeks(data) {
+      return service
+      .post("api/insight/get-popular-days", data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+    },
 
 };
 
