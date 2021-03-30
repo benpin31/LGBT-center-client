@@ -146,14 +146,20 @@ export default {
       .catch(errorHandler);
     },
 
-    //test
+    //  Insights
     repartitionByCategory(data) {
       return service
       .post("api/insight/get-category-repartition", data)
       .then((res) => res.data)
       .catch(errorHandler);
     },
-    //axios.post("http://localhost:4000/api/visits/getCategoryRepartition", this.state.date)
+
+    hotTime(data) {
+      return service
+      .post("api/insight/get-popular-hours", data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+    },
 
 
 };
