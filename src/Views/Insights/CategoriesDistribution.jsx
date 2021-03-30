@@ -1,12 +1,12 @@
 import React, { Component } from 'react' ;
 import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer } from "recharts";
 
-import Calendar from 'react-calendar';
 import './../../Styles/Calendar.css';
 import './../../Styles/DataViz.css';
 
 import apiHandler from '../../apiHandler/apiHandler';
-// import { findRenderedDOMComponentWithClass } from 'react-dom/test-utils';
+
+import Header from './../../Components/DataVizHeader';
 
 
 export class CategoriesDistribution extends Component {
@@ -44,26 +44,18 @@ export class CategoriesDistribution extends Component {
  
     render() {
         const {date, data, calendarClicked} = this.state ;
+        const dateBegin = date[0].toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric', day: 'numeric' });
+        const dateEnd = date[1].toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric', day: 'numeric' });
+        console.log(dateBegin, dateEnd);
 
         return (
             <div className="main-container">
-                <div className="Graph-header">
-                    <h2>rapport</h2>
-                    <div className= "filter-container">
-                        <p 
-                            className={calendarClicked ? "selected-filter" : ""}
-                            onClick={this.openCalendar}>Choisir dates</p>
-                        {calendarClicked &&
-                            <Calendar
-                                onChange={this.setStartDate}
-                                selectRange={true}
-                                value={date}
-                                className="small-calendar"
-                            />
-                        }
-
-                    </div>
-                </div>
+                <Header 
+                    setStartDate={this.setStartDate} 
+                    calendarClicked={calendarClicked}
+                    openCalendar={this.openCalendar}
+                    date={date}
+                />
                 <div className="Graph-container">
 
                 {
@@ -96,6 +88,10 @@ export class CategoriesDistribution extends Component {
                             <h2>total des visites</h2>
                             <p>{data.reduce((acc, curr) => acc + curr.value, 0)}</p>
                         </div>}
+                        <div className="total">
+                            <h2>Du</h2>
+                            <p>{dateBegin} au {dateEnd}</p>
+                        </div>
                     </div>
                 </div>
             </div>
