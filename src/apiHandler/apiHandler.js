@@ -155,6 +155,12 @@ export default {
     },
     //axios.post("http://localhost:4000/api/visits/getCategoryRepartition", this.state.date)
 
+    repartitionByWeeks(data) {
+      return service
+      .post("api/insight/get-popular-days", data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+    },
 
 };
 
