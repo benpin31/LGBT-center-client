@@ -50,3 +50,14 @@
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.14);
     border-radius: 4px;
 }
+
+@media (max-width: 700px) {
+    .CardContainerItem {
+        padding: 6px 6px;
+        width: 100%;
+    }
+
+    .CardContainerItem:nth-child(2n) {
+        margin-left: 0;
+    }
+}

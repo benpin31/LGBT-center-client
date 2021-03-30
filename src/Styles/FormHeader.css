@@ -37,3 +37,14 @@
         margin: 100px 48px 28px 48px;
     }
 }
+
+@media (max-width: 700px) {
+    .FormHeader {
+        margin: 40px 10px;
+        flex-direction: column;
+    }
+
+    .FormHeader h1 {
+        margin-bottom: 20px;
+    }
+}

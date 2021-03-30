@@ -189,7 +189,6 @@
     }
 
     #DashboardNavBar .link, #DashboardNavBar .rapport {
-        /* display: block; */
         font-size: 15px;
         line-height: 0;
         padding: 28.5px 15px;
@@ -199,5 +198,51 @@
         background-color: rgba(113, 78, 215, 0.06);
         border-right: 0;
         border-bottom: 2px solid rgba(65, 44, 122, 1);
+    }
+}
+
+@media (max-width: 700px) {
+    #DashboardNavBar img.logo {
+        display: none;
+    }
+
+    #DashboardNavBar {
+        position: relative;
+        flex-direction: column;
+        height: 100%;
+        align-items: center;
+    }
+
+    #DashboardNavBar .link {
+        font-size: 13px;
+        padding: 15px;
+    }
+
+    #DashboardNavBar .rapport {
+        font-size: 13px;
+        padding: 15px;
+    }
+
+    .drop-down-rapport {
+        height: 132px;
+        min-width: 170px;
+        top: 20px;
+        right: 50%;
+    }
+
+    .logout img {
+        top: 0;
+        margin: 0;
+        z-index: -1;
+        margin-top: 15px;
+        margin-right: 44px;
+        width: 12px;
+    }
+
+    .rapport img {
+        position: absolute;
+        top: 50%;
+        right: -6px;
+        margin-left: 0;
     }
 }

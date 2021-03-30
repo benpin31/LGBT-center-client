@@ -2,13 +2,17 @@
     margin: 52px 48px;
 }
 
-.Graph-container {
-    height: 100vh;
-    padding: 40px;
+.background-container {
     background-color: white;
+    max-height: 500px;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
+}
+
+.Graph-container {
     position: relative;
+    height: 100vh;
+    padding: 40px 40px 0 40px;
 }
 
 .Graph-header {
@@ -50,9 +54,18 @@
     z-index: 3;
 }
 
+.date-range-container {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 16px;
+    line-height: 24px;
+    color: #423566;
+    margin-bottom: 40px;
+}
+
 .bottom-container {
     position: absolute;
-    top: 56%;
+    top: 65%;
     width: calc(100% - 80px);
 }
 
@@ -68,5 +81,17 @@
     margin-bottom: 20px;
 }
 
+
+@media (max-width: 1024px) {
+    .main-container {
+        margin: 100px 48px 28px 48px;
+    }
+}
+
+@media (max-width: 700px) {
+    .main-container {
+        margin: 100px 48px 28px 48px;
+    }
+}
 
 

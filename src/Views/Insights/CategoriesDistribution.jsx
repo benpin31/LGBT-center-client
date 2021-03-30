@@ -17,7 +17,7 @@ export class CategoriesDistribution extends Component {
         calendarClicked: false
     }
 
-    colors=["#ffb0b0", "#fac696", "#f7e68f", "#a7f2a5", "#96f2ef", "#b5c8ff", "#F5C7FF", "#C4C4C4"] ;
+    colors=["#ffb0b0", "#fac696", "#f7e68f", "#a7f2a5", "#96f2ef", "#b5c8ff", "#F5C7FF", "#C4C4C4"];
 
     setStartDate = date => {
         this.setState({date},
@@ -27,8 +27,7 @@ export class CategoriesDistribution extends Component {
             ) ;
             
         this.setState({calendarClicked: false});
-
-    }
+    };
 
     componentDidMount() {
         const dateBegin = this.state.date[0].toISOString().substring(0,10) + " 00:00:00" ;
@@ -36,11 +35,11 @@ export class CategoriesDistribution extends Component {
         apiHandler.repartitionByCategory({dates: [dateBegin, dateEnd]})
             .then(res =>  this.setState({data: res}))
             .catch(err => console.log(err))
-    }
+    };
 
     openCalendar = () => {
-        this.setState({calendarClicked: true});
-    }
+        this.setState({calendarClicked: !this.state.calendarClicked});
+    };
  
     render() {
         const {date, data, calendarClicked} = this.state ;
@@ -56,47 +55,49 @@ export class CategoriesDistribution extends Component {
                     openCalendar={this.openCalendar}
                     date={date}
                 />
-                <div className="Graph-container">
+                
+                <div className="background-container">
+                    <div className="Graph-container">
+                    <div className="date-range-container">
+                        <p>du {dateBegin} au {dateEnd}</p>
+                    </div>
 
-                {
-                    data 
-                        &&
-                    <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
-                            <Pie
-                            data={data}
-                            startAngle={180}
-                            endAngle={0}
-                            dataKey="value"
-                            outerRadius="100%"
-                            >
-                            {data.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={this.colors[index % this.colors.length]} />
-                            ))}
-                            </Pie>
-                        <Tooltip 
-                            contentStyle={{borderRadius: "8px", boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.12)", border:"none", fontFamily: "Asap", fontSize:"12px", transform: "translate(-60%, -100%)" }}
-                        />
-                        </PieChart>
-                    </ResponsiveContainer>
-                }
+                    {
+                        data 
+                            &&
+                        <ResponsiveContainer width="100%" height="100%">
+                            <PieChart>
+                                <Pie
+                                data={data}
+                                startAngle={180}
+                                endAngle={0}
+                                dataKey="value"
+                                outerRadius="100%"
+                                >
+                                {data.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={this.colors[index % this.colors.length]} />
+                                ))}
+                                </Pie>
+                            <Tooltip 
+                                contentStyle={{borderRadius: "8px", boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.12)", border:"none", fontFamily: "Asap", fontSize:"12px", transform: "translate(-60%, -100%)" }}
+                            />
+                            </PieChart>
+                        </ResponsiveContainer>
+                    }
 
 
-                    <div className="bottom-container">
-                        {data && 
-                        <div className="total">
-                            <h2>total des visites</h2>
-                            <p>{data.reduce((acc, curr) => acc + curr.value, 0)}</p>
-                        </div>}
-                        <div className="total">
-                            <h2>Du</h2>
-                            <p>{dateBegin} au {dateEnd}</p>
+                        <div className="bottom-container">
+                            {data && 
+                            <div className="total">
+                                <h2>total des visites</h2>
+                                <p>{data.reduce((acc, curr) => acc + curr.value, 0)}</p>
+                            </div>}
                         </div>
                     </div>
                 </div>
             </div>
         )
     }
-}
+};
 
 export default CategoriesDistribution

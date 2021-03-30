@@ -186,6 +186,30 @@
     }
 }
 
+@media (max-width: 700px) {
+    #CreateForm {
+        margin: 0 24px 24px 24px;
+        padding: 20px;
+    }
+
+    #first-form {
+        flex-direction: column;
+    }
+
+    #nb-of-person .input-content {
+        margin-bottom: 20px;
+    }
+
+    .cat-cont-container .cat-cont {
+        width: 100%;
+    }
+
+    .cat-cont:nth-child(2n) {
+        margin-left: 0;
+    }
+}
+
+
 
 
 
