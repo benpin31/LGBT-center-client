@@ -14,6 +14,7 @@ export class CategoriesDistribution extends Component {
     state = {
         data: null ,
         date: [new Date(new Date() - 31*24*3600*1000), new Date()],
+        //  default view : 1 month of data
         weekDays: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"]
     }
 
@@ -97,7 +98,7 @@ export class CategoriesDistribution extends Component {
                         >
                           <XAxis dataKey="name" />
                           <Tooltip />
-                          <Bar dataKey="value" fill="#ffb0b0" name="Visits" />
+                          <Bar dataKey="value" fill="#ffb0b0" name="Visites"/>
                         </BarChart>
                       </ResponsiveContainer>
                       <div>

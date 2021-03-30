@@ -1,12 +1,9 @@
-import React, { PureComponent, Component } from "react";
+import React, { Component } from "react";
 import {
   LineChart,
   Line,
   XAxis,
-  YAxis,
-  CartesianGrid,
   Tooltip,
-  Legend,
 } from "recharts";
 import Calendar from "react-calendar";
 import apiHandler from "../../apiHandler/apiHandler";
@@ -28,16 +25,18 @@ const CustomizedDot = (props) => {
 };
 
 export class HotDay extends Component {
+
   state = {
     data: null,
     date: [new Date(new Date() - 31*24*3600*1000), new Date()],
+    //  default view : 1 month of data
   };
 
   setStartDate = (date) => {
     this.setState({ date }, () =>
       apiHandler
         .repartitionByWeeks({ dates: date })
-        .then((res) => this.setState({ data: res }))
+        .then((res) => this.setState({ data: res.agregatedData, date: res.updatedDates.map(date => new Date(date))  }))
         .catch((err) => console.log(err))
     );
   };
@@ -57,12 +56,13 @@ export class HotDay extends Component {
       .repartitionByWeeks({ dates: [dateBegin, dateEnd] })
       .then((res) => {
         console.log(res);
-        this.setState({ data: res });
+        this.setState({ data: res.agregatedData, date: res.updatedDates.map(date => new Date(date)) });
       })
       .catch((err) => console.log(err));
   }
 
   render() {
+
     return (
       <div>
         <div>
@@ -100,6 +100,7 @@ export class HotDay extends Component {
                 dataKey="value"
                 stroke="#8884d8"
                 dot={<CustomizedDot />}
+                name="Visites"
               />
               {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
             </LineChart>
