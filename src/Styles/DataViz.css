@@ -15,6 +15,10 @@
     padding: 40px 40px 0 40px;
 }
 
+.recharts-cartesian-axis-tick {   
+    font-family: 'Asap';
+}
+
 .Graph-header {
     display: flex;
     justify-content: space-between;
@@ -29,6 +33,10 @@
     line-height: 23px;
     text-transform: uppercase;
     color: #241B3D;
+}
+
+.filter-container {
+    display: flex;
 }
 
 .filter-container p {
@@ -92,6 +100,78 @@
     .main-container {
         margin: 100px 48px 28px 48px;
     }
+}
+
+/* HEURE AFFLUENCE DATAVIZ  */
+
+.select-day-container {
+    position: relative;
+}
+
+.select-day-drop-down {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    min-width: 200px;
+    padding:12px 20px;
+    background-color: white;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    z-index: 3;
+}
+
+.select-day-drop-down div {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.select-day-drop-down div label, .select-day-drop-down div input {
+    cursor: pointer;
+}
+
+input[type=checkbox] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+}
+
+input[type=checkbox] {
+    border-radius: 4px;
+    height: 15px;
+    width: 15px;
+    background: #fff;
+}
+
+input[type=checkbox]:focus {
+    outline: none;
+}
+
+input[type="checkbox"]:checked {
+    position: relative;
+}
+
+input[type="checkbox"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    width: 6px;
+    height: 10px;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    /* border-radius: 0 0 2px 0; */
+    border-radius: 1px 1px 2px 1px;
+    box-sizing: border-box;
+    transform: rotate(35deg);
+}
+
+.background-container-hot-time {
+    background-color: white;
+    max-height: 65vh;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
 }
 
 

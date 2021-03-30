@@ -45,7 +45,6 @@ export class CategoriesDistribution extends Component {
         const {date, data, calendarClicked} = this.state ;
         const dateBegin = date[0].toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric', day: 'numeric' });
         const dateEnd = date[1].toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric', day: 'numeric' });
-        console.log(dateBegin, dateEnd);
 
         return (
             <div className="main-container">
