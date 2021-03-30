@@ -92,7 +92,7 @@ class Home extends React.Component {
         
                 }, 700);
         
-                setTimeout(() => this.props.history.push("/new-visit"), 1500) ;
+                setTimeout(() => this.props.history.push("/history"), 1500) ;
             })
             .catch((error) => {
                 this.setState({isValidSignin: false})
