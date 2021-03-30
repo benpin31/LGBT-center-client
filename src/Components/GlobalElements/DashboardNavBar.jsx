@@ -6,8 +6,22 @@ import apiHandler from './../../apiHandler/apiHandler'
 import './../../Styles/NavDashboard.css';
 import logo from './../../Assets/logo.svg';
 import logout from './../../Assets/exit-icon.svg';
+import arrowDown from './../../Assets/drop-down-downarrow.svg';
+import arrowUp from './../../Assets/drop-down-uparrow.svg';
 
 class DashboardNavBar extends Component {
+
+    state = {
+        rapportClicked: false
+    }
+
+    handleOpen = () => {
+        this.setState({rapportClicked: !this.state.rapportClicked});
+    }
+
+    handleClose = () => {
+        this.setState({rapportClicked: false});
+    }
 
     handleLogout = () => {
         const {context} = this.props ;
@@ -24,7 +38,8 @@ class DashboardNavBar extends Component {
 
     render() {
 
-        const { context } =this.props ;
+        const { context } = this.props ;
+        const { rapportClicked } = this.state
 
         return (
             <>
@@ -37,18 +52,50 @@ class DashboardNavBar extends Component {
                         to="/history"
                         className="link" 
                         activeClassName="selected"
+                        onClick={this.handleClose}
                     >
                         Visits
                     </NavLink>
+                    <div className="rapport-container">
+                        <div 
+                            className="rapport" 
+                            onClick={this.handleOpen}
+                        >
+                            <p>Rapport</p>
+                            <img src={rapportClicked ? arrowUp : arrowDown} alt=""/>
+                        </div>
+                        {rapportClicked &&
+                            <div className="drop-down-rapport">
+                                <NavLink
+                                    exact
+                                    to="/categories-repartition"
+                                    className="sublink" 
+                                    activeClassName="selected"
+                                >
+                                    Répartition des visites
+                                </NavLink>
 
-                    <NavLink 
-                        exact
-                        to="/categories-repartition"
-                        className="link" 
-                        activeClassName="selected"
-                    >
-                        Rapport
-                    </NavLink>
+                                <NavLink
+                                    exact
+                                    to="/jour-affluence"
+                                    className="sublink"
+                                    activeClassName="selected" 
+                                >
+                                    Jours d'affluence
+                                </NavLink>
+
+                                <NavLink
+                                    exact
+                                    to="/heure-affluence"
+                                    className="sublink" 
+                                    activeClassName="selected"
+                                >
+                                    Heure d'affluence
+                                </NavLink>
+                            </div>
+                        }
+
+                    </div>
 
                     {
                         !context.isLoading && context.isLoggedIn && context.user.isAdmin &&
@@ -57,6 +104,7 @@ class DashboardNavBar extends Component {
                             to="/parameters"
                             className="link" 
                             activeClassName="selected"
+                            onClick={this.handleClose}
                         >
                         Paramètres
                         </NavLink>
@@ -69,6 +117,7 @@ class DashboardNavBar extends Component {
                             to="/users"
                             className="link" 
                             activeClassName="selected"
+                            onClick={this.handleClose}
                         >
                         Utilisateur·ices
                         </NavLink>

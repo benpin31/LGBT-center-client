@@ -14,6 +14,7 @@ export class CategoriesDistribution extends Component {
     state = {
         data: null ,
         date: [new Date(), new Date()],
+        calendarClicked: false
     }
 
     colors=["#ffb0b0", "#fac696", "#f7e68f", "#a7f2a5", "#96f2ef", "#b5c8ff", "#F5C7FF", "#C4C4C4"] ;
@@ -24,58 +25,65 @@ export class CategoriesDistribution extends Component {
             .then(res =>  this.setState({data: res}))
             .catch(err => console.log(err))
             ) ;
+            
+        this.setState({calendarClicked: false});
 
     }
 
     componentDidMount() {
-        console.log("toto")
         const dateBegin = this.state.date[0].toISOString().substring(0,10) + " 00:00:00" ;
         const dateEnd = this.state.date[1].toISOString().substring(0,10) + " 23:59:59" ;
         apiHandler.repartitionByCategory({dates: [dateBegin, dateEnd]})
-            .then(res =>  {console.log(res) ; this.setState({data: res})})
+            .then(res =>  this.setState({data: res}))
             .catch(err => console.log(err))
+    }
+
+    openCalendar = () => {
+        this.setState({calendarClicked: true});
     }
  
     render() {
-        const {date} = this.state ;
-        console.log(date)
-
-
+        const {date, data, calendarClicked} = this.state ;
 
         return (
             <div className="main-container">
                 <div className="Graph-header">
                     <h2>rapport</h2>
-                    <div>
-                        <p>Choisir dates</p>
-                        <Calendar
-                            onChange={this.setStartDate}
-                            selectRange={true}
-                            value={this.state.date}
-                            className="small-calendar"
-                        />
+                    <div className= "filter-container">
+                        <p 
+                            className={calendarClicked ? "selected-filter" : ""}
+                            onClick={this.openCalendar}>Choisir dates</p>
+                        {calendarClicked &&
+                            <Calendar
+                                onChange={this.setStartDate}
+                                selectRange={true}
+                                value={date}
+                                className="small-calendar"
+                            />
+                        }
+
                     </div>
                 </div>
                 <div className="Graph-container">
 
                 {
-                    this.state.data 
+                    data 
                         &&
                     <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                             <Pie
-                            data={this.state.data}
+                            data={data}
                             startAngle={180}
                             endAngle={0}
                             dataKey="value"
                             outerRadius="100%"
                             >
-                            {this.state.data.map((entry, index) => (
+                            {data.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={this.colors[index % this.colors.length]} />
                             ))}
                             </Pie>
                         <Tooltip 
-                            contentStyle={{borderRadius: "8px", boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.12)", border:"none", fontFamily: "Asap", fontSize:"14px", transform: "translate(-60%, -100%)" }}
+                            contentStyle={{borderRadius: "8px", boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.12)", border:"none", fontFamily: "Asap", fontSize:"12px", transform: "translate(-60%, -100%)" }}
                         />
                         </PieChart>
                     </ResponsiveContainer>
@@ -83,10 +91,10 @@ export class CategoriesDistribution extends Component {
 
 
                     <div className="bottom-container">
-                        {this.state.data && 
+                        {data && 
                         <div className="total">
                             <h2>total des visites</h2>
-                            <p>{this.state.data.reduce((acc, curr) => acc + curr.value, 0)}</p>
+                            <p>{data.reduce((acc, curr) => acc + curr.value, 0)}</p>
                         </div>}
                     </div>
                 </div>
