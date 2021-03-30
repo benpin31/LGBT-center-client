@@ -19,7 +19,7 @@ export class CategoriesDistribution extends Component {
 
     setStartDate = date => {
         this.setState({date},
-            () => apiHandler.repartitionByCategory(date)
+            () => apiHandler.repartitionByCategory({dates: date})
             .then(res =>  this.setState({data: res}))
             .catch(err => console.log(err))
             ) ;
@@ -30,7 +30,7 @@ export class CategoriesDistribution extends Component {
         console.log("toto")
         const dateBegin = this.state.date[0].toISOString().substring(0,10) + " 00:00:00" ;
         const dateEnd = this.state.date[1].toISOString().substring(0,10) + " 23:59:59" ;
-        apiHandler.repartitionByCategory([dateBegin, dateEnd])
+        apiHandler.repartitionByCategory({dates: [dateBegin, dateEnd]})
             .then(res =>  {console.log(res) ; this.setState({data: res})})
             .catch(err => console.log(err))
     }
