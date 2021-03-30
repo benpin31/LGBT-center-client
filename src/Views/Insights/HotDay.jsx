@@ -30,7 +30,7 @@ const CustomizedDot = (props) => {
 export class HotDay extends Component {
   state = {
     data: null,
-    date: [new Date(), new Date()],
+    date: [new Date(new Date() - 31*24*3600*1000), new Date()],
   };
 
   setStartDate = (date) => {
@@ -43,10 +43,16 @@ export class HotDay extends Component {
   };
 
   componentDidMount() {
-    const dateBegin =
-      this.state.date[0].toISOString().substring(0, 10) + " 00:00:00";
-    const dateEnd =
-      this.state.date[1].toISOString().substring(0, 10) + " 23:59:59";
+    // const dateBegin = 
+    //   this.state.date[0].toISOString().substring(0, 10) + " 00:00:00";
+    // const dateEnd =
+    //   this.state.date[1].toISOString().substring(0, 10) + " 23:59:59";
+
+    const {date} = this.state ;
+
+    const dateBegin = new Date(Date.UTC(date[0].getFullYear(),date[0].getMonth(),date[0].getDate())) ;
+    const dateEnd = new Date(Date.UTC(date[1].getFullYear(),date[1].getMonth(),date[1].getDate(),23,59,59)) ;
+
     apiHandler
       .repartitionByWeeks({ dates: [dateBegin, dateEnd] })
       .then((res) => {
