@@ -11,6 +11,7 @@ font-weight: 600; */
   --green-flag: #a7f2a5;
   --blue-flag: #96f2ef;
   --purple-flag: #b5c8ff;
+  background-color: rgba(247, 248, 250, 1);
 }
 
 * {

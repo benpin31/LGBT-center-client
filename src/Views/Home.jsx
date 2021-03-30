@@ -20,7 +20,7 @@ class Home extends React.Component {
 
         if (prevProps.context.isLoading !== this.props.context.isLoading) {
             if (this.props.context.isLoggedIn) {
-                this.props.history.push("/dashboard/new-visit")
+                this.props.history.push("/new-visit")
             } else  {
                 setTimeout(() => {
                     this.setState({
@@ -92,7 +92,7 @@ class Home extends React.Component {
         
                 }, 700);
         
-                setTimeout(() => this.props.history.push("/dashboard/new-visit"), 1500) ;
+                setTimeout(() => this.props.history.push("/new-visit"), 1500) ;
             })
             .catch((error) => {
                 this.setState({isValidSignin: false})

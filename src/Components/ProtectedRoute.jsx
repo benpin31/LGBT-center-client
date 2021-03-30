@@ -9,7 +9,7 @@ const ProtectedRoute = ({ component: Component, context,protectionLevel, ...rest
     if (protectionLevel === "volunteer" || context.user.isAdmin) {
       return <Route {...rest} render={(props) => <Component {...props} />} />;
     } else {
-      return <Redirect to="/dashboard/new-visit" />;
+      return <Redirect to="/new-visit" />;
     }
   } else {
     return <Redirect to="/" />;

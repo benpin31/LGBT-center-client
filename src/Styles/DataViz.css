@@ -1,0 +1,49 @@
+.main-container {
+    margin: 52px 48px;
+}
+
+.Graph-container {
+    height: 100vh;
+    padding: 40px;
+    background-color: white;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    position: relative;
+}
+
+.Graph-header {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 16px;
+} 
+
+.Graph-header h2, .bottom-container h2 {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+    text-transform: uppercase;
+    color: #241B3D;
+}
+
+.bottom-container {
+    position: absolute;
+    top: 55%;
+}
+
+.bottom-container .total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total p {
+    background-color: turquoise;
+}
+
+.small-calendar {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 3;
+}
