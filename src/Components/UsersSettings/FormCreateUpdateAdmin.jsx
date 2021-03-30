@@ -120,7 +120,7 @@ class FormCreateUpdateAdmin extends Component {
                 <p>Le mot de passe doit contenir au moins 3 caractères.</p>
               </div>
             )}
-            <button>Créer</button>
+            <button>{this.props.action[0].toUpperCase() + this.props.action.substr(1)}</button>
           </form>
         </div>
       </div>
