@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 import Calendar from "react-calendar";
 import apiHandler from "../../apiHandler/apiHandler";
 import Header from "../../Components/DataVizHeader";
@@ -8,14 +15,39 @@ const CustomizedDot = (props) => {
   const { cx, cy, value } = props;
   return (
     <svg
-      x={cx - 10}
-      y={cy - 10}
-      width={20}
-      height={20}
+      x={cx - 20}
+      y={cy - 20}
+      width={100}
+      height={100}
       fill="red"
       viewBox="0 0 1024 1024"
     >
-      <path d="M512 1009.984c-274.912 0-497.76-222.848-497.76-497.76s222.848-497.76 497.76-497.76c274.912 0 497.76 222.848 497.76 497.76s-222.848 497.76-497.76 497.76zM340.768 295.936c-39.488 0-71.52 32.8-71.52 73.248s32.032 73.248 71.52 73.248c39.488 0 71.52-32.8 71.52-73.248s-32.032-73.248-71.52-73.248zM686.176 296.704c-39.488 0-71.52 32.8-71.52 73.248s32.032 73.248 71.52 73.248c39.488 0 71.52-32.8 71.52-73.248s-32.032-73.248-71.52-73.248zM772.928 555.392c-18.752-8.864-40.928-0.576-49.632 18.528-40.224 88.576-120.256 143.552-208.832 143.552-85.952 0-164.864-52.64-205.952-137.376-9.184-18.912-31.648-26.592-50.08-17.28-18.464 9.408-21.216 21.472-15.936 32.64 52.8 111.424 155.232 186.784 269.76 186.784 117.984 0 217.12-70.944 269.76-186.784 8.672-19.136 9.568-31.2-9.12-40.096z" />
+      <mask
+        id="a"
+        width="503"
+        height="457"
+        x="17"
+        y="44"
+        maskUnits="userSpaceOnUse"
+      >
+        <path
+          fill="#FFFFFF"
+          d="M60.832 87.832c58.443-58.443 153.197-58.443 211.64 0l196.645 196.645c6.248 6.248 6.248 16.379 0 22.627L280.104 496.117c-6.248 6.248-16.379 6.248-22.627 0L60.832 299.472c-58.443-58.443-58.443-153.197 0-211.64z"
+        />
+        <path
+          fill="#FFFFFF"
+          d="M475.758 87.832c-58.443-58.443-153.197-58.443-211.64 0L67.474 284.477c-6.249 6.248-6.249 16.379 0 22.627l189.012 189.013c6.249 6.248 16.379 6.248 22.628 0l196.644-196.645c58.443-58.443 58.443-153.197 0-211.64z"
+        />
+      </mask>
+      <g mask="url(#a)">
+        <path fill="#FFB0B0" d="M17 44h503v66.143H17z" />
+        <path fill="#FAC696" d="M17 110.143h503v66.143H17z" />
+        <path fill="#F7E68F" d="M17 176.286h503v66.143H17z" />
+        <path fill="#A7F2A5" d="M17 242.429h503v66.143H17z" />
+        <path fill="#96F2EF" d="M17 308.571h503v66.143H17z" />
+        <path fill="#B5C8FF" d="M17 374.714h503v66.143H17z" />
+        <path fill="#F5C7FF" d="M17 440.857h503V507H17z" />
+      </g>
     </svg>
   );
 };
@@ -78,6 +110,17 @@ export class HotDay extends Component {
 
   render() {
     const { date, data, calendarClicked } = this.state;
+    const dateBegin = date[0].toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
+    const dateEnd = date[1].toLocaleDateString("fr-FR", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
+
     return (
       <div className="main-container">
         <Header
@@ -86,45 +129,51 @@ export class HotDay extends Component {
           openCalendar={this.openCalendar}
           date={date}
         />
-
-        <div className="Graph-container">
-          {this.state.data && (
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                width="100%"
-                height="100%"
-                data={this.state.data}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                <XAxis 
-                dataKey="name" 
-                tick={{stroke: "red"}}
-                tickLine={false}
-                />
-                <YAxis
-                axisLine={true}
-                tickLine={false}
-                />
-                <Tooltip cursor={false} />
-                {/* <Legend /> */}
-                <Line
-                  type="monotone"
-                  dataKey="value"
-                  stroke="#8884d8"
-                  dot={<CustomizedDot />}
-                  name="Visites"
-                  activeDot={false}
-                />
-                {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
-              </LineChart>
-            </ResponsiveContainer>
-          )}
+        <div className="background-hot-day">
+          <div className="date-range-container">
+            <p>
+              du {dateBegin} au {dateEnd}
+            </p>
+          </div>
+          <div className="Graph-hot-day">
+            {this.state.data && (
+              <ResponsiveContainer width="80%" height="70%" style={{paddingTop: "50px"}}>
+                <LineChart
+                  width="100%"
+                  height="100%"
+                  data={this.state.data}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                  {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                  <XAxis
+                    dataKey="name"
+                    tick={{ stroke: "#423566" }}
+                    tickLine={false}
+                  />
+                  <YAxis axisLine={false} tick={false} padding={{top: 20}} />
+                  <Tooltip cursor={false} />
+                  {/* <Legend /> */}
+                  <Line
+                    type="monotone"
+                    dataKey="value"
+                    stroke="#714ED7"
+                    dot={<CustomizedDot />}
+                    name="Visites"
+                    activeDot={false}
+                  />
+                  {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
+                </LineChart>
+              </ResponsiveContainer>
+            )}
+          </div>
+          <div className="bottom-hot-day">
+            {data && (
+              <div className="total-hot-day">
+                <h2>moyenne des visites en semaine</h2>
+                <p>{data.reduce((acc, curr) => acc + curr.value, 0)}</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
