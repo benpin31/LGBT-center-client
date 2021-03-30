@@ -1,5 +1,5 @@
 import React, { Component } from 'react' ;
-import { BarChart, Tooltip, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Bar } from "recharts";
+import { BarChart, Tooltip, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Bar, Text} from "recharts";
 
 import Calendar from 'react-calendar';
 import './../../Styles/Calendar.css';
@@ -92,13 +92,33 @@ export class CategoriesDistribution extends Component {
                     this.state.data 
                         &&
                         <>
-                        <ResponsiveContainer width="100%" height="50%">
+                      <ResponsiveContainer width="100%" height="50%">
                         <BarChart
                           data={this.state.data}
                         >
-                          <XAxis dataKey="name" />
-                          <Tooltip />
-                          <Bar dataKey="value" fill="#ffb0b0" name="Visites"/>
+                          <XAxis 
+                            dataKey="name" 
+                            tick={{stroke: "red"}}
+                                // change tick color
+                            tickLine={false}
+                                // don't plot the tick
+                            axisLine={false}
+                                // don't plot the axis
+                            />
+                          <defs>
+                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                                <stop offset="15%" stopColor="#333333" stopOpacity={0.5}/>
+                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                            </linearGradient>
+                        </defs>
+                          <Tooltip cursor={false}/>
+                          <Bar 
+                            dataKey="value" 
+                            // fill="#ffb0b0" 
+                            fill="url(#colorUv)" 
+                            name="Visites"
+                            />
                         </BarChart>
                       </ResponsiveContainer>
                       <div>
