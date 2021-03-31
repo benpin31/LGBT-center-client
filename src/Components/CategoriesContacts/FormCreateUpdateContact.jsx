@@ -22,7 +22,7 @@ export default class FormCreateUpdateContact extends Component {
     }
 
     handleChange = event => {
-        this.setState({name: event.target.value})
+        this.setState({name: event.target.value, isNameValidated:true})
     }
 
     handleSubmit =  async event => {
@@ -58,16 +58,20 @@ export default class FormCreateUpdateContact extends Component {
                         <h1>{formName}</h1>
                         <div className="close-pop-up" onClick={closeForm}>Annuler</div>
                     </div>
-                    <form action="" onSubmit={this.handleSubmit}>
+                    <form className="form-update-create" onSubmit={this.handleSubmit}>
                         <label htmlFor="name">Name</label>
                         <input 
                             type="text" 
                             name="name" 
-                            id="name"
                             value={name}
                             onChange={this.handleChange}
+                            id={!isNameValidated ?  "error-input" : ""}
                         />
-                    {!isNameValidated && <div><p>Le nom doit contenir au moins 3 caractères</p></div> }
+                        {!isNameValidated && 
+                            <div className="error-message name-error-contact">
+                            <p>Le nom doit contenir au moins 3 caractères</p>
+                            </div> 
+                        }
                     <button>Submit</button>
                     </form>
                 </div>

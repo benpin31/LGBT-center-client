@@ -15,7 +15,7 @@ class FormCreateUpdateAdmin extends Component {
 
   handleChange = (event) => {
     const key = event.target.name;
-    this.setState({ [key]: event.target.value });
+    this.setState({ [key]: event.target.value, isLoginLengthValidated:true,  isPasswordValidated: true});
   };
 
   handleSubmit = async (event) => {
@@ -87,36 +87,37 @@ class FormCreateUpdateAdmin extends Component {
             <h1>{this.props.action} un·e utilisateur·ice</h1>
             <div className="close-pop-up" onClick={this.props.handlePopup}>Annuler</div>
           </div>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="form-update-create">
             <label htmlFor="login">nom utilisateur.ice</label>
             <input
               onChange={this.handleChange}
               value={this.state.login}
-              id="login"
               type="text"
               name="login"
+              id={!isLoginLengthValidated || !isLoginFree ?  "error-input" : ""}
             />
             {!isLoginLengthValidated && (
-              <div>
+              <div className="error-message user-name-error">
                 <p>Le login doit contenir au moins 3 caractères.</p>
               </div>
             )}
             {!isLoginFree && (
-              <div>
+              <div className="error-message user-name-error">
                 <p>Ce nom d’utilisateur est déjà pris.</p>
               </div>
-            )}
+            )} 
+
             <label htmlFor="password">mot de passe</label>
             <input
               onChange={this.handleChange}
               value={this.props.password}
-              id="password"
               type="password"
               name="password"
               placeholder={this.props.action === "ajouter" ? '' : '●●●●●●'}
+              id={!isPasswordValidated || !isLoginFree ?  "error-input" : ""}
             />
             {!isPasswordValidated && (
-              <div>
+              <div className="error-message name-error-contact">
                 <p>Le mot de passe doit contenir au moins 3 caractères.</p>
               </div>
             )}

@@ -68,7 +68,7 @@
 }
 
 .FormCreateUpdateContact input {
-    margin-bottom: 24px;
+    margin-bottom: 34px;
 }
 
 .FormCreateUpdateContact input:focus, .FormCreateUpdateContact textarea {
@@ -92,4 +92,35 @@
     color: #FFFFFF;
     margin-top: 40px;
 }
+
+.form-update-create {
+    position: relative;
+}
+
+.FormCreateUpdateContact .error-message {
+    position: absolute;
+    pointer-events: none;
+}
+
+.FormCreateUpdateContact .name-error {
+    top: -55px;
+}
+
+.FormCreateUpdateContact .name-error-contact {
+    bottom: 55px;
+}
+
+.FormCreateUpdateContact .description-error {
+    bottom: 25px;
+}
+
+.FormCreateUpdateContact .user-name-error {
+    top: -28px;
+}
+
+.error-input {
+    border: 1px solid #E65353;
+}
+
+
 

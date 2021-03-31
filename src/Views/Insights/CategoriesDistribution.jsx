@@ -53,6 +53,7 @@ export class CategoriesDistribution extends Component {
                     calendarClicked={calendarClicked}
                     openCalendar={this.openCalendar}
                     date={date}
+                    title="répartitions des semaines"
                 />
                 
                 <div className="background-container">

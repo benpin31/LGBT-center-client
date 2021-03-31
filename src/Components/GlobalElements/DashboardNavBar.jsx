@@ -54,7 +54,7 @@ class DashboardNavBar extends Component {
                         activeClassName="selected"
                         onClick={this.handleClose}
                     >
-                        Visits
+                        Visites
                     </NavLink>
                     <div className="rapport-container">
                         <div 
@@ -90,7 +90,7 @@ class DashboardNavBar extends Component {
                                     className="sublink" 
                                     activeClassName="selected"
                                 >
-                                    Heure d'affluence
+                                    Heures d'affluence
                                 </NavLink>
                             </div>
                         }

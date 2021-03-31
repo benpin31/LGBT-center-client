@@ -42,7 +42,7 @@ export default class FormCreateUpdateCategory extends Component {
     }
 
     handleChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({ [event.target.name]: event.target.value, isNameValidated: true, isdescriptionValidated: true});
     };
 
 
@@ -54,29 +54,38 @@ export default class FormCreateUpdateCategory extends Component {
       <div className="shadow-pop-up">
         <div className="FormCreateUpdateContact">
             <div>
-                <p>{formName}</p>
+                <h1>{formName}</h1>
                 <div className="close-pop-up" onClick={closeForm}>
                 Annuler
                 </div>
             </div>
-          <form action="" onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="form-update-create">
             <label htmlFor="name">Name</label>
             <input
               type="text"
               name="name"
-              id="name"
               value={name}
               onChange={this.handleChange}
+              id={!isNameValidated ?  "error-input" : ""}
             />
-            {!isNameValidated && <div><p>Le nom doit contenir au moins 3 caractères</p></div> }
+            {!isNameValidated && 
+              <div className="error-message name-error">
+                <p>Le nom doit contenir au moins 3 caractères</p>
+              </div> 
+            }
+
             <label htmlFor="description">Description</label>
             <textarea
               name="description"
-              id="description"
               value={description}
               onChange={this.handleChange}
+              id={!isdescriptionValidated ?  "error-input" : ""}
             />
-            {!isdescriptionValidated && <div><p>La description doit contenir au moins 3 caractères</p></div> }
+            {!isdescriptionValidated && 
+              <div className="error-message description-error">
+                <p>La description doit contenir au moins 3 caractères</p>
+              </div>
+            }
             <button>Submit</button>
           </form>
         </div>
