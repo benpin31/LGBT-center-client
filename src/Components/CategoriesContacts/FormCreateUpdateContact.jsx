@@ -61,11 +61,12 @@ export default class FormCreateUpdateContact extends Component {
                     <form className="form-update-create" onSubmit={this.handleSubmit}>
                         <label htmlFor="name">Name</label>
                         <input 
+                            className={!isNameValidated ?  "error-input" : ""}
                             type="text" 
                             name="name" 
+                            id="name"
                             value={name}
                             onChange={this.handleChange}
-                            id={!isNameValidated ?  "error-input" : ""}
                         />
                         {!isNameValidated && 
                             <div className="error-message name-error-contact">

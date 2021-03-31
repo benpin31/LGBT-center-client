@@ -49,7 +49,7 @@
     user-select:none;
 }
 
-.selected-filter {
+.selected-filter, .filter-container p:hover {
     background-color: rgba(113, 78, 215, 0.06);
     border-radius: 4px;
     color: #714ED7;
@@ -240,4 +240,47 @@ input[type="checkbox"]:checked::before {
     .background-hot-day{
         padding: 10px;
     }
+}
+
+/* EXPORT VIEW  */
+
+.export h1 {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #714ED7;
+    margin-bottom: 8px;
+}
+
+.export h1+p {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+    text-transform: uppercase;
+    color: #241B3D;
+    margin-bottom: 40px;
+}
+
+.export {
+    background-color: white;
+    padding: 32px 40px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+}
+
+.download-data {
+    display: flex;
+    justify-content: center;
+    max-width: 320px;
+    width: 100%;
+    padding: 12px 0;
+    text-decoration: none;
+    background: #5B3FAD;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFFFFF;
+    user-select: none;
 }

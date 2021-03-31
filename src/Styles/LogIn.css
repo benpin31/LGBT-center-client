@@ -171,6 +171,6 @@
     bottom: 60px;
 }
 
-input.error-input {
+input.error-input, textarea.error-input {
     border: 1px solid #E65353;
 }

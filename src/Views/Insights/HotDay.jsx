@@ -61,7 +61,6 @@ export class HotDay extends Component {
     apiHandler
       .repartitionByWeeks({ dates: [dateBegin, dateEnd] })
       .then((res) => {
-        console.log(res);
         this.setState({
           data: res.agregatedData,
           date: res.updatedDates.map((date) => new Date(date)),
@@ -74,6 +73,10 @@ export class HotDay extends Component {
     this.setState({ calendarClicked: !this.state.calendarClicked });
   };
 
+  leaveSelectDay = () => {
+    this.setState({calendarClicked: false});
+  }
+
   render() {
     const { date, data, calendarClicked } = this.state;
     const dateBegin = date[0].toLocaleDateString("fr-FR", {year: "numeric", month: "numeric", day: "numeric"});
@@ -85,6 +88,7 @@ export class HotDay extends Component {
           setStartDate={this.setStartDate}
           calendarClicked={calendarClicked}
           openCalendar={this.openCalendar}
+          leaveSelectDay={this.leaveSelectDay}
           date={date}
           title="jours d'affluence"
         />

@@ -10,7 +10,6 @@ import Header from './../../Components/DataVizHeader';
 
 
 const flatData = (datas) => {
-    const {category, contactType} = datas ;
     return(datas.map(data => {return {    
         categoryName: data.category.name,
         categoryIsActive: data.category.isActive ? "actif" : "archivé",
@@ -19,9 +18,7 @@ const flatData = (datas) => {
         date: data.date
     }}
     )
-)
-
-}
+)}
 
 export class CategoriesDistribution extends Component {
 
@@ -29,7 +26,7 @@ export class CategoriesDistribution extends Component {
         data: null ,
         date: [new Date(), new Date()],
         calendarClicked: false,
-        isLoading:true
+        isLoading: true
     }
 
     setStartDate = date => {
@@ -42,6 +39,10 @@ export class CategoriesDistribution extends Component {
             
         this.setState({calendarClicked: false});
     };
+
+    leaveSelectDay = () => {
+        this.setState({selectDayClicked: false, calendarClicked: false});
+    }
 
     componentDidMount() {
         const dateBegin = this.state.date[0].toISOString().substring(0,10) + " 00:00:00" ;
@@ -61,8 +62,6 @@ export class CategoriesDistribution extends Component {
         const dateBegin = date[0].toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric', day: 'numeric' });
         const dateEnd = date[1].toLocaleDateString('fr-FR', { year: 'numeric', month: 'numeric', day: 'numeric' });
 
-        console.log(isLoading)
-
         return (
             <div className="main-container">
                 <Header 
@@ -70,29 +69,27 @@ export class CategoriesDistribution extends Component {
                     calendarClicked={calendarClicked}
                     openCalendar={this.openCalendar}
                     date={date}
+                    title="export"
+                    leaveSelectDay={this.leaveSelectDay}
                 />
                 
-                <div className="background-container">
-                    <div className="Graph-container">
-                    <div className="date-range-container">
-                        <p>du {dateBegin} au {dateEnd}</p>
-                    </div>
-
-                    <h1>Récupérer la liste des visites du {dateBegin} au {dateEnd}</h1>
-                    {
-                        data 
+                <div className="export">
+                        <h1>Récupérer la liste des visites du</h1>
+                        <p>{dateBegin} au {dateEnd}</p>
+                        {data 
                             &&
                             <>
-                            { !isLoading &&
-                        <CSVLink data={this.state.data}>Ici</CSVLink>
-                            }
-                            { isLoading &&
-                                <p>Your datas are loading</p>
-                            }
+                                {!isLoading &&
+                                    <CSVLink data={this.state.data} className="download-data">Télécharger les données</CSVLink>
+                                }
+                                {isLoading &&
+                                    <div className="download-data">
+                                        <p>Chargement des données</p>
+                                    </div>
+                                }
                             </>
-                   }
-                    </div>
-                    </div>
+                        }
+                        </div>
                 </div>
         )
     }

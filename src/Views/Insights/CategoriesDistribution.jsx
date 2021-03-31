@@ -40,6 +40,10 @@ export class CategoriesDistribution extends Component {
     openCalendar = () => {
         this.setState({calendarClicked: !this.state.calendarClicked});
     };
+
+    leaveSelectDay = () => {
+        this.setState({calendarClicked: false});
+    }
  
     render() {
         const {date, data, calendarClicked} = this.state ;
@@ -52,6 +56,7 @@ export class CategoriesDistribution extends Component {
                     setStartDate={this.setStartDate} 
                     calendarClicked={calendarClicked}
                     openCalendar={this.openCalendar}
+                    leaveSelectDay={this.leaveSelectDay}
                     date={date}
                     title="répartitions des semaines"
                 />

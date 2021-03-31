@@ -65,7 +65,10 @@ class DashboardNavBar extends Component {
                             <img src={rapportClicked ? arrowUp : arrowDown} alt=""/>
                         </div>
                         {rapportClicked &&
-                            <div className="drop-down-rapport">
+                            <div 
+                                onMouseLeave={this.handleClose}
+                                className="drop-down-rapport"
+                            >
                                 <NavLink
                                     exact
                                     to="/categories-repartition"
@@ -91,6 +94,15 @@ class DashboardNavBar extends Component {
                                     activeClassName="selected"
                                 >
                                     Heures d'affluence
+                                </NavLink>
+
+                                <NavLink
+                                    exact
+                                    to="/exporter"
+                                    className="sublink" 
+                                    activeClassName="selected"
+                                >
+                                    Exporter
                                 </NavLink>
                             </div>
                         }

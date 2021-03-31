@@ -62,11 +62,12 @@ export default class FormCreateUpdateCategory extends Component {
           <form onSubmit={this.handleSubmit} className="form-update-create">
             <label htmlFor="name">Name</label>
             <input
+              className={!isNameValidated ?  "error-input" : ""}
               type="text"
               name="name"
+              id="name"
               value={name}
               onChange={this.handleChange}
-              id={!isNameValidated ?  "error-input" : ""}
             />
             {!isNameValidated && 
               <div className="error-message name-error">
@@ -76,10 +77,11 @@ export default class FormCreateUpdateCategory extends Component {
 
             <label htmlFor="description">Description</label>
             <textarea
+              className={!isdescriptionValidated ?  "error-input" : ""}
               name="description"
+              id="description"
               value={description}
               onChange={this.handleChange}
-              id={!isdescriptionValidated ?  "error-input" : ""}
             />
             {!isdescriptionValidated && 
               <div className="error-message description-error">

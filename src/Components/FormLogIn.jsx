@@ -54,7 +54,7 @@ class FormLogIn extends Component {
                     />
                     {   !isValidSignin 
                             && 
-                        <div className="error-message"><p>Invalid credentials</p></div>
+                        <div className="error-message"><p>Mauvais mot de passe et/ou nom d'utilisateur</p></div>
                     }
                     <button >Connexion</button>
                 </form> 

@@ -25,7 +25,6 @@ export class CategoriesDistribution extends Component {
 
     setStartDate = date => {
         const {weekDays} = this.state ;
-        console.log(weekDays)
 
         this.setState({date},
             () => apiHandler.hotTime({dates: date, weekDays})

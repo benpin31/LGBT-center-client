@@ -37,7 +37,7 @@ function App() {
           <ProtectedRoute protectionLevel="volunteer" exact path="/categories-repartition" component={CategoriesDistribution}/>
           <ProtectedRoute protectionLevel="volunteer" exact path="/jour-affluence" component={HotDay}/>
           <ProtectedRoute protectionLevel="volunteer" exact path="/heure-affluence" component={HotTime}/>
-          <ProtectedRoute protectionLevel="volunteer" exact path="/csv" component={RetrieveData}/>
+          <ProtectedRoute protectionLevel="volunteer" exact path="/exporter" component={RetrieveData}/>
 
           <ProtectedRoute protectionLevel="volunteer" exact path="/new-visit" component={CreateVisit}/>
           <ProtectedRoute protectionLevel="volunteer" exact path="/update-visit" component={UpdateVisit}/>

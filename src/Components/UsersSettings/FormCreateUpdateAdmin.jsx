@@ -90,11 +90,12 @@ class FormCreateUpdateAdmin extends Component {
           <form onSubmit={this.handleSubmit} className="form-update-create">
             <label htmlFor="login">nom utilisateur.ice</label>
             <input
+              className={!isLoginLengthValidated || !isLoginFree ?  "error-input" : ""}
               onChange={this.handleChange}
               value={this.state.login}
               type="text"
               name="login"
-              id={!isLoginLengthValidated || !isLoginFree ?  "error-input" : ""}
+              id="login"
             />
             {!isLoginLengthValidated && (
               <div className="error-message user-name-error">
@@ -109,12 +110,13 @@ class FormCreateUpdateAdmin extends Component {
 
             <label htmlFor="password">mot de passe</label>
             <input
+              className={!isPasswordValidated || !isLoginFree ?  "error-input" : ""}
               onChange={this.handleChange}
               value={this.props.password}
               type="password"
               name="password"
+              id="password"
               placeholder={this.props.action === "ajouter" ? '' : '●●●●●●'}
-              id={!isPasswordValidated || !isLoginFree ?  "error-input" : ""}
             />
             {!isPasswordValidated && (
               <div className="error-message name-error-contact">
