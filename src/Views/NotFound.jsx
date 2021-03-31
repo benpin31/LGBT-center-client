@@ -10,9 +10,7 @@ export class NotFound extends Component {
           src="https://media.tenor.co/images/68a83f039448147d2d56c179e43bb474/raw"
           alt="RuPaul GIF"
         />
-        <audio controls src="../Assets/Rupaul-Laughing.mp3">
-        </audio>{" "}
-      </div>
+    </div>
     );
   }
 }
