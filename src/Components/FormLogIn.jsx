@@ -29,6 +29,7 @@ class FormLogIn extends Component {
                 <form className="form-signin" onSubmit={this.handleSubmit}>
                     <label htmlFor="username">Nom d'utilisateur</label>
                     <input 
+                        className={!isValidSignin ?  "error-input" : ""}
                         onChange={(event) => {
                             this.setState({username : event.target.value})
                             updateValidSignin()
@@ -37,11 +38,11 @@ class FormLogIn extends Component {
                         type="text" 
                         id="username" 
                         name="username"
-                        id={!isValidSignin ?  "error-input" : ""}
                     />
 
                     <label htmlFor="password">Mot de passe</label>
                     <input 
+                        className={!isValidSignin ?  "error-input" : ""}
                         onChange={(event) => {
                             this.setState({password : event.target.value})
                             updateValidSignin()
@@ -50,7 +51,6 @@ class FormLogIn extends Component {
                         type="password" 
                         id="password" 
                         name="password "
-                        id={!isValidSignin ?  "error-input" : ""}
                     />
                     {   !isValidSignin 
                             && 

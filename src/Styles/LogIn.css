@@ -171,6 +171,6 @@
     bottom: 60px;
 }
 
-#error-input {
+input.error-input {
     border: 1px solid #E65353;
 }
