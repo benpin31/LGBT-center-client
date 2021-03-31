@@ -151,7 +151,7 @@ export class HotDay extends Component {
                     tickLine={false}
                   />
                   <YAxis axisLine={false} tick={false} padding={{top: 20}} />
-                  <Tooltip cursor={false} />
+                  <Tooltip cursor={false} contentStyle={{borderRadius: "8px", boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.12)", border:"none", fontFamily: "Asap", fontSize:"12px", transform: "translate(-60%, -100%)" }} />
                   {/* <Legend /> */}
                   <Line
                     type="monotone"
