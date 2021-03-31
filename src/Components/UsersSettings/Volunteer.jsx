@@ -5,7 +5,8 @@ class Volunteer extends Component {
   render() {
     return (
       <>
-        {this.props.users.map(user => {
+        {this.props.users &&
+        this.props.users.map(user => {
           return (
             !user.isAdmin 
               && 
