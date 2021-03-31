@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 export class DataVizHeader extends Component {
 
     render() {
-        const {calendarClicked, setStartDate, openCalendar, date, selectDayClicked, openFilterDay} = this.props;
+        const {calendarClicked, setStartDate, openCalendar, date, selectDayClicked, openFilterDay, weekDays} = this.props;
         
         return (
             <div className="Graph-header">
@@ -21,27 +21,27 @@ export class DataVizHeader extends Component {
                                 <div className="select-day-drop-down">
                                     <div>
                                         <label htmlFor="Lundi">Lundi</label>
-                                        <input type="checkbox" name="Lundi" id="Lundi" onChange={this.props.handleToggleDay} defaultChecked={true}/>
+                                        <input type="checkbox" name="Lundi" id="Lundi" onChange={this.props.handleToggleDay} defaultChecked={weekDays.includes("Lundi")}/>
                                     </div>
                                     <div>
                                         <label htmlFor="Mardi">Mardi</label>
-                                        <input type="checkbox" name="Mardi" id="Mardi" onChange={this.props.handleToggleDay} defaultChecked={true}/>
+                                        <input type="checkbox" name="Mardi" id="Mardi" onChange={this.props.handleToggleDay} defaultChecked={weekDays.includes("Mardi")}/>
                                     </div>
                                     <div>
                                         <label htmlFor="Mercredi">Mercredi</label>
-                                        <input type="checkbox" name="Mercredi" id="Mercredi" onChange={this.props.handleToggleDay} defaultChecked={true}/>
+                                        <input type="checkbox" name="Mercredi" id="Mercredi" onChange={this.props.handleToggleDay} defaultChecked={weekDays.includes("Mercredi")}/>
                                     </div>
                                     <div>
                                         <label htmlFor="Jeudi">Jeudi</label>
-                                        <input type="checkbox" name="Jeudi" id="Jeudi" onChange={this.props.handleToggleDay} defaultChecked={true}/>
+                                        <input type="checkbox" name="Jeudi" id="Jeudi" onChange={this.props.handleToggleDay} defaultChecked={weekDays.includes("Jeudi")}/>
                                     </div>
                                     <div>
                                         <label htmlFor="Vendredi">Vendredi</label>
-                                        <input type="checkbox" name="Vendredi" id="Vendredi" onChange={this.props.handleToggleDay} defaultChecked={true}/>
+                                        <input type="checkbox" name="Vendredi" id="Vendredi" onChange={this.props.handleToggleDay} defaultChecked={weekDays.includes("Vendredi")}/>
                                     </div>
                                     <div>
                                         <label htmlFor="Samedi">Samedi</label>
-                                        <input type="checkbox" name="Samedi" id="Samedi" onChange={this.props.handleToggleDay} defaultChecked={true}/>
+                                        <input type="checkbox" name="Samedi" id="Samedi" onChange={this.props.handleToggleDay} defaultChecked={weekDays.includes("Samedi")}/>
                                     </div>
                                 </div>
                             }

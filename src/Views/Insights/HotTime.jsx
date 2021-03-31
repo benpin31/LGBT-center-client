@@ -25,8 +25,11 @@ export class CategoriesDistribution extends Component {
     colors=["#ffb0b0", "#fac696", "#f7e68f", "#a7f2a5", "#96f2ef", "#b5c8ff", "#F5C7FF", "#C4C4C4"] ;
 
     setStartDate = date => {
+        const {weekDays} = this.state ;
+        console.log(weekDays)
+
         this.setState({date},
-            () => apiHandler.hotTime({dates: date})
+            () => apiHandler.hotTime({dates: date, weekDays})
             .then(res =>  {
               this.setState({data: res});
               this.setState({calendarClicked: false});
@@ -77,7 +80,17 @@ export class CategoriesDistribution extends Component {
     }
  
     render() {
-        const {date, calendarClicked, isCheckboxes, selectDayClicked} = this.state ;
+        const {date, calendarClicked, isCheckboxes, selectDayClicked, weekDays} = this.state ;
+        const dateBegin = date[0].toLocaleDateString("fr-FR", {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        });
+        const dateEnd = date[1].toLocaleDateString("fr-FR", {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        });
 
         let name, visit ;
         if (this.state.value) {
@@ -96,10 +109,17 @@ export class CategoriesDistribution extends Component {
                   date={date}
                   isCheckboxes={isCheckboxes}
                   handleToggleDay={this.handleToggleDay}
+                  weekDays={weekDays}
                 />
 
                 <div className="background-container-hot-time">
+
                   <div className="Graph-container">
+                    <div className="date-range-container">
+                      <p>
+                        du {dateBegin} au {dateEnd}
+                      </p>
+                    </div>
 
                   {
                       this.state.data 
