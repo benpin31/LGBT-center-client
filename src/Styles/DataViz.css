@@ -27,7 +27,7 @@
     margin-bottom: 16px;
 } 
 
-.Graph-header h2, .bottom-container h2 {
+.Graph-header h2, .bottom-container h2, .total-hot-day h2 {
     font-weight: 600;
     font-size: 20px;
     line-height: 23px;
@@ -65,15 +65,17 @@
 .date-range-container {
     display: flex;
     justify-content: flex-end;
-    font-size: 16px;
-    line-height: 24px;
-    color: #423566;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #706C7A;
     margin-bottom: 40px;
 }
 
 .bottom-container {
     position: absolute;
-    top: 65%;
+    top: 68%;
     width: calc(100% - 80px);
 }
 
@@ -98,7 +100,42 @@
 
 @media (max-width: 700px) {
     .main-container {
-        margin: 100px 48px 28px 48px;
+        margin: 100px 10px 20px 10px;
+    }
+
+    .recharts-layer {
+        transform: translateY(-5%);
+    }
+
+    .background-container {
+        max-height: 60vh;
+        overflow: hidden
+    }
+
+    .bottom-container {
+        top: 50%;
+    }
+}
+
+@media (max-width: 470px) {
+    .recharts-layer {
+        transform: translateY(-10%);
+    }
+
+    .background-container {
+        max-height: 45vh;
+    }
+
+    .bottom-container {
+        top: 35%;
+    }
+
+    .Graph-header {
+        flex-direction: column;
+    }
+
+    .small-calendar {
+        top: 70px;
     }
 }
 
@@ -161,7 +198,6 @@ input[type="checkbox"]:checked::before {
     height: 10px;
     border-bottom: 2px solid black;
     border-right: 2px solid black;
-    /* border-radius: 0 0 2px 0; */
     border-radius: 1px 1px 2px 1px;
     box-sizing: border-box;
     transform: rotate(35deg);
@@ -176,6 +212,7 @@ input[type="checkbox"]:checked::before {
 
 /* IT'S FOR HOT DAY */
 .background-hot-day{
+    position: relative;
     background-color: white;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
@@ -184,35 +221,23 @@ input[type="checkbox"]:checked::before {
 }
 
 .Graph-hot-day{
-    position: relative;
     height: 80vh;
     display: flex;
     justify-content: center;
-}
-
-.bottom-hot-day{
-    position: absolute;
-    top: 95%;
-    width: 65%;
+    transform: translateX(-5%);
 }
 
 .total-hot-day{
+    position: absolute;
+    top: 88%;
+    width: calc(100% - 80px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 50px;
 }
 
-.bottom-hot-day h2{
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 23px;
-    text-transform: uppercase;
-    color: #241B3D;
-}
-
-.recharts-line-dots {
-    padding: 20px;  
-    background-color: red;
-    overflow: visible;
+@media (max-width: 470px) {
+    .background-hot-day{
+        padding: 10px;
+    }
 }

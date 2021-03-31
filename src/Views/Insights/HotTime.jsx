@@ -1,7 +1,6 @@
 import React, { Component } from 'react' ;
-import { BarChart, Tooltip, CartesianGrid, ResponsiveContainer, XAxis, YAxis, Bar, Text} from "recharts";
+import { BarChart, Tooltip, ResponsiveContainer, XAxis, Bar, Cell} from "recharts";
 
-import Calendar from 'react-calendar';
 import './../../Styles/Calendar.css';
 import './../../Styles/DataViz.css';
 
@@ -73,14 +72,21 @@ export class CategoriesDistribution extends Component {
 
     openCalendar = () => {
       this.setState({calendarClicked: !this.state.calendarClicked});
+      this.setState({selectDayClicked: false});
     };
 
     openFilterDay = () => {
       this.setState({selectDayClicked: !this.state.selectDayClicked});
+      this.setState({calendarClicked: false});
     }
+
+    leaveSelectDay = () => {
+      this.setState({selectDayClicked: false, calendarClicked: false});
+    }
+
  
     render() {
-        const {date, calendarClicked, isCheckboxes, selectDayClicked, weekDays} = this.state ;
+        const {date, calendarClicked, isCheckboxes, selectDayClicked, weekDays, data} = this.state ;
         const dateBegin = date[0].toLocaleDateString("fr-FR", {
           year: "numeric",
           month: "numeric",
@@ -102,14 +108,18 @@ export class CategoriesDistribution extends Component {
             <div className="main-container">
                 <Header 
                   setStartDate={this.setStartDate} 
+                  date={date}
+                  handleToggleDay={this.handleToggleDay}
+                  weekDays={weekDays}
+                  title="heures d'affluence"
+
+                  //Props passed for UI details
                   calendarClicked={calendarClicked}
                   selectDayClicked={selectDayClicked}
                   openCalendar={this.openCalendar}
                   openFilterDay={this.openFilterDay}
-                  date={date}
                   isCheckboxes={isCheckboxes}
-                  handleToggleDay={this.handleToggleDay}
-                  weekDays={weekDays}
+                  leaveSelectDay={this.leaveSelectDay}
                 />
 
                 <div className="background-container-hot-time">
@@ -131,7 +141,7 @@ export class CategoriesDistribution extends Component {
                           >
                             <XAxis 
                               dataKey="name" 
-                              tick={{fill: "#423566"}}
+                              tick={{fill: "#706C7A", fontSize: 14}}
                               tickMargin={15}
                                   // change tick color
                               tickLine={false}
@@ -139,25 +149,19 @@ export class CategoriesDistribution extends Component {
                               axisLine={false}
                                   // don't plot the axis
                               />
-                            <defs>
-                              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                  <stop offset="15%" stopColor="#ffb0b0" stopOpacity={0.8}/>
-                                  <stop offset="30%" stopColor="#fac696" stopOpacity={0.8}/>
-                                  <stop offset="45%" stopColor="#f7e68f" stopOpacity={0.8}/>
-                                  <stop offset="60%" stopColor="#a7f2a5" stopOpacity={0.8}/>
-                                  <stop offset="75%" stopColor="#96f2ef" stopOpacity={0.8}/>
-                                  <stop offset="90%" stopColor="#b5c8ff" stopOpacity={0.8}/>
-                              </linearGradient>
-                          </defs>
                             <Tooltip 
                               cursor={false}
                               contentStyle={{borderRadius: "8px", boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.12)", border:"none", fontFamily: "Asap", fontSize:"12px" }}
                             />
                             <Bar 
                               dataKey="value" 
-                              fill="url(#colorUv)" 
+                              fill="#000000" 
                               name="Visites"
-                              />
+                            >
+                              {data.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={this.colors[index % this.colors.length]} />
+                              ))}
+                            </Bar>
                           </BarChart>
                         </ResponsiveContainer>
                         

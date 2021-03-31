@@ -100,6 +100,10 @@ class Home extends React.Component {
             });
     }
 
+    updateValidSignin = () => {
+        this.setState({isValidSignin: true})
+    }
+
     render() {
 
         const flags = ["red", "orange", "yellow", "green", "blue", "purple"];
@@ -108,7 +112,11 @@ class Home extends React.Component {
         return (
             <div>
                 <div id="signin" style={this.state.signInStyle}>
-                    <FormLogIn onLoggedIn={this.handleLoggedin} isValidSignin={isValidSignin}/>
+                    <FormLogIn 
+                        onLoggedIn={this.handleLoggedin} 
+                        isValidSignin={isValidSignin}
+                        updateValidSignin={this.updateValidSignin}
+                    />
                 </div>
 
                 <div id="flag-container">

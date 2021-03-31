@@ -4,11 +4,11 @@ import Calendar from 'react-calendar';
 export class DataVizHeader extends Component {
 
     render() {
-        const {calendarClicked, setStartDate, openCalendar, date, selectDayClicked, openFilterDay, weekDays} = this.props;
+        const {calendarClicked, setStartDate, openCalendar, date, selectDayClicked, openFilterDay, weekDays, leaveSelectDay, title} = this.props;
         
         return (
             <div className="Graph-header">
-                <h2>rapport</h2>
+                <h2>{title}</h2>
                 <div className= "filter-container">
                     {this.props.isCheckboxes &&
                         <div className="select-day-container">
@@ -18,7 +18,9 @@ export class DataVizHeader extends Component {
                                 Choisir jours
                             </p>
                             {selectDayClicked &&
-                                <div className="select-day-drop-down">
+                                <div 
+                                    onMouseLeave={leaveSelectDay}
+                                    className="select-day-drop-down">
                                     <div>
                                         <label htmlFor="Lundi">Lundi</label>
                                         <input type="checkbox" name="Lundi" id="Lundi" onChange={this.props.handleToggleDay} defaultChecked={weekDays.includes("Lundi")}/>
@@ -51,12 +53,14 @@ export class DataVizHeader extends Component {
                         className={calendarClicked ? "selected-filter" : ""}
                         onClick={openCalendar}>Choisir dates</p>
                     {calendarClicked &&
-                        <Calendar
-                            onChange={setStartDate}
-                            selectRange={true}
-                            value={date}
-                            className="small-calendar"
-                        />
+                        <div onMouseLeave={leaveSelectDay}>
+                            <Calendar
+                                onChange={setStartDate}
+                                selectRange={true}
+                                value={date}
+                                className="small-calendar"
+                            />
+                        </div>
                     }
 
                 </div>

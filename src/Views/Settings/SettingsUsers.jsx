@@ -45,9 +45,6 @@ class SettingsUsers extends Component {
   };
 
   render() {
-    if (this.state.users === null) {
-      return <div className="loading">Loading...</div>;
-    }
 
     return (
       <div id="settings-users">
