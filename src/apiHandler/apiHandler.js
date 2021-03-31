@@ -149,21 +149,21 @@ export default {
     //  Insights
     repartitionByCategory(data) {
       return service
-      .post("api/insight/get-category-repartition", data)
+      .post("/api/insight/get-category-repartition", data)
       .then((res) => res.data)
       .catch(errorHandler);
     },
 
     hotTime(data) {
       return service
-      .post("api/insight/get-popular-hours", data)
+      .post("/api/insight/get-popular-hours", data)
       .then((res) => res.data)
       .catch(errorHandler);
     },
 
     repartitionByWeeks(data) {
       return service
-      .post("api/insight/get-popular-days", data)
+      .post("/api/insight/get-popular-days", data)
       .then((res) => res.data)
       .catch(errorHandler);
     },
