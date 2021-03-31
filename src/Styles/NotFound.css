@@ -1,0 +1,23 @@
+#not-found{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    margin: 52px 48px;
+    height: 85vh;
+}
+
+#not-found h1{
+    margin: 5%;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 23px;
+}
+
+#not-found img{
+    margin-bottom: 5%;
+}
