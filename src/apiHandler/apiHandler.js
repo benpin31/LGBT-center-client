@@ -168,6 +168,14 @@ export default {
       .catch(errorHandler);
     },
 
+    getVisitsDateRange(data) {
+      return service
+        .post("api/insight/visits-list", data)
+        .then((res) => res.data)
+        .catch(errorHandler);
+    }
+
+
 };
 
 
