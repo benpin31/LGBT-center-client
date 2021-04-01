@@ -224,7 +224,7 @@ input[type="checkbox"]:checked::before {
     height: 80vh;
     display: flex;
     justify-content: center;
-    transform: translateX(-5%);
+    transform: translateX(-3.5%);
 }
 
 .total-hot-day{
