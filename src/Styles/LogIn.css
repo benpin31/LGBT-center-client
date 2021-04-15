@@ -174,3 +174,17 @@
 input.error-input, textarea.error-input {
     border: 1px solid #E65353;
 }
+
+@media (max-width: 700px) {
+    .form-signin {
+        max-width: 320px;
+    }
+
+    .form-signin button {
+        padding: 12px 120px;
+    }
+
+    .error-message {
+        font-size: 12px;
+    }
+}

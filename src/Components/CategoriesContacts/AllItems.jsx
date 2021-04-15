@@ -111,7 +111,8 @@ export class AllItems extends Component {
         {showCreateForm && (
           // appears only the the state is true
           <FormCreateUpdateComponent
-            formName={"Ajouter " + titleFormat}
+            formType={"Ajouter "}
+            formName={titleFormat}
             formAction={formCreateAction}
             handleUpdateView={this.handleUpdateView}
             closeForm={this.handleCloseCreate}
@@ -122,7 +123,8 @@ export class AllItems extends Component {
           // appears only the the state is not empty/ here the state is a full item so that one can use
           // its informations to fill the form
           <FormCreateUpdateComponent
-            formName={"Modifier " + titleFormat}
+            formType={"Modifier "}
+            formName={titleFormat}
             formAction={(value) =>
               updateItem(this.state.showUpdateForm._id, value)
             }

@@ -1,46 +1,65 @@
 import React, { Component } from 'react';
 import infoIcon from './../../Assets/info-icon.svg';
+import {isMobileOnly} from 'react-device-detect';
 
 export class CategoryCard extends Component {
     state = {
-        isHoveringCardCat: false,
         isHoveringInfoIcon: false
     } 
 
-    handleMouseEnter = (itemHovered) => {
-        this.setState({[itemHovered]: true});
+    handleMouseEnter = () => {
+        this.setState({isHoveringInfoIcon: true});
     } 
 
-    handleMouseLeave = (itemHovered) => {
-        this.setState({[itemHovered]: false});
+    handleMouseLeave = () => {
+        this.setState({isHoveringInfoIcon: false});
     } 
+
+    handleTouchInfo = (e) => {
+        e.preventDefault();
+        this.setState({isHoveringInfoIcon: !this.state.isHoveringInfoIcon});
+    }
+
+    handleTouchEnd = (e) => {
+        e.preventDefault();
+    }
 
     render() {
+        console.log(isMobileOnly);
         const {category, handleSelectItem} = this.props;
-        const {isHoveringInfoIcon, isHoveringCardCat} = this.state;
+        const {isHoveringInfoIcon} = this.state;
 
         return (
-            <div 
-                onMouseEnter={() => this.handleMouseEnter('isHoveringCardCat')}
-                onMouseLeave={() => this.handleMouseLeave('isHoveringCardCat')}
-                onClick={() => handleSelectItem(category._id, category.name, "category")}
-                className="cat-cont"
-            >
+            <div className="cat-cont-card">
+                <div 
+                    onClick={() => handleSelectItem(category._id, category.name, "category")}
+                    className="cat-cont"
+                >
 
-                {isHoveringInfoIcon &&
-                    <div className="info-toolbox">
-                        <h3>{category.description}</h3> 
-                        <div></div>
-                    </div>
-                }
+                    {isHoveringInfoIcon && !isMobileOnly &&
+                        <div className="info-toolbox">
+                            <h3>{category.description}</h3> 
+                            <div></div>
+                        </div>
+                    }
 
-                <p>{category.name}</p> 
-                {isHoveringCardCat &&
+                    <p>{category.name}</p> 
+                    
                     <img 
-                        onMouseEnter={() => this.handleMouseEnter('isHoveringInfoIcon')}
-                        onMouseLeave={() => this.handleMouseLeave('isHoveringInfoIcon')}
+                        onMouseEnter={this.handleMouseEnter}
+                        onMouseLeave={this.handleMouseLeave}
+                        style= {{opacity : isHoveringInfoIcon ? "1" : "0.5"}}
+                        onTouchStart={this.handleTouchInfo}
+                        onTouchEnd={this.handleTouchEnd}
                         src={infoIcon} alt=""
                     />
+                
+                </div>
+                
+                {isMobileOnly && isHoveringInfoIcon &&
+                    <div className="description-mobile">
+                        <p>{category.description}</p>
+                    </div>
                 }
             </div>
         )

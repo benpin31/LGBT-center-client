@@ -47,14 +47,14 @@ export default class FormCreateUpdateCategory extends Component {
 
 
   render() {
-    const { formName, closeForm } = this.props;
+    const { formType, formName, closeForm } = this.props;
     const {name, description, isNameValidated, isdescriptionValidated} = this.state ;
 
     return (
       <div className="shadow-pop-up">
         <div className="FormCreateUpdateContact">
             <div>
-                <h1>{formName}</h1>
+                <h1>{formType}{formName}</h1>
                 <div className="close-pop-up" onClick={closeForm}>
                 Annuler
                 </div>
@@ -88,7 +88,7 @@ export default class FormCreateUpdateCategory extends Component {
                 <p>La description doit contenir au moins 3 caractères</p>
               </div>
             }
-            <button>Submit</button>
+            <button>{formType}</button>
           </form>
         </div>
       </div>

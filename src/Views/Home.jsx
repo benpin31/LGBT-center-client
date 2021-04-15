@@ -16,34 +16,19 @@ class Home extends React.Component {
         isValidSignin: true
     };
 
-    componentDidUpdate(prevProps) {
-
-        if (prevProps.context.isLoading !== this.props.context.isLoading) {
-            if (this.props.context.isLoggedIn) {
-                this.props.history.push("/new-visit")
-            } else  {
-                setTimeout(() => {
-                    this.setState({
-                        signInStyle: {
-                            display : 'block',
-                            animation : 'signinsweep 0.9s ease-out'
-                        }
-                    })
-                }, 900);
-        
-                setTimeout(() => {
-                    this.setState({
-                        helloStyle : {
-                            display : 'block',
-                        }
-                    })
-                }, 700);
-            }
-        }
-    }
-
     componentDidMount() {
+        //Dealing with arriving on Home page animation
         if(!this.props.context.isLoggedIn & !this.props.context.isLoading) {
+            //css deals with making flag move up
+            // then after 700ms I want the "bonjour" to display 
+            setTimeout(() => {
+                this.setState({
+                    helloStyle : {
+                        display : 'block',
+                    }
+                })
+            }, 700);
+            //then after 900ms I want the login form to move down
             setTimeout(() => {
                 this.setState({
                     signInStyle: {
@@ -52,14 +37,35 @@ class Home extends React.Component {
                     }
                 })
             }, 900);
-    
-            setTimeout(() => {
-                this.setState({
-                    helloStyle : {
-                        display : 'block',
-                    }
-                })
-            }, 700);
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        //Dealing with arriving at Home page animation
+        //but same time dealing with loading isLoggedIn asynchrone issues
+
+        //TO REFACTOR : we have the same animation twice
+        if (prevProps.context.isLoading !== this.props.context.isLoading) {
+            if (this.props.context.isLoggedIn) {
+                this.props.history.push("/new-visit")
+            } else  {
+                setTimeout(() => {
+                    this.setState({
+                        helloStyle : {
+                            display : 'block',
+                        }
+                    })
+                }, 700);
+
+                setTimeout(() => {
+                    this.setState({
+                        signInStyle: {
+                            display : 'block',
+                            animation : 'signinsweep 0.9s ease-out'
+                        }
+                    })
+                }, 900);
+            }
         }
     }
 
@@ -100,6 +106,8 @@ class Home extends React.Component {
             });
     }
 
+    //show error message if sign in is not good
+    //to do = setState only if !isValidSignin
     updateValidSignin = () => {
         this.setState({isValidSignin: true})
     }

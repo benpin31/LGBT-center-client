@@ -42,6 +42,8 @@ export class ChooseCategory extends Component {
         })
         .catch(err => console.log(err));
 
+        //if there is a visitId props, it means that I come from update a visit
+        //then I need the visit Information and isUpdateVisit
         if(this.props.visitId) {
             this.setState({visitToUpdate : this.props.visitId, isUpdateVisit: true})
         }
@@ -60,6 +62,8 @@ export class ChooseCategory extends Component {
         this.setState({[item] : {id, name}});
     }
 
+    //if user change their mind about selecting a category or contact type
+    //if user was here to update it resets information 
     handleChangeItem = (item) => {
         this.setState({[item] : null, isUpdateVisit:false});
     }
@@ -108,7 +112,7 @@ export class ChooseCategory extends Component {
                 onSubmit={this.handleSubmit}
                 id="CreateForm"
             >
-
+                {/* if visit to update we don't want the user to change nbofperson and/or date */}
                 {!visitToUpdate &&
                     <div id="first-form">
                         <div id="nb-of-person">
@@ -162,6 +166,7 @@ export class ChooseCategory extends Component {
                     }
                 </div>
 
+                {/* probably an OR guardian for this one, to check on v2 */}
                 {category &&
                     <div 
                         onClick={() => this.handleChangeItem('category')}

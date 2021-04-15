@@ -4,7 +4,7 @@ import './../../Styles/VisitCardInfo.css';
 import editIcon from './../../Assets/edit-icon.svg';
 import deleteIcon from './../../Assets/trash-icon.svg';
 
-class JulieCardInfo extends Component {
+class VisitCardInfo extends Component {
     state = {
         isHovering: false
     }
@@ -46,7 +46,7 @@ class JulieCardInfo extends Component {
                         }}>
                             <img src={editIcon} alt=""/>
                         </Link>
-                        <img onClick={() => onDelete(visit._id)} src={deleteIcon} alt=""/>
+                        <img onClick={() => onDelete(visit._id)} src={deleteIcon} alt="trash-can"/>
                     </aside>
                 }
             </div>
@@ -54,4 +54,4 @@ class JulieCardInfo extends Component {
     }
 }
 
-export default JulieCardInfo
+export default VisitCardInfo

@@ -63,19 +63,66 @@
     flex-wrap: wrap;
 }
 
-.cat-cont-container .cat-cont {
+.cat-cont-card {
+    width: 49.5%;
+    margin-bottom: 8px;
+}
+
+.cat-cont-card:nth-child(2n) {
+    margin-left: 1%;
+}
+
+.cat-cont-card:last-child {
+    margin-bottom: 40px;
+}
+
+.cat-cont {
     position: relative;
     display: flex;
     justify-content: space-between;
-    padding: 19px 24px;
-    width: 49.5%;
+    align-items: center;
     height: 60px;
-    margin-bottom: 8px;
     background: #FFFFFF;
     border: 1px solid rgba(113, 78, 215, 0.24);
     border-radius: 8px;
+    padding: 19px 16px 19px 24px;
     cursor: pointer;
     animation: opacity 0.3s ease-out;
+    margin-bottom: 4px;
+}
+
+.cat-cont p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: #241B3D;
+}
+
+.cat-cont:hover p {
+    color: #5B3FAD;
+} 
+
+.cat-cont:hover {
+    border: 2px solid #714ED7;
+    background-color: rgba(113, 78, 215, 0.06);
+    padding: 18px 15px 18px 23px;
+}
+
+.cat-cont img {
+    padding: 8px;
+}
+
+.description-mobile {
+   padding: 0 8px 8px 8px ;
+   animation: opacity 0.3s ease-out;
+}
+
+.description-mobile p {
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #241B3D;
 }
 
 .info-toolbox {
@@ -87,6 +134,7 @@
     background: #FFFFFF;
     border-radius: 4px;
     filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.16));
+    pointer-events: none;
 }
 
 .info-toolbox h3 {
@@ -107,29 +155,10 @@
     transform: rotate(45deg);
 }
 
-.cat-cont:nth-child(2n) {
-    margin-left: 1%;
-}
-
-.cat-cont:last-child {
-    margin-bottom: 40px;
-}
-
-.cat-cont:hover {
-    border: 2px solid #714ED7;
-    background-color: rgba(113, 78, 215, 0.06);
-    padding: 18px 23px;
-}
-
-.cat-cont p {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 22px;
+.description-mobile {
+    font-size: 14px;
+    line-height: 16px;
     color: #241B3D;
-}
-
-.cat-cont:hover p {
-    color: #5B3FAD;
 }
 
 .selected-cat-cont {
@@ -200,14 +229,16 @@
         margin-bottom: 20px;
     }
 
-    .cat-cont-container .cat-cont {
+    .cat-cont-container .cat-cont-card {
         width: 100%;
     }
 
-    .cat-cont:nth-child(2n) {
+    .cat-cont-card:nth-child(2n) {
         margin-left: 0;
     }
 }
+
+
 
 
 
