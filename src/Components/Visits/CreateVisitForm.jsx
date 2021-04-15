@@ -205,12 +205,14 @@ export class ChooseCategory extends Component {
                     !contactType &&
                     allContactTypes &&
                         allContactTypes.map(contact => 
-                            <div 
-                                onClick={() => this.handleSelectItem(contact._id, contact.name, "contactType")}
-                                key={contact._id}
-                                className="cat-cont"
-                            >
-                                <p>{contact.name}</p>
+                            <div className="cat-cont-card">
+                                <div 
+                                    onClick={() => this.handleSelectItem(contact._id, contact.name, "contactType")}
+                                    key={contact._id}
+                                    className="cat-cont"
+                                >
+                                    <p>{contact.name}</p>
+                                </div>
                             </div>
                         )
                     }

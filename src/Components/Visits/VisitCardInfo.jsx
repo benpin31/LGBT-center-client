@@ -23,7 +23,8 @@ class VisitCardInfo extends Component {
 
         const date = new Date(visit.date);
         const hour = date.getHours();
-        const minutes = date.getMinutes();
+        let minutes = date.getMinutes();
+        minutes = minutes < 10 ? '0' + minutes : minutes;
     
         return (
             <div 
