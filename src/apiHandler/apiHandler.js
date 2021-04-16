@@ -156,7 +156,7 @@ export default {
 
 	hotTime(data) {
 		return service
-			.get(`/api/insight/get-popular-hours?dateBegin=${data.dates[0]}&dateEnd=${data.dates[1]}&weekDays=${data.weekDays.join(",")}`)
+			.get(`/api/insight/get-popular-hours?dateBegin=${data.dates[0]}&dateEnd=${data.dates[1]}${data.weekDays?"&weekDays="+data.weekDays.join(","):""}`)
 			.then((res) => res.data)
 			.catch(errorHandler);
 	},
@@ -170,7 +170,7 @@ export default {
 
 	getVisitsDateRange(data) {
 		return service
-			.post(`api/visits?dateBegin=${data.dates[0]}&dateEnd=${data.dates[1]}`)
+			.get(`/api/visits?dateBegin=${data.dates[0]}&dateEnd=${data.dates[1]}`)
 			.then((res) => res.data)
 			.catch(errorHandler);
 	}
