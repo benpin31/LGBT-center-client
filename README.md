@@ -17,21 +17,15 @@ We met with employees to try and figure out what they actually needed. We ended 
 
 With these informations in hands we went to work!
 
+[Come and play here](https://lgbtqi-plus-test.herokuapp.com/history)
 
-## Client side 
+![](https://media0.giphy.com/media/l4hvNQ8U3bFysxC4wr/giphy.gif)
 
-# A day with a goooood Kitty  :blush:
+# Made by
+
+- Thaïs Hauguel - [here](https://github.com/thaishauguel)
+- Romain Benard - [here](https://github.com/romainb33)
+- Julie Plantey - [here](https://github.com/ronronscelestes)
 
 
-## 1st Ironhack project : a video game!
-I decided to create a cute and wholesome game about helping a cat having its best life: 
-☞ eating fish **all day long**
-## 2 mini games (for now...)!
-☞ Cat snake
-☞ Cat catch fish (kitty no likey raindrops)
-## ENJOY
-[Come and play here](https://ronronscelestes.github.io/dayInCatLife/)
-![](https://media4.giphy.com/media/4XnL30fhVarrG/giphy.gif?cid=ecf05e47xlvmln4k34f9l0d8iu5lkw8ftdvd6cy0yrs0w5wb&rid=giphy.gif)
-
-![](https://www.dropbox.com/s/foesllnx0bi6t5r/Seq_LGBTQI.mp4?raw=1)
 
