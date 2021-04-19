@@ -21,7 +21,7 @@ With these informations in hands we went to work!
 
 ### [Test our app here](https://lgbtqi-plus-test.herokuapp.com/history)
 
-(Username: Admin, password: 1234)
+(Username: Admin, Password: 1234)
 
 ![](https://media0.giphy.com/media/l4hvNQ8U3bFysxC4wr/giphy.gif)
 
