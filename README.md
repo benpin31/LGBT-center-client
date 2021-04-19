@@ -21,13 +21,30 @@ With these informations in hands we went to work!
 
 ### [Test our app here](https://lgbtqi-plus-test.herokuapp.com/history)
 
+(Username: Admin, password: 1234)
+
 ![](https://media0.giphy.com/media/l4hvNQ8U3bFysxC4wr/giphy.gif)
+
+## Tech stack
+
+### client
+- React.js
+- CSS
+- Recharts.js
+- React-calendar
+
+### server
+- Node.js
+- Express.js
+- MongoDB
 
 ## Made by:
 
-- Benjamin - [here](https://github.com/benpin31)
-- Julie Plantey - [here](https://github.com/ronronscelestes)
-- Mathieu Lambertin - [here](https://github.com/Mathoz)
+☞ Benjamin Pinard - [here](https://github.com/benpin31)
+
+☞ Julie Plantey - [here](https://github.com/ronronscelestes)
+
+☞ Mathieu Lambertin - [here](https://github.com/Mathoz)
 
 
 
