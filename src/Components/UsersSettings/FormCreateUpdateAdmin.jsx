@@ -11,6 +11,9 @@ class FormCreateUpdateAdmin extends Component {
     isLoginLengthValidated: true,
     isLoginFree: true,
     isPasswordValidated: true,
+
+    //prevent update user if test mode
+    isTestMode: false
   };
 
   handleChange = (event) => {
@@ -19,10 +22,16 @@ class FormCreateUpdateAdmin extends Component {
   };
 
   handleSubmit = async (event) => {
+    
     event.preventDefault();
 
     const { login, password, isAdmin } = this.state;
     const { users } = this.props;
+
+    if(this.props.action === 'modifier' && process.env.REACT_APP_TEST === 'true') {
+      this.setState({isTestMode: true});
+      return;
+    }
 
     try {
       const newValue = { login, isAdmin };
@@ -78,6 +87,7 @@ class FormCreateUpdateAdmin extends Component {
       isLoginLengthValidated,
       isLoginFree,
       isPasswordValidated,
+      isTestMode
     } = this.state;
 
     return (
@@ -88,9 +98,9 @@ class FormCreateUpdateAdmin extends Component {
             <div className="close-pop-up" onClick={this.props.handlePopup}>Annuler</div>
           </div>
           <form onSubmit={this.handleSubmit} className="form-update-create">
-            <label htmlFor="login">nom utilisateur.ice</label>
+            <label htmlFor="login">nom utilisateur·ice</label>
             <input
-              className={!isLoginLengthValidated || !isLoginFree ?  "error-input" : ""}
+              className={!isLoginLengthValidated || !isLoginFree || isTestMode ?  "error-input" : ""}
               onChange={this.handleChange}
               value={this.state.login}
               type="text"
@@ -110,7 +120,7 @@ class FormCreateUpdateAdmin extends Component {
 
             <label htmlFor="password">mot de passe</label>
             <input
-              className={!isPasswordValidated || !isLoginFree ?  "error-input" : ""}
+              className={!isPasswordValidated || !isLoginFree || isTestMode ?  "error-input" : ""}
               onChange={this.handleChange}
               value={this.props.password}
               type="password"
@@ -123,6 +133,13 @@ class FormCreateUpdateAdmin extends Component {
                 <p>Le mot de passe doit contenir au moins 3 caractères.</p>
               </div>
             )}
+
+            {isTestMode && (
+              <div className="error-message name-error-contact">
+                <p>Action impossible sur la version test</p>
+              </div>
+            )} 
+
             <button>{this.props.action[0].toUpperCase() + this.props.action.substr(1)}</button>
           </form>
         </div>

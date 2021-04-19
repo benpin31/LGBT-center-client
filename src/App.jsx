@@ -21,6 +21,7 @@ import RetrieveData from './Views/Insights/RetrieveData'
 import NotFound from './Views/NotFound';
 
 function App() {
+
   return (
     <div className="App">
 
@@ -57,4 +58,3 @@ function App() {
 
 export default App;
 
-//mongodb://localhost/LGBTCenterVisits

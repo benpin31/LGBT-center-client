@@ -25,7 +25,6 @@ export class CategoryCard extends Component {
     }
 
     render() {
-        console.log(isMobileOnly);
         const {category, handleSelectItem} = this.props;
         const {isHoveringInfoIcon} = this.state;
 
