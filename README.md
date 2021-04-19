@@ -1,4 +1,4 @@
-# IDF-LGBTQI+ CENTER APP :rainbow_flag:
+# IDF-LGBTQI+ CENTER APP (CLIENT SIDE) :rainbow_flag:
 
 ## What is our app about?
 
@@ -29,16 +29,11 @@ With these informations in hands we went to work!
 
 ## Tech stack
 
-### client
-- React.js
-- CSS
-- Recharts.js
-- React-calendar
-
-### server
-- Node.js
-- Express.js
-- MongoDB
+| Client      |     Server    |
+|:-----------:|:-------------:|
+| React.js    |  Node.js      |
+|   CSS       |  Express.js   |
+| Recharts.js | MongoDB       |
 
 ## Made by:
 
