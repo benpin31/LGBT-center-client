@@ -3,7 +3,7 @@ import "../../Styles/FormCreateCatCont.css";
 
 class FormCreateUpdateAdmin extends Component {
   state = {
-    login: this.props.value ? this.props.value.login : "",
+    login: this.props.value ? this.props.value.login[0].toUpperCase() + this.props.value.login.substring(1) : "",
     password: "",
     isAdmin: this.props.value ? this.props.value.isAdmin : true,
 
