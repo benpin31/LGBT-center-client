@@ -16,6 +16,22 @@ class FormCreateUpdateAdmin extends Component {
     isTestMode: false
   };
 
+  wrapperRef = React.createRef();
+
+  handleClickOutside = event => {
+    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+      this.props.handlePopup();
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
   handleChange = (event) => {
     const key = event.target.name;
     this.setState({ [key]: event.target.value, isLoginLengthValidated:true,  isPasswordValidated: true});
@@ -92,7 +108,7 @@ class FormCreateUpdateAdmin extends Component {
 
     return (
       <div className="shadow-pop-up">
-        <div className="FormCreateUpdateContact">
+        <div ref={this.wrapperRef} className="FormCreateUpdateContact">
           <div>
             <h1>{this.props.action} un·e utilisateur·ice</h1>
             <div className="close-pop-up" onClick={this.props.handlePopup}>Annuler</div>

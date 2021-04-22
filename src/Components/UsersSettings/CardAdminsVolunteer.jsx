@@ -28,32 +28,35 @@ class CardAdminsVolunteer extends Component {
   };
 
   render() {
+    const {users, context, handlePopup} = this.props;
+    const name = users.login[0].toUpperCase() + users.login.substring(1);
+
     return (
       <div
         onMouseEnter={this.handleMouseEnterCard}
         onMouseLeave={this.handleMouseLeaveCard}
         className="CardContainerAdminsVolunteer"
       >
-        {this.props.users.isAdmin && (
+        {users.isAdmin && (
           <div>
             <div className="card-info-admins-volunteer">
               <div>Admin</div>
-              <p>{this.props.users.login}</p>
+              <p>{name}</p>
             </div>
             {this.state.isHovering && (
               <aside>
-                {!this.props.context.isLoading &&
-                  this.props.context.user._id === this.props.users._id && (
+                {!context.isLoading &&
+                  context.user._id === users._id && (
                     <img
-                      onClick={this.props.handlePopup}
+                      onClick={handlePopup}
                       src={editIcon}
                       alt="edit-icon"
                     />
                   )}
-                {!this.props.context.isLoading &&
-                  this.props.context.user._id !== this.props.users._id && (
+                {!context.isLoading &&
+                  context.user._id !== users._id && (
                     <img
-                      onClick={() => this.handleDelete(this.props.users._id)}
+                      onClick={() => this.handleDelete(users._id)}
                       src={binIcon}
                       alt="trash-icon"
                     />
@@ -62,14 +65,14 @@ class CardAdminsVolunteer extends Component {
             )}
           </div>
         )}
-        {!this.props.users.isAdmin && (
+        {!users.isAdmin && (
           <div>
             <div className="card-info-admins-volunteer">
               <div>Bénévole</div>
-              <p>{this.props.users.login}</p>
+              <p>{name}</p>
             </div>
             {this.state.isHovering && (
-              <aside onClick={this.props.handlePopup}>
+              <aside onClick={handlePopup}>
                 <img src={editIcon} alt="edit-icon" />
               </aside>
             )}

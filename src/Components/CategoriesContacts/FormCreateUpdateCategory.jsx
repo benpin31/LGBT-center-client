@@ -10,6 +10,22 @@ export default class FormCreateUpdateCategory extends Component {
         isdescriptionValidated : true
     }
 
+    wrapperRef = React.createRef();
+
+    handleClickOutside = event => {
+      if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+        this.props.closeForm();
+      }
+    }
+  
+    componentDidMount() {
+      document.addEventListener('mousedown', this.handleClickOutside);
+    }
+  
+    componentWillUnmount() {
+      document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
     componentDidUpdate(prevProps) {
         //  when the user want to change the upfateform without closing the previous one
         if (prevProps.values) {
@@ -52,7 +68,7 @@ export default class FormCreateUpdateCategory extends Component {
 
     return (
       <div className="shadow-pop-up">
-        <div className="FormCreateUpdateContact">
+        <div ref={this.wrapperRef} className="FormCreateUpdateContact">
             <div>
                 <h1>{formType}{formName}</h1>
                 <div className="close-pop-up" onClick={closeForm}>
