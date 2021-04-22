@@ -45,6 +45,7 @@ class SettingsUsers extends Component {
   };
 
   render() {
+    const {users, isShownCreate, isShownUpdate} = this.state;
 
     return (
       <div id="settings-users">
@@ -57,36 +58,36 @@ class SettingsUsers extends Component {
         </div>
         <div className="users-container">
           <Admins
-            users={this.state.users}
+            users={users}
             handlePopup={this.handlePopupUpdate}
             getAllUsers={this.getAllUsers}
           />
         </div>
         <div className="users-container">
           <Volunteer
-            users={this.state.users}
+            users={users}
             handlePopup={this.handlePopupUpdate}
             getAllUsers={this.getAllUsers}
           />
         </div>
-        {this.state.isShownCreate && (
+        {isShownCreate && (
           <FormUser
             formAction={api.createUser}
             handlePopup={this.handleHidePopup}
             getAllUsers={this.getAllUsers}
-            users={this.state.users}
+            users={users}
             action="ajouter"
           />
         )}
-        {this.state.isShownUpdate && (
+        {isShownUpdate && (
           <FormUser
             formAction={(value) =>
-              api.updateUser(this.state.isShownUpdate._id, value)
+              api.updateUser(isShownUpdate._id, value)
             }
             handlePopup={this.handleHidePopup}
             getAllUsers={this.getAllUsers}
-            value={this.state.isShownUpdate}
-            users={this.state.users}
+            value={isShownUpdate}
+            users={users}
             action="modifier"
           />
         )}
