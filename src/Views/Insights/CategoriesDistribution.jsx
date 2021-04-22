@@ -65,10 +65,8 @@ export class CategoriesDistribution extends Component {
 
 	exportChart = () => {
 		this.setState({ plotLegend: true }, () => {
-			// setTimeout(() => { 
 			exportComponentAsPNG(this.chartRef);
 			this.setState({ plotLegend: false })
-			// }, 0)
 		})
 
 	}
@@ -127,14 +125,15 @@ export class CategoriesDistribution extends Component {
 
 
 						<div className="bottom-container">
-							<div className="download-data" onClick={this.exportChart} style={{display:plotLegend?'none':'flex'}}>
-								<p>Exporter en PNG</p>
-							</div>
+
 							{data &&
 								<div className="total">
 									<h2>total des visites</h2>
 									<p>{data.reduce((acc, curr) => acc + curr.value, 0)}</p>
 								</div>}
+							<div className="download-data" onClick={this.exportChart} style={{ display: plotLegend ? 'none' : 'flex' }}>
+								<p>Exporter en PNG</p>
+							</div>
 						</div>
 					</div>
 				</div>
