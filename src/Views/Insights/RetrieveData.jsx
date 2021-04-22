@@ -80,7 +80,7 @@ export class CategoriesDistribution extends Component {
                             &&
                             <>
                                 {!isLoading &&
-                                    <CSVLink data={this.state.data} className="download-data">Télécharger les données</CSVLink>
+                                    <CSVLink data={this.state.data} className="download-data" separator={";"}>Télécharger les données</CSVLink>
                                 }
                                 {isLoading &&
                                     <div className="download-data">
