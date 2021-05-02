@@ -27,7 +27,7 @@ class FormLogIn extends Component {
             <div className="form-container">
                 <img src={logo} alt=""/>
                 <form className="form-signin" onSubmit={this.handleSubmit}>
-                    <label htmlFor="username">Nom d'utilisateur</label>
+                    <label htmlFor="username">Nom d'utilisateur.ice</label>
                     <input 
                         className={!isValidSignin ?  "error-input" : ""}
                         onChange={(event) => {
@@ -54,7 +54,7 @@ class FormLogIn extends Component {
                     />
                     {   !isValidSignin 
                             && 
-                        <div className="error-message"><p>Mauvais mot de passe et/ou nom d'utilisateur</p></div>
+                        <div className="error-message"><p>Mauvais mot de passe et/ou nom d'utilisateur.ice</p></div>
                     }
                     <button >Connexion</button>
                 </form> 

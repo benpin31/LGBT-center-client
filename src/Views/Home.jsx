@@ -12,7 +12,6 @@ class Home extends React.Component {
         signInStyle : null,
         flagStyle : null,
         helloStyle : null,
-
         isValidSignin: true
     };
 
@@ -95,7 +94,6 @@ class Home extends React.Component {
                             animation : 'outro-sweep 0.5s ease-out'
                         }
                     })
-        
                 }, 700);
         
                 setTimeout(() => this.props.history.push("/history"), 1500) ;
