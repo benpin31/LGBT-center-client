@@ -105,7 +105,7 @@ export class CategoriesDistribution extends Component {
 										endAngle={0}
 										dataKey="value"
 										outerRadius="100%"
-										isAnimationActive={false}
+										// isAnimationActive={false}
 										label={plotLegend && renderCustomizedLabel}
 										labelLine={false}
 										height={20}

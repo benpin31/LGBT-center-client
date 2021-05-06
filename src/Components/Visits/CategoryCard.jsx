@@ -31,7 +31,7 @@ export class CategoryCard extends Component {
         return (
             <div className="cat-cont-card">
                 <div 
-                    onClick={() => handleSelectItem(category._id, category.name, "category")}
+                    onClick={() => handleSelectItem({id: category._id, name: category.name, requiredComment: category.requiredComment}, "category")}
                     className="cat-cont"
                 >
 
