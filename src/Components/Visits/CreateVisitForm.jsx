@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import apiHandler from '../../apiHandler/apiHandler';
 import CategoryCard from './CategoryCard';
 
@@ -17,6 +17,7 @@ export class ChooseCategory extends Component {
 
         category: null,
         contactType: null,
+        comment: null,
 
         allCategories: null,
         allContactTypes: null,
@@ -27,88 +28,97 @@ export class ChooseCategory extends Component {
 
     componentDidMount() {
         apiHandler
-        .getCategories()
-        .then(res => {
-            const activeCategories = res.filter(cat => cat.isActive);
-            this.setState({allCategories : activeCategories})
-        })
-        .catch(err => console.log(err));
+            .getCategories()
+            .then(res => {
+                const activeCategories = res.filter(cat => cat.isActive);
+                this.setState({ allCategories: activeCategories })
+            })
+            .catch(err => console.log(err));
 
         apiHandler
-        .getContactTypes()
-        .then(res => {
-            const activeContacts = res.filter(cont => cont.isActive);
-            this.setState({allContactTypes : activeContacts});
-        })
-        .catch(err => console.log(err));
+            .getContactTypes()
+            .then(res => {
+                const activeContacts = res.filter(cont => cont.isActive);
+                this.setState({ allContactTypes: activeContacts });
+            })
+            .catch(err => console.log(err));
 
         //if there is a visitId props, it means that I come from update a visit
         //then I need the visit Information and isUpdateVisit
-        if(this.props.visitId) {
-            this.setState({visitToUpdate : this.props.visitId, isUpdateVisit: true})
+        if (this.props.visitId) {
+            this.setState({ visitToUpdate: this.props.visitId, isUpdateVisit: true })
         }
     }
 
     handleDecrease = () => {
-        if(this.state.nbOfPerson > 1) 
-            this.setState({nbOfPerson : this.state.nbOfPerson - 1});
+        if (this.state.nbOfPerson > 1)
+            this.setState({ nbOfPerson: this.state.nbOfPerson - 1 });
     }
 
     handleIncrease = () => {
-        this.setState({nbOfPerson : this.state.nbOfPerson + 1});
+        this.setState({ nbOfPerson: this.state.nbOfPerson + 1 });
     }
 
-    handleSelectItem = (id, name, item) => {
-        this.setState({[item] : {id, name}});
+    handleSelectItem = (properties, item) => {
+        const { id, name, requiredComment } = properties;
+        this.setState({ [item]: { id, name, ...requiredComment !== undefined && { requiredComment } } });
+    }
+
+    handleComment = event => {
+        this.setState({ comment: event.target.value })
     }
 
     //if user change their mind about selecting a category or contact type
     //if user was here to update it resets information 
     handleChangeItem = (item) => {
-        this.setState({[item] : null, isUpdateVisit:false});
+        this.setState({ [item]: null, isUpdateVisit: false });
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const {nbOfPerson, category, contactType, visitToUpdate} = this.state;
+        const { nbOfPerson, category, contactType, visitToUpdate, comment } = this.state;
 
-        if(visitToUpdate) {
+        if (visitToUpdate) {
 
             apiHandler
-            .updateVisit(visitToUpdate._id, {
-                date: visitToUpdate.date,
-                category: category.id,
-                contactType: contactType.id
-            })
-            .then(() => this.props.history.push('/history'))
-            .catch(error => console.log(error))
+                .updateVisit(visitToUpdate._id, {
+                    date: visitToUpdate.date,
+                    category: category.id,
+                    contactType: contactType.id,
+                    ...comment && { comment }
+                })
+                .then(() => this.props.history.push('/history'))
+                .catch(error => console.log(error))
 
         } else {
 
-            for(let i = 0; i < nbOfPerson; i++) {
+            for (let i = 0; i < nbOfPerson; i++) {
                 apiHandler
-                .createVisit({
-                    category : category.id,
-                    contactType : contactType.id
-                })
-                .then(() => {
-                    if(i === nbOfPerson - 1) {
-                        this.props.history.push('/history')
-                    }
-                })
-                .catch(error => console.log(error));
+                    .createVisit({
+                        category: category.id,
+                        contactType: contactType.id,
+                        ...comment && { comment }
+                    })
+                    .then(() => {
+                        if (i === nbOfPerson - 1) {
+                            this.props.history.push('/history')
+                        }
+                    })
+                    .catch(error => console.log(error));
             }
 
         }
     }
 
     render() {
-        const {allCategories, category, allContactTypes, contactType, date, nbOfPerson, visitToUpdate, isUpdateVisit} = this.state
+        const { allCategories, category, allContactTypes, contactType, date, nbOfPerson, visitToUpdate, isUpdateVisit, comment } = this.state
+        console.log({ ...visitToUpdate && { toto: visitToUpdate.category } })
+
 
         const dateFormat = date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
-        
+
         return (
-            <form 
+            <form
                 onSubmit={this.handleSubmit}
                 id="CreateForm"
             >
@@ -118,29 +128,29 @@ export class ChooseCategory extends Component {
                         <div id="nb-of-person">
                             <div className="input-header">
                                 <h2>nombre de personnes</h2>
-                                {nbOfPerson && 
-                                    <img src={checkedIcon} alt=""/>
+                                {nbOfPerson &&
+                                    <img src={checkedIcon} alt="" />
                                 }
                             </div>
                             <div className="input-content">
-                                <img 
+                                <img
                                     onClick={this.handleDecrease}
                                     src={minusIcon} alt=""
                                 />
                                 <p className="validated-input">
                                     {nbOfPerson} personne{nbOfPerson > 1 ? 's' : ''}
                                 </p>
-                                <img 
-                                onClick={this.handleIncrease} 
-                                src={plusIcon} alt=""
+                                <img
+                                    onClick={this.handleIncrease}
+                                    src={plusIcon} alt=""
                                 />
                             </div>
                         </div>
                         <div id="date">
                             <div className="input-header">
                                 <h2>date</h2>
-                                {date && 
-                                    <img src={checkedIcon} alt=""/>
+                                {date &&
+                                    <img src={checkedIcon} alt="" />
                                 }
                             </div>
                             <div className="input-content">
@@ -157,57 +167,57 @@ export class ChooseCategory extends Component {
                     }
                 </div>
                 <div className="cat-cont-container">
-                    {!isUpdateVisit && 
-                    !category &&
-                    allCategories &&
-                        allCategories.map(category => 
-                            <CategoryCard key={category._id} category={category} handleSelectItem={this.handleSelectItem}/>
+                    {!isUpdateVisit &&
+                        !category &&
+                        allCategories &&
+                        allCategories.map(category =>
+                            <CategoryCard key={category._id} category={category} handleSelectItem={this.handleSelectItem} />
                         )
                     }
                 </div>
 
                 {/* probably an OR guardian for this one, to check on v2 */}
                 {category &&
-                    <div 
+                    <div
                         onClick={() => this.handleChangeItem('category')}
                         className="selected-cat-cont"
                     >
                         <p className="validated-input">{category.name}</p>
-                        <img src={editIcon} alt=""/>
+                        <img src={editIcon} alt="" />
                     </div>
                 }
 
                 {isUpdateVisit &&
-                    <div 
+                    <div
                         onClick={() => this.handleChangeItem('category')}
                         className="selected-cat-cont"
                     >
                         <p className="validated-input">{visitToUpdate.category.name}</p>
-                        <img src={editIcon} alt=""/>
+                        <img src={editIcon} alt="" />
                     </div>
-                }           
+                }
 
                 <div className="input-header">
                     <h2>mode de contact utilisé</h2>
                     {!category &&
-                        <img 
-                            src={waitIcon} 
+                        <img
+                            src={waitIcon}
                             alt=""
                         />
                     }
                     {contactType &&
-                    category &&
-                        <img src={checkedIcon} alt=""/>
+                        category &&
+                        <img src={checkedIcon} alt="" />
                     }
                 </div>
                 <div className="cat-cont-container">
-                    {category && 
-                    !contactType &&
-                    allContactTypes &&
-                        allContactTypes.map(contact => 
+                    {category &&
+                        !contactType &&
+                        allContactTypes &&
+                        allContactTypes.map(contact =>
                             <div className="cat-cont-card">
-                                <div 
-                                    onClick={() => this.handleSelectItem(contact._id, contact.name, "contactType")}
+                                <div
+                                    onClick={() => this.handleSelectItem({ id: contact._id, name: contact.name }, "contactType")}
                                     key={contact._id}
                                     className="cat-cont"
                                 >
@@ -219,24 +229,53 @@ export class ChooseCategory extends Component {
                 </div>
 
                 {category && contactType &&
-                    <div 
+                    <div
                         onClick={() => this.handleChangeItem('contactType')}
                         className="selected-cat-cont"
                     >
                         <p className="validated-input">{contactType.name}</p>
-                        <img src={editIcon} alt=""/>
+                        <img src={editIcon} alt="" />
                     </div>
-                }   
+                }
 
                 {isUpdateVisit &&
-                    <div 
+                    <div
                         onClick={() => this.handleChangeItem('contactType')}
                         className="selected-cat-cont"
                     >
                         <p className="validated-input">{visitToUpdate.contactType.name}</p>
-                        <img src={editIcon} alt=""/>
+                        <img src={editIcon} alt="" />
                     </div>
-                }   
+                }
+
+
+                <div className="input-header">
+                    {(
+                        (category && category.requiredComment && allContactTypes)
+                        ||
+                        (visitToUpdate && visitToUpdate.category.requiredComment)
+                    ) &&
+                        <h2>Commentaire</h2>
+                    }
+                </div>
+
+                <div className="cat-cont-container">
+                    {(
+                        (category && category.requiredComment && allContactTypes)
+                        ||
+                        (visitToUpdate && visitToUpdate.category.requiredComment)
+                    ) &&
+                        <textarea
+                            name="comment"
+                            id="comment"
+                            cols="30"
+                            rows="10"
+                            onChange={this.handleComment}
+                            value={comment}
+                        />
+                    }
+                </div>
+
 
                 {category && contactType &&
                     <button>Enregistrer</button>
