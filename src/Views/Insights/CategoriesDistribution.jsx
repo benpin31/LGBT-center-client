@@ -89,8 +89,13 @@ export class CategoriesDistribution extends Component {
 
 				<div className="background-container" ref={this.chartRef}>
 					<div className="Graph-container">
-						<div className="date-range-container">
-							<p>du {dateBegin} au {dateEnd}</p>
+						<div className="dates-data-header">
+							<div className="date-range-container">
+								<p>du {dateBegin} au {dateEnd}</p>
+							</div>
+							<div className="download-dataviz" onClick={this.exportChart} style={{ display: plotLegend ? 'none' : 'flex' }}>
+								<p>Exporter en PNG</p>
+							</div>
 						</div>
 
 						{
@@ -105,7 +110,6 @@ export class CategoriesDistribution extends Component {
 										endAngle={0}
 										dataKey="value"
 										outerRadius="100%"
-										isAnimationActive={false}
 										label={plotLegend && renderCustomizedLabel}
 										labelLine={false}
 										height={20}
@@ -123,17 +127,12 @@ export class CategoriesDistribution extends Component {
 						}
 
 
-
 						<div className="bottom-container">
-
 							{data &&
 								<div className="total">
 									<h2>total des visites</h2>
 									<p>{data.reduce((acc, curr) => acc + curr.value, 0)}</p>
 								</div>}
-							<div className="download-data" onClick={this.exportChart} style={{ display: plotLegend ? 'none' : 'flex' }}>
-								<p>Exporter en PNG</p>
-							</div>
 						</div>
 					</div>
 				</div>

@@ -151,7 +151,7 @@ export class ChooseCategory extends Component {
                 }
 
                 <div className="input-header">
-                    <h2>service du centre demandé</h2>
+                    <h2>objet de la demande</h2>
                     {category && 
                         <img src={checkedIcon} alt=""/>
                     }

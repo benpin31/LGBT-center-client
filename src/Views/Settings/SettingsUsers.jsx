@@ -4,6 +4,7 @@ import Admins from "../../Components/UsersSettings/Admins";
 import Volunteer from "../../Components/UsersSettings/Volunteer";
 import api from "../../apiHandler/apiHandler";
 import FormUser from "../../Components/UsersSettings/FormCreateUpdateAdmin";
+import DeleteUserPopup from './../../Components/UsersSettings/DeleteUser';
 
 import "../../Styles/SettingsUsers.css";
 import plusIcon from "../../Assets/plus-icon.svg";
@@ -13,6 +14,7 @@ class SettingsUsers extends Component {
     users: null,
     isShownCreate: false,
     isShownUpdate: null,
+    isShownDelete: null
   };
 
   componentDidMount() {
@@ -40,12 +42,16 @@ class SettingsUsers extends Component {
     this.setState({ isShownUpdate: user, isShownCreate: false });
   };
 
+  handlePopupDelete = (user) => {
+    this.setState({ isShownDelete: user });
+  }
+
   handleHidePopup = () => {
-    this.setState({ isShownUpdate: null, isShownCreate: false });
+    this.setState({ isShownUpdate: null, isShownCreate: false, isShownDelete: null });
   };
 
   render() {
-    const {users, isShownCreate, isShownUpdate} = this.state;
+    const {users, isShownCreate, isShownUpdate, isShownDelete} = this.state;
 
     return (
       <div id="settings-users">
@@ -61,6 +67,7 @@ class SettingsUsers extends Component {
             users={users}
             handlePopup={this.handlePopupUpdate}
             getAllUsers={this.getAllUsers}
+            handlePopupDelete={this.handlePopupDelete}
           />
         </div>
         <div className="users-container">
@@ -89,6 +96,13 @@ class SettingsUsers extends Component {
             value={isShownUpdate}
             users={users}
             action="modifier"
+          />
+        )}
+        {isShownDelete && (
+          <DeleteUserPopup 
+            handlePopup={this.handleHidePopup}
+            user={isShownDelete}
+            getAllUsers={this.getAllUsers}
           />
         )}
       </div>

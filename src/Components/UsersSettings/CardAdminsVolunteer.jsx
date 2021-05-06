@@ -2,21 +2,12 @@ import React, { Component } from "react";
 import binIcon from "../../Assets/trash-icon.svg";
 import editIcon from "../../Assets/edit-icon.svg";
 import { withUser } from "../Auth/withUser";
-import api from "../../apiHandler/apiHandler";
 import "../../Styles/CardAdminsVolunteer.css";
+
 
 class CardAdminsVolunteer extends Component {
   state = {
     isHovering: false,
-  };
-
-  handleDelete = (userId) => {
-    api
-      .deleteUser(userId)
-      .then((response) => {
-        this.props.getAllUsers();
-      })
-      .catch((error) => console.log(error));
   };
 
   handleMouseEnterCard = () => {
@@ -28,7 +19,8 @@ class CardAdminsVolunteer extends Component {
   };
 
   render() {
-    const {users, context, handlePopup} = this.props;
+    const {users, context, handlePopup, handlePopupDelete} = this.props;
+    console.log(this.props);
     const name = users.login[0].toUpperCase() + users.login.substring(1);
 
     return (
@@ -56,7 +48,7 @@ class CardAdminsVolunteer extends Component {
                 {!context.isLoading &&
                   context.user._id !== users._id && (
                     <img
-                      onClick={() => this.handleDelete(users._id)}
+                      onClick={ handlePopupDelete }
                       src={binIcon}
                       alt="trash-icon"
                     />

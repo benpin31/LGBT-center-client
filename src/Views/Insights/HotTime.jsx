@@ -137,10 +137,13 @@ export class CategoriesDistribution extends Component {
 				<div className="background-container-hot-time" ref={this.chartRef}>
 
 					<div className="Graph-container">
-						<div className="date-range-container">
-							<p>
-								du {dateBegin} au {dateEnd}
-							</p>
+						<div className="dates-data-header hot-day-dd-header">
+							<div className="date-range-container">
+								<p>du {dateBegin} au {dateEnd}</p>
+							</div>
+							<div className="download-dataviz" onClick={this.exportChart} style={{ display: plotLegend ? 'none' : 'flex' }}>
+								<p>Exporter en PNG</p>
+							</div>
 						</div>
 
 						{
@@ -180,9 +183,6 @@ export class CategoriesDistribution extends Component {
 
 							</>
 						}
-						<div className="download-data" onClick={this.exportChart} style={{ display: plotLegend ? 'none' : 'flex' }}>
-							<p>Exporter en PNG</p>
-						</div>
 					</div>
 				</div>
 			</div>

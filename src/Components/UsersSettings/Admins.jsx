@@ -3,18 +3,21 @@ import Card from "./CardAdminsVolunteer";
 
 class Admins extends Component {
   render() {
+    const { users, handlePopup, handlePopupDelete, getAllUsers } = this.props;
+
     return (
       <>
-        {this.props.users && 
-        this.props.users.map(user => {
+        {users && 
+        users.map(user => {
           return (
             user.isAdmin 
               && 
             <Card 
               key={user._id} 
                 users={user} 
-                handlePopup = {() => this.props.handlePopup(user)}
-                getAllUsers={this.props.getAllUsers}            
+                handlePopup = {() => handlePopup(user)}
+                getAllUsers={getAllUsers}  
+                handlePopupDelete={() => handlePopupDelete(user)}   
               />)
         })}
       </>

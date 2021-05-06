@@ -11,7 +11,7 @@
     z-index: 3;
 }
 
-.FormCreateUpdateContact {
+.FormCreateUpdateContact, .delete-user-container {
     width: 480px;
     padding: 32px;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
@@ -19,12 +19,16 @@
     background-color: white;
 }
 
-
 .FormCreateUpdateContact div {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 40px;
+}
+
+.delete-user-container .delete-user-buttons {
+    display: flex;
+    justify-content: space-between;
 }
 
 .FormCreateUpdateContact .close-pop-up {
@@ -38,7 +42,7 @@
     line-height: 22px;
 }
 
-.FormCreateUpdateContact h1 {
+.FormCreateUpdateContact h1, .delete-user-container h1 {
     font-weight: 600;
     font-size: 20px;
     line-height: 23px;
@@ -79,7 +83,7 @@
     height: 120px;
 }
 
-.FormCreateUpdateContact button {
+.FormCreateUpdateContact button, .delete-user-container button {
     cursor: pointer;
     width: 100%;
     padding: 12px;
@@ -91,6 +95,10 @@
     line-height: 22px;
     color: #FFFFFF;
     margin-top: 40px;
+}
+
+.delete-user-container button {
+    width: 45%;
 }
 
 .form-update-create {
@@ -117,6 +125,7 @@
 .FormCreateUpdateContact .user-name-error {
     top: -28px;
 }
+
 
 
 

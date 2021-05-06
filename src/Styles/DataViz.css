@@ -63,14 +63,11 @@
 }
 
 .date-range-container {
-    display: flex;
-    justify-content: flex-end;
     font-weight: 500;
     font-size: 13px;
     line-height: 20px;
     text-transform: uppercase;
     color: #706C7A;
-    margin-bottom: 40px;
 }
 
 .bottom-container {
@@ -205,7 +202,7 @@ input[type="checkbox"]:checked::before {
 
 .background-container-hot-time {
     background-color: white;
-    max-height: 65vh;
+    max-height: 73vh;
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
 }
@@ -229,7 +226,7 @@ input[type="checkbox"]:checked::before {
 
 .total-hot-day{
     position: absolute;
-    top: 88%;
+    top: 90%;
     width: calc(100% - 80px);
     display: flex;
     justify-content: space-between;
@@ -269,18 +266,39 @@ input[type="checkbox"]:checked::before {
     border-radius: 8px;
 }
 
-.download-data {
+.download-data, .download-dataviz {
     display: flex;
     justify-content: center;
-    max-width: 320px;
-    width: 100%;
-    padding: 12px 0;
     text-decoration: none;
-    background: #5B3FAD;
     border-radius: 8px;
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
-    color: #FFFFFF;
     user-select: none;
+}
+
+.download-data {
+    background: #5B3FAD;
+    color: #FFFFFF;
+    max-width: 320px;
+    padding: 12px 0;
+    width: 100%;
+}
+
+.download-dataviz {
+    background: rgba(113, 78, 215, 0.06);
+    color: #714ED7;
+    max-width: 220px;
+    cursor: pointer;
+    padding: 12px 16px;
+}
+
+.dates-data-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hot-day-dd-header {
+    margin-bottom: 40px;
 }

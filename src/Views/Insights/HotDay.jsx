@@ -118,11 +118,16 @@ export class HotDay extends Component {
 					title="jours d'affluence"
 				/>
 				<div className="background-hot-day" ref={this.chartRef}>
-					<div className="date-range-container">
-						<p>
-							du {dateBegin} au {dateEnd}
-						</p>
+
+					<div className="dates-data-header hot-day-dd-header">
+							<div className="date-range-container">
+								<p>du {dateBegin} au {dateEnd}</p>
+							</div>
+							<div className="download-dataviz" onClick={this.exportChart} style={{ display: plotLegend ? 'none' : 'flex' }}>
+								<p>Exporter en PNG</p>
+							</div>
 					</div>
+
 					<div className="Graph-hot-day">
 						{this.state.data && (
 							<ResponsiveContainer width="100%" height="70%" style={{ paddingTop: "50px" }}>
@@ -160,9 +165,6 @@ export class HotDay extends Component {
 						<div className="total-hot-day">
 							<h2>moyenne des visites en semaine</h2>
 							<p>{data.reduce((acc, curr) => acc + curr.value, 0)}</p>
-							<div className="download-data" onClick={this.exportChart} style={{ display: plotLegend ? 'none' : 'flex' }}>
-								<p>Exporter en PNG</p>
-							</div>
 						</div>
 					)}
 
