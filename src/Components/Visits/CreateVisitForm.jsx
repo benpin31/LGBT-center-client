@@ -17,13 +17,12 @@ export class ChooseCategory extends Component {
 
         category: null,
         contactType: null,
-        comment: null,
+        comment: '',
 
         allCategories: null,
         allContactTypes: null,
 
-        visitToUpdate: null,
-        isUpdateVisit: false,
+        visitToUpdate: null
     }
 
     componentDidMount() {
@@ -44,9 +43,15 @@ export class ChooseCategory extends Component {
             .catch(err => console.log(err));
 
         //if there is a visitId props, it means that I come from update a visit
-        //then I need the visit Information and isUpdateVisit
+        //then I need the visit Information and visitToUpdate
         if (this.props.visitId) {
-            this.setState({ visitToUpdate: this.props.visitId, isUpdateVisit: true })
+            const {visitId} = this.props;
+            this.setState({
+                category: visitId.category,
+                contactType: visitId.contactType,
+                comment: visitId.comment,
+                visitToUpdate: visitId
+            })
         }
     }
 
@@ -71,7 +76,7 @@ export class ChooseCategory extends Component {
     //if user change their mind about selecting a category or contact type
     //if user was here to update it resets information 
     handleChangeItem = (item) => {
-        this.setState({ [item]: null, isUpdateVisit: false });
+        this.setState({ [item]: null });
     }
 
     handleSubmit = (event) => {
@@ -79,7 +84,6 @@ export class ChooseCategory extends Component {
         const { nbOfPerson, category, contactType, visitToUpdate, comment } = this.state;
 
         if (visitToUpdate) {
-
             apiHandler
                 .updateVisit(visitToUpdate._id, {
                     date: visitToUpdate.date,
@@ -111,8 +115,7 @@ export class ChooseCategory extends Component {
     }
 
     render() {
-        const { allCategories, category, allContactTypes, contactType, date, nbOfPerson, visitToUpdate, isUpdateVisit, comment } = this.state
-        console.log({ ...visitToUpdate && { toto: visitToUpdate.category } })
+        const { allCategories, category, allContactTypes, contactType, date, nbOfPerson, visitToUpdate, comment } = this.state;
 
 
         const dateFormat = date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -167,8 +170,7 @@ export class ChooseCategory extends Component {
                     }
                 </div>
                 <div className="cat-cont-container">
-                    {!isUpdateVisit &&
-                        !category &&
+                    {!category &&
                         allCategories &&
                         allCategories.map(category =>
                             <CategoryCard key={category._id} category={category} handleSelectItem={this.handleSelectItem} />
@@ -176,7 +178,6 @@ export class ChooseCategory extends Component {
                     }
                 </div>
 
-                {/* probably an OR guardian for this one, to check on v2 */}
                 {category &&
                     <div
                         onClick={() => this.handleChangeItem('category')}
@@ -187,14 +188,25 @@ export class ChooseCategory extends Component {
                     </div>
                 }
 
-                {isUpdateVisit &&
-                    <div
-                        onClick={() => this.handleChangeItem('category')}
-                        className="selected-cat-cont"
-                    >
-                        <p className="validated-input">{visitToUpdate.category.name}</p>
-                        <img src={editIcon} alt="" />
-                    </div>
+                {category && category.requiredComment && allContactTypes
+                &&
+                    <>
+                        <div className="input-header">
+                            <h2>Commentaire</h2>
+                        </div>
+                        <div className="cat-cont-container">
+                            <textarea
+                                className={comment ? 'textarea-filled' : ''}
+                                name="comment"
+                                id="comment"
+                                cols="30"
+                                rows="10"
+                                onChange={this.handleComment}
+                                value={comment}
+                                placeholder='ajouter un commentaire si nécessaire'
+                            />
+                        </div>
+                    </>
                 }
 
                 <div className="input-header">
@@ -215,7 +227,7 @@ export class ChooseCategory extends Component {
                         !contactType &&
                         allContactTypes &&
                         allContactTypes.map(contact =>
-                            <div className="cat-cont-card">
+                            <div className="cat-cont-card" key={contact._id}>
                                 <div
                                     onClick={() => this.handleSelectItem({ id: contact._id, name: contact.name }, "contactType")}
                                     key={contact._id}
@@ -237,46 +249,7 @@ export class ChooseCategory extends Component {
                         <img src={editIcon} alt="" />
                     </div>
                 }
-
-                {isUpdateVisit &&
-                    <div
-                        onClick={() => this.handleChangeItem('contactType')}
-                        className="selected-cat-cont"
-                    >
-                        <p className="validated-input">{visitToUpdate.contactType.name}</p>
-                        <img src={editIcon} alt="" />
-                    </div>
-                }
-
-
-                <div className="input-header">
-                    {(
-                        (category && category.requiredComment && allContactTypes)
-                        ||
-                        (visitToUpdate && visitToUpdate.category.requiredComment)
-                    ) &&
-                        <h2>Commentaire</h2>
-                    }
-                </div>
-
-                <div className="cat-cont-container">
-                    {(
-                        (category && category.requiredComment && allContactTypes)
-                        ||
-                        (visitToUpdate && visitToUpdate.category.requiredComment)
-                    ) &&
-                        <textarea
-                            name="comment"
-                            id="comment"
-                            cols="30"
-                            rows="10"
-                            onChange={this.handleComment}
-                            value={comment}
-                        />
-                    }
-                </div>
-
-
+                
                 {category && contactType &&
                     <button>Enregistrer</button>
                 }
